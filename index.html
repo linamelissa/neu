@@ -12,6 +12,11 @@
 </head>
 <body data-stage="0">
 
+<!-- Filter für wackelige „Bleistift"-Linien in der Skizzen-Stufe -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="sketchy"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="4"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="2.5"></feDisplacementMap></filter>
+</svg>
+
 <a class="skip-link" href="#projekte" data-de="Direkt zu den Projekten" data-en="Skip to projects">Direkt zu den Projekten</a>
 
 <!-- Scroll-Fortschritt -->
@@ -79,24 +84,24 @@
       <span class="handle h-bl" aria-hidden="true"></span><span class="handle h-br" aria-hidden="true"></span>
 
       <div class="hero-inner">
-        <div class="h-badge">
+        <div class="h-badge" data-intro>
           <span class="dot" aria-hidden="true"></span>
           <span class="sk" data-de="Verfügbar ab sofort · Raum Hamburg / Remote" data-en="Available now · Hamburg area / Remote">Verfügbar ab sofort · Raum Hamburg / Remote</span>
         </div>
 
-        <p class="h-role"><span class="sk" data-de="UX/UI Designerin" data-en="UX/UI Designer">UX/UI Designerin</span></p>
+        <p class="h-role" data-intro><span class="sk" data-de="UX/UI Designerin" data-en="UX/UI Designer">UX/UI Designerin</span></p>
 
-        <h1 class="h-title">
+        <h1 class="h-title" data-intro>
           <span class="spec on-2 spec-title" aria-hidden="true">H1 · Inter 700 · −4.8%</span>
           <span class="sk">Soft edges in a </span><span class="sk accent">sharp world.</span>
         </h1>
 
-        <p class="h-lead">
+        <p class="h-lead" data-intro>
           <span class="spec on-2 spec-lead" aria-hidden="true">Body · 19 / 150% · #6E6E73</span>
           <span class="sk" data-de="Ich validiere Annahmen, bevor sie zu Pixeln werden. Meine wichtigsten Design-Entscheidungen lassen sich auf echte Nutzergespräche zurückführen." data-en="I validate assumptions before they become pixels. My key design decisions trace back to real conversations with users.">Ich validiere Annahmen, bevor sie zu Pixeln werden. Meine wichtigsten Design-Entscheidungen lassen sich auf echte Nutzergespräche zurückführen.</span>
         </p>
 
-        <dl class="h-stats">
+        <dl class="h-stats" data-intro>
           <span class="spec on-2 spec-stats" aria-hidden="true">Grid · 3 Spalten · Gap 12</span>
           <div class="stat">
             <dt><span class="sk" data-de="6 Jahre" data-en="6 years">6 Jahre</span></dt>
@@ -112,7 +117,7 @@
           </div>
         </dl>
 
-        <div class="h-cta">
+        <div class="h-cta" data-intro>
           <a class="btn btn-primary" href="CV/CV_Lina-Melissa-Arndt.pdf" download>
             <span class="spec on-2 spec-btn" aria-hidden="true">Primary · Radius 999</span>
             <svg class="btn-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12M6.5 10.5L12 16l5.5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
@@ -126,17 +131,21 @@
       </div>
 
       <!-- Sticky Notes (Sketch & Wireframe) -->
-      <div class="note on-0 n-a" aria-hidden="true">Headline = Versprechen.<br>Kurz &amp; ehrlich!</div>
-      <div class="note on-0 n-b" aria-hidden="true">Stats: nur Zahlen,<br>die stimmen</div>
+      <div class="note on-0 n-a" data-intro aria-hidden="true">Headline = Versprechen.<br>Kurz &amp; ehrlich!</div>
+      <div class="note on-0 n-b" data-intro aria-hidden="true">Stats: nur Zahlen,<br>die stimmen</div>
       <div class="note on-1 n-c" aria-hidden="true">Copy steht ✓<br>jetzt: Hierarchie</div>
       <div class="note on-1 n-d" aria-hidden="true">1 klarer CTA,<br>nicht 3</div>
+
+      <!-- Live-Cursor -->
+      <div class="lina-cursor" aria-hidden="true">
+        <svg width="22" height="24" viewBox="0 0 22 24" fill="none"><path d="M2 2l17 8.5-7.4 1.9L8 20z" fill="#1F7A45" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"></path></svg>
+        <span class="tag">Lina</span>
+      </div>
     </div>
 
     <div class="hero-foot">
-      <span class="hf-scroll">
-        <span class="mouse" aria-hidden="true"><i></i></span>
-        <span data-de="Scroll weiter: die Seite wird gerade designt" data-en="Keep scrolling: this page is being designed">Scroll weiter: die Seite wird gerade designt</span>
-      </span>
+      <p class="hint hint-0"><span data-de="Hi, ich bin Lina! Diese Seite ist noch eine Skizze. Scroll und schau mir beim Designen zu" data-en="Hi, I'm Lina! This page is still a sketch. Scroll and watch me design it">Hi, ich bin Lina! Diese Seite ist noch eine Skizze. Scroll und schau mir beim Designen zu</span> <span class="hint-arrow" aria-hidden="true">↓</span></p>
+      <p class="hint hint-2"><span data-de="Fast fertig, nur noch ein bisschen" data-en="Almost done, just a little more">Fast fertig, nur noch ein bisschen</span> <span class="hint-arrow" aria-hidden="true">↓</span></p>
       <a class="hf-done" href="#projekte" data-de="Fertig gestaltet ✓ Weiter zu den Projekten ↓" data-en="Design done ✓ On to the projects ↓">Fertig gestaltet ✓ Weiter zu den Projekten ↓</a>
     </div>
   </div>
