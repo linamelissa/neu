@@ -1,561 +1,134 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lina Melissa Arndt · UX/UI Designerin</title>
-<meta name="description" content="Lina Melissa Arndt – UX/UI Designerin aus dem Raum Hamburg. Research-basiertes Design, vom Interview bis zum Prototyp.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lina Melissa – UX/UI Design</title>
+  <meta name="description" content="Portfolio von Lina Melissa Arndt, UX/UI Designerin aus dem Raum Hamburg.">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body data-stage="0">
+<body>
 
-<!-- Filter für wackelige „Bleistift"-Linien in der Skizzen-Stufe -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <filter id="sketchy"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="4"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="2.5"></feDisplacementMap></filter>
-</svg>
-
-<a class="skip-link" href="#projekte" data-de="Direkt zu den Projekten" data-en="Skip to projects">Direkt zu den Projekten</a>
-
-<!-- Scroll-Fortschritt -->
-<div class="progress" aria-hidden="true"><div id="scroll-progress"></div></div>
-
-<!-- ================= Navigation Desktop ================= -->
-<nav class="nav" id="navDesktop" aria-label="Hauptnavigation">
-  <ul>
-    <li><a href="#top" class="nav-brand" aria-label="Start · Lina Melissa Arndt"><span class="logo" aria-hidden="true">LA</span><span>Lina Melissa Arndt</span></a></li>
-    <li class="nav-sep" aria-hidden="true"></li>
-    <li><a href="#projekte" class="nav-link" data-nav="projekte" data-de="Projekte" data-en="Projects">Projekte</a></li>
-    <li><a href="#antrieb" class="nav-link" data-nav="antrieb" data-de="Antrieb" data-en="Drive">Antrieb</a></li>
-    <li><a href="#expertise" class="nav-link" data-nav="expertise" data-de="Expertise" data-en="Expertise">Expertise</a></li>
-    <li><a href="#ueber-mich" class="nav-link" data-nav="ueber-mich" data-de="Über mich" data-en="About me">Über mich</a></li>
-    <li><a href="#blog" class="nav-link" data-nav="blog" data-de="Blog" data-en="Blog">Blog</a></li>
-    <li><a href="#zwischendurch" class="nav-link" data-nav="zwischendurch" data-de="Zwischendurch" data-en="In between">Zwischendurch</a></li>
-    <li class="nav-sep" aria-hidden="true"></li>
-    <li><a href="#kontakt" class="nav-cta" data-de="Kontakt" data-en="Contact">Kontakt</a></li>
-    <li><button type="button" class="lang-btn" data-lang-toggle aria-label="Sprache wechseln">EN</button></li>
-  </ul>
-</nav>
-
-<!-- ================= Navigation Mobil ================= -->
-<div class="nav-mobile" id="navMobile">
-  <a href="#top" class="nav-brand" aria-label="Start · Lina Melissa Arndt"><span class="logo" aria-hidden="true">LA</span><span>Lina Melissa Arndt</span></a>
-  <div class="nav-mobile-actions">
-    <button type="button" class="lang-btn" data-lang-toggle aria-label="Sprache wechseln">EN</button>
-    <button type="button" class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
-      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
-    </button>
-  </div>
-</div>
-
-<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-  <div class="mm-head">
-    <span aria-hidden="true" style="width:38px"></span>
-    <div class="mm-title"><strong>Lina Melissa Arndt</strong><span data-de="UX/UI Designerin" data-en="UX/UI Designer">UX/UI Designerin</span></div>
-    <button type="button" class="mm-close" data-close-menu aria-label="Menü schließen"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-  </div>
-  <nav class="mm-links" aria-label="Mobile Hauptnavigation">
-    <a href="#projekte" data-close-menu data-de="Projekte" data-en="Projects">Projekte</a>
-    <a href="#antrieb" data-close-menu data-de="Antrieb" data-en="Drive">Antrieb</a>
-    <a href="#expertise" data-close-menu data-de="Expertise" data-en="Expertise">Expertise</a>
-    <a href="#ueber-mich" data-close-menu data-de="Über mich" data-en="About me">Über mich</a>
-    <a href="#blog" data-close-menu data-de="Blog" data-en="Blog">Blog</a>
-    <a href="#zwischendurch" data-close-menu data-de="Zwischendurch" data-en="In between">Zwischendurch</a>
-    <a href="#kontakt" data-close-menu class="mm-cta" data-de="Kontakt" data-en="Contact">Kontakt</a>
+  <nav class="nav">
+    <a href="#start" class="nav__logo">Lina Melissa</a>
+    <ul class="nav__links">
+      <li><a href="#cases">Case Studies</a></li>
+      <li><a href="#lebenslauf">Lebenslauf</a></li>
+      <li><a href="#ueber-mich">Über mich</a></li>
+      <li><a href="#kontakt" class="nav__cta">Kontakt</a></li>
+    </ul>
   </nav>
-  <div class="mm-foot">
-    <a href="CV/CV_Lina-Melissa-Arndt.pdf" download data-close-menu class="pill-soft" data-de="CV herunterladen" data-en="Download CV">CV herunterladen</a>
-  </div>
-</div>
 
-<!-- ================= HERO: Lo-Fi → Hi-Fi beim Scrollen ================= -->
-<section class="hero-scroll" id="top" aria-label="Intro">
-  <div class="hero-sticky">
-    <div class="canvas-grid" aria-hidden="true"></div>
+  <!-- ===== START: Beim Scrollen zoomt die Kamera in den Bildschirm ===== -->
+  <section class="zoom" id="start">
+    <div class="stage">
 
-    <div class="frame">
-      <div class="frame-label" aria-hidden="true">
-        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M3 0v12M9 0v12M0 3h12M0 9h12" stroke="currentColor" stroke-width="1.2"></path></svg>
-        <span data-stage-label>Hero · Sketch</span>
+      <div class="hero-text">
+        <h1>Hi, ich bin Lina – UX/UI Designerin.</h1>
+        <p>Scroll dich in meinen Bildschirm.</p>
+        <span class="scroll-hint" aria-hidden="true">↓</span>
       </div>
-      <span class="handle h-tl" aria-hidden="true"></span><span class="handle h-tr" aria-hidden="true"></span>
-      <span class="handle h-bl" aria-hidden="true"></span><span class="handle h-br" aria-hidden="true"></span>
 
-      <div class="hero-inner">
-        <div class="h-badge" data-intro>
-          <span class="dot" aria-hidden="true"></span>
-          <span class="sk" data-de="Verfügbar ab sofort · Raum Hamburg / Remote" data-en="Available now · Hamburg area / Remote">Verfügbar ab sofort · Raum Hamburg / Remote</span>
-        </div>
+      <div class="scene intro">
+        <img class="scene__img" src="schreibtisch.jpg" width="1024" height="687"
+             alt="Gezeichneter UX-Arbeitsplatz mit Bildschirm, Laptop, Sticky Notes, User Journey und Kaffeetasse">
 
-        <p class="h-role" data-intro><span class="sk" data-de="UX/UI Designerin" data-en="UX/UI Designer">UX/UI Designerin</span></p>
-
-        <h1 class="h-title" data-intro>
-          <span class="spec on-2 spec-title" aria-hidden="true">H1 · Inter 700 · −4.8%</span>
-          <span class="sk">Soft edges in a </span><span class="sk accent">sharp world.</span>
-        </h1>
-
-        <p class="h-lead" data-intro>
-          <span class="spec on-2 spec-lead" aria-hidden="true">Body · 19 / 150% · #6E6E73</span>
-          <span class="sk" data-de="Ich validiere Annahmen, bevor sie zu Pixeln werden. Meine wichtigsten Design-Entscheidungen lassen sich auf echte Nutzergespräche zurückführen." data-en="I validate assumptions before they become pixels. My key design decisions trace back to real conversations with users.">Ich validiere Annahmen, bevor sie zu Pixeln werden. Meine wichtigsten Design-Entscheidungen lassen sich auf echte Nutzergespräche zurückführen.</span>
-        </p>
-
-        <dl class="h-stats" data-intro>
-          <span class="spec on-2 spec-stats" aria-hidden="true">Grid · 3 Spalten · Gap 12</span>
-          <div class="stat">
-            <dt><span class="sk" data-de="6 Jahre" data-en="6 years">6 Jahre</span></dt>
-            <dd><span class="sk" data-de="Gestaltung, von der Ausbildung bis Product Design" data-en="in design, from apprenticeship to product design">Gestaltung, von der Ausbildung bis Product Design</span></dd>
+        <!-- Der Bildschirm als echtes HTML, damit er beim Reinzoomen gestochen scharf bleibt.
+             Position in % vom Bild – muss genau auf dem gezeichneten Bildschirm liegen. -->
+        <div class="screen" style="--x:37.11%; --y:37.26%; --w:25.88%; --h:20.67%">
+          <div class="screen__bar">
+            <span></span><span></span><span></span>
+            <i></i>
           </div>
-          <div class="stat">
-            <dt><span class="sk" data-de="3 Rollen" data-en="3 roles">3 Rollen</span></dt>
-            <dd><span class="sk" data-de="Mediengestaltung, Druck, Product Design" data-en="Media design, print, product design">Mediengestaltung, Druck, Product Design</span></dd>
+          <div class="screen__body">
+            <a href="#cases" class="screen__pill">Lina
+              <svg class="screen__cursor" viewBox="0 0 28 44" aria-hidden="true">
+                <path d="M2 2L2 36L10 28L17 42L23 39L16 25L27 25Z"/>
+              </svg>
+            </a>
+            <p class="screen__sub">UX/UI Designerin · Raum Hamburg oder remote</p>
+            <span class="screen__hint" aria-hidden="true">Scroll weiter ↓</span>
           </div>
-          <div class="stat">
-            <dt><span class="sk" data-de="2 Cases" data-en="2 cases">2 Cases</span></dt>
-            <dd><span class="sk" data-de="vom Interview bis zum Prototyp" data-en="from interview to prototype">vom Interview bis zum Prototyp</span></dd>
-          </div>
-        </dl>
-
-        <div class="h-cta" data-intro>
-          <a class="btn btn-primary" href="CV/CV_Lina-Melissa-Arndt.pdf" download>
-            <span class="spec on-2 spec-btn" aria-hidden="true">Primary · Radius 999</span>
-            <svg class="btn-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12M6.5 10.5L12 16l5.5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
-            <span class="sk" data-de="CV herunterladen" data-en="Download CV">CV herunterladen</span>
-          </a>
-          <a class="btn btn-ghost" href="#projekte">
-            <span class="sk" data-de="Projekte ansehen" data-en="See projects">Projekte ansehen</span>
-            <svg class="btn-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          </a>
         </div>
       </div>
 
-      <!-- Sticky Notes (Sketch & Wireframe) -->
-      <div class="note on-0 n-a" data-intro aria-hidden="true">Headline = Versprechen.<br>Kurz &amp; ehrlich!</div>
-      <div class="note on-0 n-b" data-intro aria-hidden="true">Stats: nur Zahlen,<br>die stimmen</div>
-      <div class="note on-1 n-c" aria-hidden="true">Copy steht ✓<br>jetzt: Hierarchie</div>
-      <div class="note on-1 n-d" aria-hidden="true">1 klarer CTA,<br>nicht 3</div>
+    </div>
+  </section>
 
-      <!-- Live-Cursor -->
-      <div class="lina-cursor" aria-hidden="true">
-        <svg width="22" height="24" viewBox="0 0 22 24" fill="none"><path d="M2 2l17 8.5-7.4 1.9L8 20z" fill="#1F7A45" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"></path></svg>
-        <span class="tag">Lina</span>
+
+  <!-- ===== INHALT: liegt "im Bildschirm" (gleiches Grün) ===== -->
+  <main class="content">
+
+    <section class="block" id="cases">
+      <span class="kicker">Meine Arbeit</span>
+      <h2>UX Case Studies</h2>
+      <div class="cards">
+        <a class="card" href="case-studies/samespot.html">
+          <span class="card__tag">App · UX/UI</span>
+          <h3>sameSpot</h3>
+          <p>Kurzbeschreibung des Projekts.</p>
+        </a>
+        <a class="card" href="case-studies/kino-grimm.html">
+          <span class="card__tag">Website-Redesign</span>
+          <h3>Kino Grimm</h3>
+          <p>Kurzbeschreibung des Projekts.</p>
+        </a>
+        <a class="card" href="case-studies/accessible-city.html">
+          <span class="card__tag">Design Challenge</span>
+          <h3>Accessible City</h3>
+          <p>Kurzbeschreibung des Projekts.</p>
+        </a>
       </div>
-    </div>
+    </section>
 
-    <div class="hero-foot">
-      <p class="hint hint-0"><span data-de="Hi, ich bin Lina! Diese Seite ist noch eine Skizze. Scroll und schau mir beim Designen zu" data-en="Hi, I'm Lina! This page is still a sketch. Scroll and watch me design it">Hi, ich bin Lina! Diese Seite ist noch eine Skizze. Scroll und schau mir beim Designen zu</span> <span class="hint-arrow" aria-hidden="true">↓</span></p>
-      <p class="hint hint-2"><span data-de="Fast fertig, nur noch ein bisschen" data-en="Almost done, just a little more">Fast fertig, nur noch ein bisschen</span> <span class="hint-arrow" aria-hidden="true">↓</span></p>
-      <a class="hf-done" href="#projekte" data-de="Fertig gestaltet ✓ Weiter zu den Projekten ↓" data-en="Design done ✓ On to the projects ↓">Fertig gestaltet ✓ Weiter zu den Projekten ↓</a>
-    </div>
-  </div>
-</section>
+    <section class="block" id="prozess">
+      <span class="kicker">So arbeite ich</span>
+      <h2>Mein Design-Prozess</h2>
+      <ol class="process">
+        <li>Research</li><li>Skizzen</li><li>Wireframes</li><li>Prototyp</li><li>Testen</li>
+      </ol>
+      <p>Kurzer Text, wie du vorgehst.</p>
+      <ul class="chips">
+        <li>Figma</li><li>User Research</li><li>Prototyping</li><li>Illustrator</li><li>HTML & CSS</li>
+      </ul>
+    </section>
 
-<!-- Fidelity-Anzeige -->
-<div class="fid-hud" role="group" aria-label="Fidelity-Stufe des Hero-Bereichs">
-  <span class="hud-title">Fidelity</span>
-  <div class="hud-steps">
-    <button type="button" data-go="0">Sketch</button>
-    <button type="button" data-go="1">Wireframe</button>
-    <button type="button" data-go="2">Mid-Fi</button>
-    <button type="button" data-go="3">Hi-Fi</button>
-  </div>
-  <span class="hud-bar" aria-hidden="true"><i></i></span>
-  <button type="button" class="hud-skip" data-go="3" data-de="Überspringen" data-en="Skip">Überspringen</button>
-</div>
+    <section class="block" id="ueber-mich">
+      <span class="kicker">Hol dir einen Kaffee</span>
+      <h2>Über mich</h2>
+      <p>Hier kommt ein kurzer Text über dich, gern mit einem Foto.</p>
+    </section>
 
-<!-- ================= Tools-Marquee ================= -->
-<div class="marquee-dark" aria-label="Tools">
-  <div class="marquee-track">
-    <div class="marquee-set"><span>Figma</span><span>Miro</span><span>Blender</span><span>Framer</span><span>Notion</span><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>Claude</span></div>
-    <div class="marquee-set" aria-hidden="true"><span>Figma</span><span>Miro</span><span>Blender</span><span>Framer</span><span>Notion</span><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>Claude</span></div>
-  </div>
-</div>
+    <section class="block" id="weg">
+      <span class="kicker">Vom Print ins Digitale</span>
+      <h2>Mein Weg ins UX</h2>
+      <p>Kurzer Text zu deinem Quereinstieg aus der Mediengestaltung, deinem Studium und deinen Zertifikaten.</p>
+      <p class="links"><a href="zertifikate.pdf" target="_blank">Zertifikate & Zeugnisse</a></p>
+    </section>
 
-<div class="marquee-img" aria-label="Arbeiten im Überblick">
-  <div class="marquee-track back">
-    <div class="marquee-set">
-      <img src="loop/loop01.jpg" alt="sameSpot Feed-Screen" class="top">
-      <img src="loop/loop02.jpg" alt="sameSpot Dark Mode" class="top">
-      <img src="loop/loop03.jpg" alt="sameSpot Detailansicht" class="top">
-      <img src="loop/loop04.jpg" alt="Yumi Projekt">
-      <img src="loop/loop05.jpg" alt="Projektarbeit Trademark">
-      <img src="loop/loop06.jpg" alt="PR Druck Arbeiten">
-      <img src="loop/loop07.jpg" alt="3D-Arbeit in Blender">
-    </div>
-    <div class="marquee-set" aria-hidden="true">
-      <img src="loop/loop01.jpg" alt="" class="top"><img src="loop/loop02.jpg" alt="" class="top"><img src="loop/loop03.jpg" alt="" class="top">
-      <img src="loop/loop04.jpg" alt=""><img src="loop/loop05.jpg" alt=""><img src="loop/loop06.jpg" alt=""><img src="loop/loop07.jpg" alt="">
-    </div>
-  </div>
-</div>
+    <section class="block" id="lebenslauf">
+      <span class="kicker">Alles auf einen Blick</span>
+      <h2>Lebenslauf</h2>
+      <p>Mein Lebenslauf als PDF zum Ansehen und Herunterladen.</p>
+      <p class="links"><a href="lebenslauf.pdf" target="_blank">Lebenslauf öffnen</a></p>
+    </section>
 
-<main>
+    <section class="block" id="kontakt">
+      <span class="kicker">Lass uns sprechen</span>
+      <h2>Ich bin startklar</h2>
+      <ul class="facts">
+        <li><strong>Arbeitsort:</strong> Raum Hamburg oder remote</li>
+        <li><strong>Verfügbar:</strong> ab sofort</li>
+      </ul>
+      <p class="links">
+        <a href="mailto:lina-melissa@web.de">lina-melissa@web.de</a>
+        <a href="https://linkedin.com/in/linamelissa" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </section>
 
-<!-- ================= Projekte ================= -->
-<section id="projekte" class="section bg-grey resolve">
-  <div class="wrap">
-    <p class="eyebrow"><span class="sk" data-de="Ausgewählte Projekte" data-en="Selected projects">Ausgewählte Projekte</span></p>
-    <h2 class="h2"><span class="sk" data-de="Echte Probleme, echte Lösungen." data-en="Real problems, real solutions.">Echte Probleme, echte Lösungen.</span></h2>
-    <p class="lead"><span class="sk" data-de="Jede Studie zeigt den Teil, den die meisten Portfolios überspringen: das Audit, die Interviews, die Irrwege. Und die Entscheidung, die ich am Ende getroffen habe." data-en="Each study shows the part most portfolios skip: the audit, the interviews, the wrong turns. And the decision I made in the end.">Jede Studie zeigt den Teil, den die meisten Portfolios überspringen: das Audit, die Interviews, die Irrwege. Und die Entscheidung, die ich am Ende getroffen habe.</span></p>
+    <footer class="footer">© 2026 Lina Melissa Arndt</footer>
+  </main>
 
-    <div class="cards">
-
-      <!-- sameSpot -->
-      <article class="sticky-card card-dark">
-        <div class="card-body">
-          <span class="card-kicker"><span>01</span><i></i><span class="sk" data-de="Mobile App" data-en="Mobile app">Mobile App</span></span>
-          <h3 class="proj-title"><span class="sk" style="color:#F5F2EC">same</span><span class="sk" style="color:#FF5B3A">Spot</span></h3>
-          <p class="card-text"><span class="sk" data-de="Eine App, in der lokale Verbindung als Nebenprodukt entsteht, nicht als Ziel. Von den ersten Interviews bis zum klickbaren Prototyp." data-en="An app where local connection happens as a byproduct, not a goal. From the first interviews to the clickable prototype.">Eine App, in der lokale Verbindung als Nebenprodukt entsteht, nicht als Ziel. Von den ersten Interviews bis zum klickbaren Prototyp.</span></p>
-          <div class="card-stats">
-            <div><b class="sk">52</b><span class="sk" data-de="Umfrage-<br>Antworten" data-en="Survey<br>responses">Umfrage-<br>Antworten</span></div>
-            <div><b class="sk">4</b><span class="sk" data-de="Nutzer-<br>interviews" data-en="User<br>interviews">Nutzer-<br>interviews</span></div>
-            <div><b class="sk">4</b><span class="sk" data-de="Konkurrenz-<br>Apps" data-en="Competitor<br>apps">Konkurrenz-<br>Apps</span></div>
-            <div><b class="sk">≥15 %</b><span class="sk" data-de="Ziel-KPI<br>Wiederkehr" data-en="Target KPI<br>retention">Ziel-KPI<br>Wiederkehr</span></div>
-          </div>
-          <div class="chips">
-            <span class="chip">Research</span><span class="chip">User Flows</span><span class="chip">UI Design</span><span class="chip">Prototyping</span><span class="chip">Usability Testing</span>
-          </div>
-          <a href="samespot.html" class="card-btn" style="background:#FF5B3A;box-shadow:0 6px 20px rgba(255,91,58,.32)"><span data-de="Case Study öffnen" data-en="Open case study">Case Study öffnen</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></a>
-        </div>
-        <div class="card-media ph">
-          <video src="samespot-mocks/samespot-loop.mp4" autoplay muted loop playsinline></video>
-        </div>
-      </article>
-
-      <!-- pr.druck -->
-      <article class="sticky-card card-light">
-        <div class="card-body">
-          <span class="card-kicker"><span>02</span><i></i><span class="sk" data-de="Website Redesign" data-en="Website redesign">Website Redesign</span></span>
-          <h3 class="proj-title"><span class="sk" style="color:#42B071">pr.druck</span></h3>
-          <p class="card-text"><span class="sk" data-de="Redesign für einen Anbieter für Textilveredelung, dessen Website die eigenen Kund:innen nicht beantworten konnte. Aus Telefonaten in der Auftragsannahme direkt in eine neue Struktur." data-en="Redesign for a textile-printing provider whose website couldn't answer its own customers' questions. Straight from order-desk phone calls into a new structure.">Redesign für einen Anbieter für Textilveredelung, dessen Website die eigenen Kund:innen nicht beantworten konnte. Aus Telefonaten in der Auftragsannahme direkt in eine neue Struktur.</span></p>
-          <div class="card-stats">
-            <div><b class="sk">3</b><span class="sk" data-de="Zielgruppen-<br>Cluster" data-en="Audience<br>clusters">Zielgruppen-<br>Cluster</span></div>
-            <div><b class="sk">4</b><span class="sk" data-de="Fidelity-<br>Stufen" data-en="Fidelity<br>stages">Fidelity-<br>Stufen</span></div>
-            <div><b class="sk">&lt;2</b><span class="sk" data-de="Klicks zur<br>Kundenfrage" data-en="Clicks to<br>answer">Klicks zur<br>Kundenfrage</span></div>
-          </div>
-          <div class="chips">
-            <span class="chip">UX Audit</span><span class="chip" data-de="Informationsarchitektur" data-en="Information architecture">Informationsarchitektur</span><span class="chip">UI Design</span><span class="chip">Prototyping</span>
-          </div>
-          <a href="prdruck.html" class="card-btn" style="background:#2E8C57;box-shadow:0 6px 20px rgba(66,176,113,.32)"><span data-de="Case Study öffnen" data-en="Open case study">Case Study öffnen</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></a>
-        </div>
-        <div class="card-media ph stretch">
-          <img class="prdruck-scroll" src="prdruck/neu.png" alt="pr.druck Website, komplette Seite">
-        </div>
-      </article>
-
-      <!-- Kino Grimm: bewusst noch im Lo-Fi -->
-      <article class="sticky-card card-lofi">
-        <div class="card-body">
-          <span class="card-kicker"><span>03</span><i></i><span data-de="Website Redesign" data-en="Website redesign">Website Redesign</span></span>
-          <h3 class="proj-title">Kino Grimm</h3>
-          <p class="card-text" data-de="Redesign der Website eines lokalen Programmkinos: von der Multi-Page-Struktur zu einem übersichtlichen Onepager mit Programm, Kinogeschichte und Kinocard." data-en="Redesign of a local independent cinema's website: from a multi-page structure to a clear one-pager with showtimes, cinema history and membership card.">Redesign der Website eines lokalen Programmkinos: von der Multi-Page-Struktur zu einem übersichtlichen Onepager mit Programm, Kinogeschichte und Kinocard.</p>
-          <div class="chips lofi-chips">
-            <span class="chip-lofi" data-de="UX Konzept" data-en="UX concept">UX Konzept</span><span class="chip-lofi" data-de="Informationsarchitektur" data-en="Information architecture">Informationsarchitektur</span><span class="chip-lofi">UI Design</span>
-          </div>
-          <span class="status-pill"><span class="status-dot" aria-hidden="true"></span><span data-de="Status: Wireframe · Case Study entsteht gerade" data-en="Status: wireframe · case study in progress">Status: Wireframe · Case Study entsteht gerade</span></span>
-        </div>
-        <div class="card-media wire" aria-hidden="true">
-          <div class="wire-frame">
-            <div class="w-bar"><i></i><i></i><i></i></div>
-            <div class="w-hero"></div>
-            <div class="w-line w70"></div>
-            <div class="w-line w45"></div>
-            <div class="w-cols"><div></div><div></div><div></div></div>
-          </div>
-          <div class="note note-card">Noch im Lo-Fi.<br>Hier entsteht gerade was!</div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ================= Antrieb ================= -->
-<section id="antrieb" class="section resolve">
-  <div class="wrap">
-    <p class="eyebrow"><span class="sk" data-de="Was mich antreibt" data-en="What drives me">Was mich antreibt</span></p>
-    <h2 class="h2 mb-56"><span class="sk" data-de="So arbeite ich." data-en="How I work.">So arbeite ich.</span></h2>
-    <div class="grid-cards">
-      <div class="tile">
-        <p class="tile-kicker"><span class="sk" data-de="Verbinden" data-en="Connect">Verbinden</span></p>
-        <h3 class="tile-title"><span class="sk" data-de="Blickwinkel zusammenführen" data-en="Bringing viewpoints together">Blickwinkel zusammenführen</span></h3>
-        <p class="tile-text"><span class="sk" data-de="Ich bringe unterschiedliche Sichtweisen zusammen, damit aus guten Ideen starke Produkte werden." data-en="I bring different perspectives together so good ideas become strong products.">Ich bringe unterschiedliche Sichtweisen zusammen, damit aus guten Ideen starke Produkte werden.</span></p>
-      </div>
-      <div class="tile">
-        <p class="tile-kicker"><span class="sk" data-de="Verstehen" data-en="Understand">Verstehen</span></p>
-        <h3 class="tile-title"><span class="sk" data-de="Das echte Problem finden" data-en="Finding the real problem">Das echte Problem finden</span></h3>
-        <p class="tile-text"><span class="sk" data-de="Ich möchte nicht die erstbeste Lösung, sondern grabe so lange, bis das wirkliche Problem gelöst ist." data-en="I don't settle for the first solution, I dig until the real problem is solved.">Ich möchte nicht die erstbeste Lösung, sondern grabe so lange, bis das wirkliche Problem gelöst ist.</span></p>
-      </div>
-      <div class="tile">
-        <p class="tile-kicker"><span class="sk" data-de="Gestalten" data-en="Design">Gestalten</span></p>
-        <h3 class="tile-title"><span class="sk" data-de="Vertrauen statt nur Screens" data-en="Trust, not just screens">Vertrauen statt nur Screens</span></h3>
-        <p class="tile-text"><span class="sk" data-de="Ich gestalte Produkte, die nicht nur funktionieren, sondern auch Vertrauen aufbauen und gerne benutzt werden." data-en="I design products that don't just work, but build trust and are a pleasure to use.">Ich gestalte Produkte, die nicht nur funktionieren, sondern auch Vertrauen aufbauen und gerne benutzt werden.</span></p>
-      </div>
-      <div class="tile">
-        <p class="tile-kicker"><span class="sk" data-de="Skalieren" data-en="Scale">Skalieren</span></p>
-        <h3 class="tile-title"><span class="sk" data-de="Für Wachstum mitdenken" data-en="Thinking ahead for growth">Für Wachstum mitdenken</span></h3>
-        <p class="tile-text"><span class="sk" data-de="Ich denke über den einzelnen Screen hinaus, damit Produkte konsistent bleiben und Teams effizienter arbeiten können." data-en="I think beyond the single screen so products stay consistent and teams can work more efficiently.">Ich denke über den einzelnen Screen hinaus, damit Produkte konsistent bleiben und Teams effizienter arbeiten können.</span></p>
-      </div>
-      <div class="tile">
-        <p class="tile-kicker"><span class="sk" data-de="Hinterfragen" data-en="Question">Hinterfragen</span></p>
-        <h3 class="tile-title"><span class="sk" data-de="Unbequeme Fragen stellen" data-en="Asking uncomfortable questions">Unbequeme Fragen stellen</span></h3>
-        <p class="tile-text"><span class="sk" data-de="Ich stelle Gewohntes infrage und suche nach besseren Wegen, auch wenn sie zunächst unbequemer erscheinen." data-en="I question the familiar and look for better ways, even when they seem less comfortable at first.">Ich stelle Gewohntes infrage und suche nach besseren Wegen, auch wenn sie zunächst unbequemer erscheinen.</span></p>
-      </div>
-      <div class="tile">
-        <p class="tile-kicker"><span class="sk" data-de="Bewirken" data-en="Make an impact">Bewirken</span></p>
-        <h3 class="tile-title"><span class="sk" data-de="Ergebnisse, die man merkt" data-en="Results you can feel">Ergebnisse, die man merkt</span></h3>
-        <p class="tile-text"><span class="sk" data-de="Ich empfinde Design als erfolgreich, wenn Menschen das Produkt gerne nutzen und gleichzeitig die Business-Ziele messbar unterstützt werden." data-en="To me, design succeeds when people enjoy using the product and business goals are measurably supported at the same time.">Ich empfinde Design als erfolgreich, wenn Menschen das Produkt gerne nutzen und gleichzeitig die Business-Ziele messbar unterstützt werden.</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= Statement ================= -->
-<section class="statement resolve on-dark">
-  <blockquote>
-    <p><span class="sk" data-de="Wenn etwas erklärt werden muss, ist es noch nicht " data-en="If something needs explaining, it isn't ">Wenn etwas erklärt werden muss, ist es noch nicht </span><span class="sk green" data-de="fertig." data-en="finished.">fertig.</span></p>
-    <footer><span class="sk" data-de="Meine Messlatte, in jedem Projekt" data-en="My benchmark, in every project">Meine Messlatte, in jedem Projekt</span></footer>
-  </blockquote>
-</section>
-
-<!-- ================= Expertise ================= -->
-<section id="expertise" class="section resolve">
-  <div class="wrap">
-    <p class="eyebrow"><span class="sk">Expertise</span></p>
-    <h2 class="h2 mb-56"><span class="sk" data-de="Von der Frage zum Interface." data-en="From the question to the interface.">Von der Frage zum Interface.</span></h2>
-    <div class="grid-exp">
-      <div class="tile">
-        <span class="tile-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m20 20-4.35-4.35"></path></svg></span>
-        <h3 class="exp-title"><span class="sk" data-de="Verstehen" data-en="Understand">Verstehen</span></h3>
-        <div class="chips wrap-chips"><span class="chip white" data-de="Nutzerinterviews" data-en="User interviews">Nutzerinterviews</span><span class="chip white" data-de="Umfragen" data-en="Surveys">Umfragen</span><span class="chip white" data-de="Wettbewerbsanalyse" data-en="Competitive analysis">Wettbewerbsanalyse</span><span class="chip white">Persona Mapping</span><span class="chip white">Usability Testing</span></div>
-      </div>
-      <div class="tile">
-        <span class="tile-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="7" height="7" rx="1.6"></rect><rect x="14" y="4" width="7" height="7" rx="1.6"></rect><rect x="8.5" y="14" width="7" height="7" rx="1.6"></rect><path d="M6.5 11v3M17.5 11v3M6.5 14h11"></path></svg></span>
-        <h3 class="exp-title"><span class="sk" data-de="Strukturieren" data-en="Structure">Strukturieren</span></h3>
-        <div class="chips wrap-chips"><span class="chip white">Card Sorting</span><span class="chip white">User Journeys</span><span class="chip white" data-de="Informationsarchitektur" data-en="Information architecture">Informationsarchitektur</span><span class="chip white">Storyboarding</span></div>
-      </div>
-      <div class="tile">
-        <span class="tile-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 3 7 7-9.5 9.5H4v-7.5z"></path><path d="m14 3-2.5 2.5"></path></svg></span>
-        <h3 class="exp-title"><span class="sk" data-de="Gestalten" data-en="Design">Gestalten</span></h3>
-        <div class="chips wrap-chips"><span class="chip white">Wireframing</span><span class="chip white">UI Design</span><span class="chip white">Design Systems</span><span class="chip white">Components</span><span class="chip white">Style Guides</span><span class="chip white">Branding</span></div>
-      </div>
-      <div class="tile">
-        <span class="tile-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="7"></rect></svg></span>
-        <h3 class="exp-title"><span class="sk" data-de="Umsetzen" data-en="Implement">Umsetzen</span></h3>
-        <div class="chips wrap-chips"><span class="chip white">Prototyping</span><span class="chip white">Interaction Design</span><span class="chip white">Responsive Design</span><span class="chip white" data-de="Reinzeichnung" data-en="Final artwork">Reinzeichnung</span><span class="chip white" data-de="Druckproduktion" data-en="Print production">Druckproduktion</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= Über mich ================= -->
-<section id="ueber-mich" class="section bg-grey resolve">
-  <div class="about wrap">
-    <div class="about-text">
-      <p class="eyebrow left"><span class="sk" data-de="Über mich" data-en="About me">Über mich</span></p>
-      <h2 class="h2 left"><span class="sk" data-de="Hi, ich bin Lina." data-en="Hi, I'm Lina.">Hi, ich bin Lina.</span></h2>
-      <p class="about-p dark"><span class="sk" data-de="Ich bin UX/UI Designerin und komme aus der Mediengestaltung Digital &amp; Print. Irgendwann habe ich gemerkt: Mich interessiert nicht nur, wie etwas aussieht, sondern wie es sich anfühlt, wenn man es benutzt." data-en="I'm a UX/UI designer with a background in digital &amp; print media design. At some point I realized: I'm not just interested in how something looks, but how it feels to use.">Ich bin UX/UI Designerin und komme aus der Mediengestaltung Digital &amp; Print. Irgendwann habe ich gemerkt: Mich interessiert nicht nur, wie etwas aussieht, sondern wie es sich anfühlt, wenn man es benutzt.</span></p>
-      <p class="about-p"><span class="sk" data-de="Heute arbeite ich am liebsten dort, wo Research und Interface zusammenkommen: erst verstehen, dann gestalten, dann testen und wieder ändern." data-en="Today I love working where research and interface meet: first understand, then design, then test and revise.">Heute arbeite ich am liebsten dort, wo Research und Interface zusammenkommen: erst verstehen, dann gestalten, dann testen und wieder ändern.</span></p>
-      <div class="link-pills">
-        <a href="https://www.linkedin.com/in/linamelissa/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://www.behance.net/linamelissa" target="_blank" rel="noopener">Behance</a>
-        <a href="https://dribbble.com/linamelissade" target="_blank" rel="noopener">Dribbble</a>
-        <a href="CV/CV_Lina-Melissa-Arndt.pdf" download class="green" data-de="Lebenslauf" data-en="Resume">Lebenslauf</a>
-      </div>
-    </div>
-    <div class="about-img ph">
-      <img src="ich/bild2.jpg" alt="Lina Melissa Arndt im Portrait">
-    </div>
-  </div>
-  <div class="about-stats wrap">
-    <div><b class="sk" data-de="2 Jahre" data-en="2 years">2 Jahre</b><span class="sk" data-de="Fachhochschulreife Gestaltung" data-en="Technical college entrance qualification, design">Fachhochschulreife Gestaltung</span></div>
-    <div><b class="sk" data-de="3 Jahre" data-en="3 years">3 Jahre</b><span class="sk" data-de="Ausbildung Mediengestaltung Digital &amp; Print" data-en="Apprenticeship in digital &amp; print media design">Ausbildung Mediengestaltung Digital &amp; Print</span></div>
-    <div><b class="sk" data-de="4 Monate" data-en="4 months">4 Monate</b><span class="sk">Product Design Bootcamp</span></div>
-    <div><b class="sk">2</b><span class="sk" data-de="Zertifikate" data-en="Certificates">Zertifikate</span></div>
-    <div class="last"><b class="sk green-num" data-de="1 Jahr" data-en="1 year">1 Jahr</b><span class="sk" data-de="Berufserfahrung im Design" data-en="Professional experience in design">Berufserfahrung im Design</span></div>
-  </div>
-</section>
-
-<!-- ================= Blog ================= -->
-<section id="blog" class="section resolve">
-  <div class="wrap">
-    <p class="eyebrow"><span class="sk" data-de="Gedanken" data-en="Thoughts">Gedanken</span></p>
-    <h2 class="h2 mb-52"><span class="sk" data-de="Gedanken aus dem Prozess." data-en="Thoughts from the process.">Gedanken aus dem Prozess.</span></h2>
-    <div class="grid-blog">
-      <a href="Blog/blog-artikel-01.html" class="blog-card">
-        <div class="blog-cover-wrap ph">
-          <svg class="blog-cover" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="#F5F5F7"></rect><rect x="40" y="70" width="140" height="150" rx="10" fill="#fff" stroke="#E1E1E4" stroke-width="1.5"></rect><rect x="58" y="92" width="104" height="8" rx="4" fill="#C7C7CB"></rect><rect x="58" y="112" width="80" height="8" rx="4" fill="#C7C7CB"></rect><rect x="58" y="140" width="104" height="46" rx="6" fill="#EDEDEF"></rect><rect x="58" y="196" width="60" height="8" rx="4" fill="#C7C7CB"></rect><rect x="220" y="55" width="150" height="180" rx="12" fill="#0A0A0A"></rect><circle cx="238" cy="72" r="3" fill="#4A4A4E"></circle><circle cx="250" cy="72" r="3" fill="#4A4A4E"></circle><rect x="236" y="92" width="118" height="8" rx="4" fill="#2E9E63"></rect><rect x="236" y="112" width="90" height="8" rx="4" fill="#3A3A3E"></rect><rect x="236" y="140" width="118" height="8" rx="4" fill="#3A3A3E"></rect><rect x="236" y="158" width="70" height="8" rx="4" fill="#3A3A3E"></rect><rect x="236" y="192" width="118" height="22" rx="8" fill="#2E9E63"></rect><path d="M182 150 Q200 150 218 150" stroke="#2E9E63" stroke-width="2" stroke-dasharray="4 5" fill="none"></path><circle cx="182" cy="150" r="4" fill="#2E9E63"></circle></svg>
-          <span class="blog-tag" data-de="Prozess" data-en="Process">Prozess</span>
-        </div>
-        <div class="blog-body">
-          <span class="blog-date"><span class="sk" data-de="Mai 2026" data-en="May 2026">Mai 2026</span></span>
-          <h3><span class="sk" data-de="Wie ich dieses Portfolio mit Vibe Coding gebaut habe" data-en="How I built this portfolio with vibe coding">Wie ich dieses Portfolio mit Vibe Coding gebaut habe</span></h3>
-          <p><span class="sk" data-de="Vier Tage Figma-Design. Und dann spontan über Bord geworfen." data-en="Four days of Figma design. Then spontaneously thrown overboard.">Vier Tage Figma-Design. Und dann spontan über Bord geworfen.</span></p>
-        </div>
-      </a>
-      <a href="Blog/blog-artikel-02.html" class="blog-card">
-        <div class="blog-cover-wrap ph">
-          <svg class="blog-cover" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="#F5F5F7"></rect><rect x="164" y="46" width="72" height="20" rx="6" fill="#0A0A0A"></rect><path d="M200 66 V90 M120 110 H280 M120 110 V90 M280 110 V90 M120 110 V132 M200 110 V132 M280 110 V132" stroke="#C7C7CB" stroke-width="2" fill="none"></path><rect x="82" y="132" width="76" height="18" rx="5" fill="#2E9E63"></rect><rect x="162" y="132" width="76" height="18" rx="5" fill="#E1E1E4"></rect><rect x="242" y="132" width="76" height="18" rx="5" fill="#E1E1E4"></rect><path d="M100 150 V172 M118 150 V172 M100 172 H118" stroke="#C7C7CB" stroke-width="2" fill="none"></path><rect x="82" y="172" width="42" height="14" rx="4" fill="#EDEDEF"></rect><rect x="130" y="172" width="42" height="14" rx="4" fill="#EDEDEF"></rect><rect x="196" y="200" width="118" height="66" rx="10" fill="#fff" stroke="#E1E1E4" stroke-width="1.5"></rect><rect x="212" y="216" width="86" height="8" rx="4" fill="#2E9E63"></rect><rect x="212" y="234" width="60" height="8" rx="4" fill="#C7C7CB"></rect><rect x="212" y="250" width="70" height="8" rx="4" fill="#C7C7CB"></rect><path d="M162 186 Q180 195 196 216" stroke="#2E9E63" stroke-width="2" stroke-dasharray="4 5" fill="none"></path></svg>
-          <span class="blog-tag">UX Design</span>
-        </div>
-        <div class="blog-body">
-          <span class="blog-date"><span class="sk" data-de="Juni 2026" data-en="June 2026">Juni 2026</span></span>
-          <h3><span class="sk" data-de="Erst der Plan, dann das Gefühl: Navigationsarchitektur und Prototyping" data-en="First the plan, then the feeling: navigation architecture and prototyping">Erst der Plan, dann das Gefühl: Navigationsarchitektur und Prototyping</span></h3>
-          <p><span class="sk" data-de="Wie man eine Struktur baut, in der sich Menschen nicht verlaufen." data-en="How to build a structure people don't get lost in.">Wie man eine Struktur baut, in der sich Menschen nicht verlaufen.</span></p>
-        </div>
-      </a>
-      <a href="Blog/blog-artikel-03.html" class="blog-card">
-        <div class="blog-cover-wrap ph">
-          <svg class="blog-cover" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="#F5F5F7"></rect><rect x="110" y="60" width="180" height="180" rx="12" fill="#fff" stroke="#E1E1E4" stroke-width="1.5"></rect><rect x="126" y="76" width="148" height="26" rx="7" fill="#0A0A0A"></rect><rect x="126" y="114" width="60" height="8" rx="4" fill="#C7C7CB"></rect><circle cx="132" cy="140" r="6" fill="none" stroke="#2E9E63" stroke-width="2"></circle><path d="M129 140 l2 3 5-6" stroke="#2E9E63" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><rect x="146" y="136" width="100" height="8" rx="4" fill="#C7C7CB"></rect><circle cx="132" cy="164" r="6" fill="none" stroke="#C7C7CB" stroke-width="2"></circle><rect x="146" y="160" width="80" height="8" rx="4" fill="#EDEDEF"></rect><rect x="126" y="188" width="148" height="30" rx="9" fill="#0A0A0A"></rect><path d="M126 60 L294 240 M294 60 L126 240" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"></path></svg>
-          <span class="blog-tag" data-de="Haltung" data-en="Stance">Haltung</span>
-        </div>
-        <div class="blog-body">
-          <span class="blog-date"><span class="sk" data-de="Juni 2026" data-en="June 2026">Juni 2026</span></span>
-          <h3><span class="sk" data-de="Dark Patterns und warum ich sie ablehne" data-en="Dark patterns and why I reject them">Dark Patterns und warum ich sie ablehne</span></h3>
-          <p><span class="sk" data-de="Manche Designs sind nicht schlecht gemacht. Sie sind absichtlich gegen dich gebaut." data-en="Some designs aren't badly made. They're deliberately built against you.">Manche Designs sind nicht schlecht gemacht. Sie sind absichtlich gegen dich gebaut.</span></p>
-        </div>
-      </a>
-      <a href="Blog/blog-artikel-04.html" class="blog-card">
-        <div class="blog-cover-wrap ph">
-          <svg class="blog-cover" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="#F5F5F7"></rect><circle cx="112" cy="90" r="8" fill="#2E9E63"></circle><rect x="132" y="78" width="150" height="24" rx="12" fill="#fff" stroke="#E1E1E4" stroke-width="1.5"></rect><rect x="148" y="86" width="100" height="8" rx="4" fill="#C7C7CB"></rect><rect x="150" y="120" width="150" height="24" rx="12" fill="#EDEDEF"></rect><rect x="166" y="128" width="90" height="8" rx="4" fill="#8E8E93"></rect><circle cx="112" cy="174" r="8" fill="#2E9E63"></circle><rect x="132" y="162" width="150" height="24" rx="12" fill="#fff" stroke="#E1E1E4" stroke-width="1.5"></rect><rect x="148" y="170" width="70" height="8" rx="4" fill="#C7C7CB"></rect><rect x="150" y="204" width="150" height="24" rx="12" fill="#2E9E63"></rect><rect x="166" y="212" width="90" height="8" rx="4" fill="#fff" opacity="0.85"></rect><path d="M300 132 Q320 110 300 88" stroke="#2E9E63" stroke-width="2" stroke-dasharray="4 5" fill="none"></path></svg>
-          <span class="blog-tag" data-de="KI &amp; Tools" data-en="AI &amp; tools">KI &amp; Tools</span>
-        </div>
-        <div class="blog-body">
-          <span class="blog-date"><span class="sk" data-de="Juni 2026" data-en="June 2026">Juni 2026</span></span>
-          <h3><span class="sk" data-de="Prompten als neue Designfähigkeit" data-en="Prompting as a new design skill">Prompten als neue Designfähigkeit</span></h3>
-          <p><span class="sk" data-de="Warum gutes Prompten nah an dem ist, was ich als Designerin sowieso tue." data-en="Why good prompting is close to what I do as a designer anyway.">Warum gutes Prompten nah an dem ist, was ich als Designerin sowieso tue.</span></p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= Zwischendurch ================= -->
-<section id="zwischendurch" class="section bg-grey resolve">
-  <div class="wrap">
-    <p class="eyebrow"><span class="sk" data-de="Zwischendurch" data-en="In between">Zwischendurch</span></p>
-    <h2 class="h3c"><span class="sk" data-de="Blick hinter die Kulissen." data-en="A look behind the scenes.">Blick hinter die Kulissen.</span></h2>
-  </div>
-
-  <div class="zd-grid">
-    <div class="zd-item ph" style="height:320px"><img src="zwischendurch/zd-ausbildung.jpg" alt="Abschluss der Ausbildung"><span class="zd-tag" data-de="Ausbildung" data-en="Training">Ausbildung</span></div>
-    <div class="zd-item ph" style="height:220px"><img class="pan-tile" src="zwischendurch/zd-prdruck.jpg" alt="Website für pr.druck"><span class="zd-tag" data-de="Webdesign" data-en="Web design">Webdesign</span></div>
-    <button type="button" class="zd-item ph zd-btn" style="height:300px" data-lightbox="illu1" aria-label="Illustrationen Set 1 vergrößern">
-      <div class="slide-track"><img src="zwischendurch/zd-set1-1.jpg" alt="Illustrationen, Set 1, Bild 1"><img src="zwischendurch/zd-set1-2.jpg" alt="Illustrationen, Set 1, Bild 2"><img src="zwischendurch/zd-set1-3.jpg" alt="Illustrationen, Set 1, Bild 3"></div>
-      <span class="zd-tag">Illustration</span><span class="zd-count">1/3</span>
-    </button>
-    <div class="zd-item ph" style="height:280px"><img src="zwischendurch/zd-venedig.jpg" alt="Venedig"><span class="zd-tag" data-de="Reise" data-en="Travel">Reise</span></div>
-    <div class="zd-item ph"><video src="zwischendurch/greensip.mp4" autoplay muted loop playsinline></video><span class="zd-tag">Motion Design</span></div>
-    <div class="zd-item ph" style="height:260px"><img src="zwischendurch/zd-blender.jpg" alt="3D-Illustration in Blender"><span class="zd-tag">3D Design</span></div>
-    <div class="zd-item ph" style="height:280px"><img src="zwischendurch/zd-familie.jpg" alt="Mit Familie"><span class="zd-tag" data-de="Familie" data-en="Family">Familie</span></div>
-    <div class="zd-item ph" style="height:300px"><img src="zwischendurch/zd-cafe.jpg" alt="Skizzieren im Café"><span class="zd-tag">Café</span></div>
-    <div class="zd-item ph"><video src="zwischendurch/zodiac.mp4" autoplay muted loop playsinline></video><span class="zd-tag">Motion Design</span></div>
-    <div class="zd-item zd-empty" style="height:260px" aria-hidden="true"><span class="zd-tag">Digital Art</span><span class="zd-soon" data-de="Bild folgt" data-en="Coming soon">Bild folgt</span></div>
-    <div class="zd-item ph" style="height:220px"><img class="pan-tile" src="zwischendurch/zd-tara.jpg" alt="App-Design für Tara"><span class="zd-tag" data-de="Webdesign" data-en="Web design">Webdesign</span></div>
-    <div class="zd-item ph" style="height:320px"><img src="zwischendurch/zd-plentymarkets.jpg" alt="Event für plentymarkets"><span class="zd-tag">Event</span></div>
-    <button type="button" class="zd-item ph zd-btn" style="height:260px" data-lightbox="illu2" aria-label="Illustrationen Set 2 vergrößern">
-      <div class="slide-track"><img src="zwischendurch/zd-set2-1.jpg" alt="Illustrationen, Set 2, Bild 1"><img src="zwischendurch/zd-set2-2.jpg" alt="Illustrationen, Set 2, Bild 2"><img src="zwischendurch/zd-set2-3.jpg" alt="Illustrationen, Set 2, Bild 3"></div>
-      <span class="zd-tag">Illustration</span><span class="zd-count">1/3</span>
-    </button>
-    <div class="zd-item ph" style="height:280px"><img src="zwischendurch/zd-start.jpg" alt="Der Anfang meiner UX/UI-Journey"><span class="zd-tag" data-de="Anfang" data-en="Beginning">Anfang</span></div>
-    <div class="zd-item zd-empty" style="height:240px" aria-hidden="true"><span class="zd-tag">Workspace</span><span class="zd-soon" data-de="Bild folgt" data-en="Coming soon">Bild folgt</span></div>
-    <div class="zd-item ph"><video src="zwischendurch/memorycapsule.mp4" autoplay muted loop playsinline></video><span class="zd-tag">Motion Design</span></div>
-    <div class="zd-item ph" style="height:300px"><img src="zwischendurch/zd-ich.jpg" alt="Portrait von Lina"><span class="zd-tag">Portrait</span></div>
-    <div class="zd-item ph"><video src="zwischendurch/zd-rom.mp4" autoplay muted loop playsinline></video><span class="zd-tag" data-de="Reise" data-en="Travel">Reise</span></div>
-    <div class="zd-item zd-empty" style="height:220px" aria-hidden="true"><span class="zd-tag">Wireframe</span><span class="zd-soon" data-de="Bild folgt" data-en="Coming soon">Bild folgt</span></div>
-    <div class="zd-item ph" style="height:320px"><img src="zwischendurch/zd-freunde.jpg" alt="Mit Freund:innen unterwegs"><span class="zd-tag" data-de="Freunde" data-en="Friends">Freunde</span></div>
-    <div class="zd-item zd-empty" style="height:300px" aria-hidden="true"><span class="zd-tag">Sketch</span><span class="zd-soon" data-de="Bild folgt" data-en="Coming soon">Bild folgt</span></div>
-  </div>
-</section>
-
-<!-- ================= Kontakt ================= -->
-<section id="kontakt" class="contact resolve">
-  <div class="contact-inner">
-    <div class="open-pill"><span class="open-dot" aria-hidden="true"></span><span data-de="Offen für neue Möglichkeiten" data-en="Open to new opportunities">Offen für neue Möglichkeiten</span></div>
-    <h2 class="contact-h"><span class="sk" data-de="Ich freue mich auf dein Hallo :)" data-en="I'd love to hear from you :)">Ich freue mich auf dein Hallo :)</span></h2>
-    <p class="contact-p"><span class="sk" data-de="Ich bin offen für Gespräche über offene Stellen, Projekte oder einfach einen Austausch." data-en="I'm open to conversations about job openings, projects, or simply an exchange.">Ich bin offen für Gespräche über offene Stellen, Projekte oder einfach einen Austausch.</span></p>
-    <div class="contact-meta">
-      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F7A45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span class="sk" data-de="Ab sofort verfügbar" data-en="Available now">Ab sofort verfügbar</span></span>
-      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F7A45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span class="sk" data-de="Raum Hamburg · Remote" data-en="Hamburg area · Remote">Raum Hamburg · Remote</span></span>
-    </div>
-    <div class="contact-cta">
-      <button type="button" class="mail-btn" id="mailBtn" aria-label="E-Mail-Adresse Lina-Melissa@web.de kopieren">
-        <svg class="ico-mail" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-        <svg class="ico-check" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-        <span class="mail-label" data-de="E-Mail kopieren" data-en="Copy email">E-Mail kopieren</span>
-      </button>
-      <a href="CV/CV_Lina-Melissa-Arndt.pdf" download class="soft-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg><span data-de="CV herunterladen" data-en="Download CV">CV herunterladen</span></a>
-      <a href="https://www.linkedin.com/in/linamelissa/" target="_blank" rel="noopener" class="soft-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>LinkedIn</a>
-    </div>
-    <p class="mail-note" id="mailNote" aria-live="polite">Lina-Melissa@web.de</p>
-  </div>
-</section>
-
-</main>
-
-<!-- ================= Footer ================= -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-id">
-      <span class="f-name">Lina Melissa Arndt</span>
-      <span data-de="UX/UI Design · Schwarzenbek bei Hamburg" data-en="UX/UI Design · Schwarzenbek near Hamburg">UX/UI Design · Schwarzenbek bei Hamburg</span>
-      <a href="mailto:Lina-Melissa@web.de">Lina-Melissa@web.de</a>
-    </div>
-    <div class="footer-social">
-      <a href="https://www.linkedin.com/in/linamelissa/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-      <a href="https://www.behance.net/linamelissa" target="_blank" rel="noopener" aria-label="Behance"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 7H3v10h4.5a3 3 0 0 0 0-6 2.5 2.5 0 0 0 0-4z"></path><path d="M3 12h5"></path><path d="M15 7h4"></path></svg></a>
-      <a href="https://dribbble.com/linamelissade" target="_blank" rel="noopener" aria-label="Dribbble"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"></path><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"></path><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"></path></svg></a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© Lina Melissa Arndt</span>
-    <div><span data-de="Zuletzt aktualisiert: November 2026" data-en="Last updated: November 2026">Zuletzt aktualisiert: November 2026</span><a href="impressum.html" data-de="Impressum &amp; Datenschutz" data-en="Legal notice &amp; privacy">Impressum &amp; Datenschutz</a></div>
-  </div>
-</footer>
-
-<!-- ================= Update-Ticker ================= -->
-<div class="chat-launcher" id="chatLauncher">
-  <button type="button" class="nudge" id="nudge" data-open-chat>
-    <span data-de="Neue Version ist online 👀 Gefällt's dir?" data-en="New version is live 👀 Do you like it?">Neue Version ist online 👀 Gefällt's dir?</span>
-    <small data-de="Lina · November 2026" data-en="Lina · November 2026">Lina · November 2026</small>
-  </button>
-  <button type="button" class="avatar-btn" data-open-chat aria-label="Nachrichten von Lina öffnen">
-    <img src="ich/bild1.jpg" alt="">
-    <span class="badge" id="chatBadge" aria-hidden="true"></span>
-  </button>
-</div>
-
-<div class="chat" id="chat" role="dialog" aria-label="Was gerade bei mir läuft" hidden>
-  <div class="chat-head">
-    <span class="chat-ava"><img src="ich/bild1.jpg" alt=""></span>
-    <span class="chat-title"><strong data-de="Was gerade bei mir läuft" data-en="What's happening right now">Was gerade bei mir läuft</strong><span><i aria-hidden="true"></i><span data-de="Lina · Update-Ticker" data-en="Lina · update ticker">Lina · Update-Ticker</span></span></span>
-    <button type="button" class="chat-close" id="chatClose" aria-label="Chat schließen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
-  </div>
-  <div class="chat-body" id="chatBody">
-    <p class="chat-hint" data-de="Nach oben scrollen fürs Archiv" data-en="Scroll up for the archive">Nach oben scrollen fürs Archiv</p>
-    <div class="msg"><p data-de="Das Google UX Certificate war der Punkt, an dem mir klar wurde: Das hier will ich machen" data-en="The Google UX Certificate was the moment I realized: this is what I want to do">Das Google UX Certificate war der Punkt, an dem mir klar wurde: Das hier will ich machen</p><span>November 2025</span></div>
-    <div class="msg"><p data-de="Bootcamp läuft! Mein Case war eigentlich sofort klar: sameSpot. Das Thema beschäftigt mich schon seit Jahren" data-en="Bootcamp is underway! My case was clear right away: sameSpot. This topic has been on my mind for years">Bootcamp läuft! Mein Case war eigentlich sofort klar: sameSpot. Das Thema beschäftigt mich schon seit Jahren</p><span>April 2026</span></div>
-    <div class="msg"><p data-de="Portfolio ist online 👀 4 Tage Figma-Wireframe gebaut, dann spontan Vibe Coding mit Claude probiert." data-en="Portfolio is live 👀 Spent 4 days on a Figma wireframe, then spontaneously tried vibe coding with Claude.">Portfolio ist online 👀 4 Tage Figma-Wireframe gebaut, dann spontan Vibe Coding mit Claude probiert.</p><span data-de="Mai 2026" data-en="May 2026">Mai 2026</span></div>
-    <div class="typing" id="typing" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="msg latest" id="latestMsg"><p data-de="Neue Version! Diesmal wird die Seite beim Scrollen designt: von der Skizze bis Hi-Fi. Gefällt's dir?" data-en="New version! This time the page gets designed as you scroll: from sketch to hi-fi. Do you like it?">Neue Version! Diesmal wird die Seite beim Scrollen designt: von der Skizze bis Hi-Fi. Gefällt's dir?</p><span>November 2026</span></div>
-  </div>
-  <a href="#blog" class="chat-blog" data-close-chat data-de="→ mehr im Blog lesen" data-en="→ read more on the blog">→ mehr im Blog lesen</a>
-  <form class="chat-form" action="mailto:Lina-Melissa@web.de" method="get">
-    <input type="text" name="subject" placeholder="Antworten…" data-de-placeholder="Antworten…" data-en-placeholder="Reply…" aria-label="Nachricht">
-    <button type="submit" aria-label="Senden"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg></button>
-  </form>
-</div>
-
-<!-- ================= Lightbox ================= -->
-<dialog class="lightbox" id="lightbox" aria-label="Illustrationen">
-  <button type="button" class="lb-close" id="lbClose" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
-  <div class="lb-content">
-    <div data-set="illu1"><img src="zwischendurch/zd-set1-1.jpg" alt="Illustration, Set 1, Bild 1" loading="lazy"><img src="zwischendurch/zd-set1-2.jpg" alt="Illustration, Set 1, Bild 2" loading="lazy"><img src="zwischendurch/zd-set1-3.jpg" alt="Illustration, Set 1, Bild 3" loading="lazy"></div>
-    <div data-set="illu2"><img src="zwischendurch/zd-set2-1.jpg" alt="Illustration, Set 2, Bild 1" loading="lazy"><img src="zwischendurch/zd-set2-2.jpg" alt="Illustration, Set 2, Bild 2" loading="lazy"><img src="zwischendurch/zd-set2-3.jpg" alt="Illustration, Set 2, Bild 3" loading="lazy"></div>
-  </div>
-</dialog>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
