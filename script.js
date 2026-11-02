@@ -21,12 +21,34 @@ window.addEventListener('load', function () {
   // Ab welchem Scroll-Anteil (0–1) im Hero welche Stufe gilt
   var STOPS = [0, 0.2, 0.45, 0.7];
   var stage = -1;
+  var heroSticky = document.querySelector('.hero-sticky');
+  var frame = document.querySelector('.frame');
+  var cursor = document.querySelector('.lina-cursor');
+  var introDone = false;
+
+  // Cursor an eine Stelle im Frame fahren (fx/fy = Position im Element, 0–1)
+  function moveCursor(el, fx, fy) {
+    if (!cursor || !frame || !el) return;
+    var f = frame.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    var x = r.left - f.left + r.width * fx;
+    var y = r.top - f.top + r.height * fy;
+    cursor.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+  }
+  // Wo der Cursor in welcher Stufe „arbeitet"
+  function parkCursor(s) {
+    if (!introDone || !cursor) return;
+    if (s === 0) moveCursor(document.querySelector('.h-cta'), 1.02, 0.7);
+    if (s === 1) moveCursor(document.querySelector('.h-lead'), 1.0, 0.85);
+    if (s === 2) moveCursor(document.querySelector('.h-title'), 1.0, 0.95);
+  }
 
   function setStage(s) {
     if (s === stage) return;
     stage = s;
     body.setAttribute('data-stage', s);
     if (stageLabel) stageLabel.textContent = 'Hero · ' + STAGE_NAMES[s];
+    parkCursor(s);
     hudSteps.forEach(function (b, i) {
       b.classList.toggle('done', i < s);
       b.classList.toggle('active', i === s);
@@ -53,6 +75,64 @@ window.addEventListener('load', function () {
   });
 
   if (reduceMotion) setStage(3);
+
+  /* ================= Intro: Cursor „zeichnet" die Skizze ================= */
+  function runIntro() {
+    if (!cursor || !frame || reduceMotion || window.scrollY > 10 || window.location.hash) {
+      introDone = true;
+      if (cursor && !reduceMotion) { cursor.classList.add('on'); parkCursor(stage); }
+      return;
+    }
+    var q = function (sel) { return frame.querySelector(sel); };
+    var steps = [
+      { el: q('.h-badge'), fx: 0.92, fy: 0.6, wait: 60, also: q('.h-role') },
+      { el: q('.h-title'), fx: 0.97, fy: 0.75, wait: 380 },
+      { el: q('.n-a'), fx: 0.5, fy: 0.5, wait: 100 },
+      { el: q('.h-lead'), fx: 0.96, fy: 0.8, wait: 120 },
+      { el: q('.h-stats'), fx: 0.97, fy: 0.7, wait: 100 },
+      { el: q('.n-b'), fx: 0.6, fy: 0.5, wait: 80 },
+      { el: q('.h-cta'), fx: 1.0, fy: 0.7, wait: 80 }
+    ];
+    var items = Array.prototype.slice.call(frame.querySelectorAll('[data-intro]'));
+    var cancelled = false;
+    heroSticky.classList.add('intro-run');
+
+    function finish() {
+      if (cancelled) return;
+      cancelled = true;
+      items.forEach(function (i) { i.classList.add('shown'); });
+      introDone = true;
+      cursor.classList.add('on');
+      parkCursor(stage);
+      setTimeout(function () { heroSticky.classList.remove('intro-run'); }, 800);
+    }
+    // Wer sofort scrollt, muss nicht warten
+    window.addEventListener('scroll', finish, { once: true, passive: true });
+
+    function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    var i = 0;
+    function next() {
+      if (cancelled) return;
+      if (i >= steps.length) { finish(); return; }
+      var st = steps[i++];
+      if (!st.el || getComputedStyle(st.el).display === 'none') { st.el && st.el.classList.add('shown'); next(); return; }
+      moveCursor(st.el, st.fx, st.fy);
+      sleep(470).then(function () {
+        if (cancelled) return;
+        cursor.classList.add('click');
+        st.el.classList.add('shown');
+        if (st.also) st.also.classList.add('shown');
+        return sleep(110);
+      }).then(function () {
+        cursor.classList.remove('click');
+        return sleep(st.wait);
+      }).then(next);
+    }
+    moveCursor(frame, 0.5, 1.02);
+    sleep(350).then(function () { cursor.classList.add('on'); return sleep(250); }).then(next);
+  }
+  // Warten, bis die Schriften da sind, damit die Positionen stimmen
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(runIntro); else window.addEventListener('load', runIntro);
 
   /* ================= Scroll: Fortschritt, Nav, Hero ================= */
   var bar = document.getElementById('scroll-progress');
@@ -91,7 +171,7 @@ window.addEventListener('load', function () {
   window.addEventListener('scroll', function () {
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
-  window.addEventListener('resize', onScroll);
+  window.addEventListener('resize', function () { onScroll(); parkCursor(stage); });
   onScroll();
 
   /* ================= Resolve: Wireframe → Hi-Fi beim Reinscrollen ================= */
@@ -222,10 +302,21 @@ window.addEventListener('load', function () {
   document.getElementById('chatClose').addEventListener('click', closeChat);
   document.querySelectorAll('[data-close-chat]').forEach(function (el) { el.addEventListener('click', closeChat); });
 
-  setTimeout(function () {
-    if (chat.hidden) { nudge.classList.add('show'); badge.classList.add('show'); }
-  }, 3800);
-  setTimeout(function () { nudge.classList.remove('show'); }, 10500);
+  // Die Sprechblase erst zeigen, wenn der Hero fertig gestaltet ist (sonst verdeckt sie das Intro)
+  var nudgeShown = false;
+  function maybeNudge() {
+    if (nudgeShown || !chat.hidden) return;
+    if (document.body.getAttribute('data-stage') !== '3') return;
+    nudgeShown = true;
+    setTimeout(function () {
+      if (!chat.hidden) return;
+      nudge.classList.add('show');
+      badge.classList.add('show');
+      setTimeout(function () { nudge.classList.remove('show'); }, 6500);
+    }, 900);
+  }
+  window.addEventListener('scroll', maybeNudge, { passive: true });
+  maybeNudge();
 
   /* ================= Lightbox ================= */
   var lb = document.getElementById('lightbox');
