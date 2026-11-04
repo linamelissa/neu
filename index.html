@@ -792,8 +792,8 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   user-select: none;
   -webkit-user-select: none;
 }
-.mt-item { position: absolute; left: var(--x); top: var(--y); width: var(--w); transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--r)); cursor: grab; touch-action: none; transition: box-shadow .25s ease, filter .25s ease; will-change: transform; }
-.mt-item.is-drag { cursor: grabbing; transition: none; filter: drop-shadow(0 26px 22px rgba(0,0,0,.45)); }
+.mt-item { position: absolute; left: var(--x); top: var(--y); width: var(--w); transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--r)); cursor: grab; touch-action: pan-y; -webkit-touch-callout: none; transition: box-shadow .25s ease, filter .25s ease; will-change: transform; }
+.mt-item.is-drag { cursor: grabbing; transition: none; touch-action: none; filter: drop-shadow(0 26px 22px rgba(0,0,0,.45)); }
 .mt-item.is-back { transition: transform .8s var(--ease); }
 
 /* Fotos */
@@ -828,6 +828,9 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 @media (max-width: 760px) {
   .tafel__head { flex-direction: column; align-items: flex-start; }
   .tafel__hint { text-align: left; }
+  .tafel__how { display: block; margin-bottom: 8px; }
+  .tafel__how::after { content: " Kurz halten, dann ziehen."; }
+  .tafel__reset { margin-left: 0; }
   .mt { height: 760px; }
   .mt-photo { width: 34% !important; left: min(var(--x), 62%); }
   .mt-card { width: 46% !important; font-size: 17px; left: min(var(--x), 50%); }
@@ -1044,6 +1047,48 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .chat__panel { bottom: 72px; height: min(600px, calc(100vh - 100px)); }
 }
 
+/* =====================================================
+   HANDY-FEINSCHLIFF
+   ===================================================== */
+.nav__menu { display: none; }
+@media (max-width: 640px) {
+  /* Navigation: Logo links, Menü + CV rechts, Links klappen darunter auf */
+  .nav { width: calc(100vw - 24px); flex-wrap: wrap; overflow: visible; border-radius: 26px; transition: border-radius .3s ease; }
+  .nav__logo { margin-right: auto; }
+  .nav__sep { display: none; }
+  .nav a:not(.nav__logo):not(.nav__cv) { display: none; order: 5; width: 100%; height: 48px; padding: 0 14px; font-size: 17px; font-weight: 600; border-top: 1px solid rgba(0,0,0,.06); border-radius: 0; }
+  .nav.is-open a:not(.nav__logo):not(.nav__cv) { display: flex; }
+  .nav.is-open { border-radius: 22px; padding-bottom: 8px; background: rgba(255,255,255,.94); }
+  .nav__menu { display: grid; place-content: center; gap: 5px; width: 42px; height: 42px; margin-right: 4px; border: 0; border-radius: 50%; background: var(--soft-2); }
+  .nav__menu i { display: block; width: 16px; height: 2px; border-radius: 2px; background: var(--text); transition: transform .3s var(--ease); }
+  .nav.is-open .nav__menu i:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .nav.is-open .nav__menu i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+  .nav__cv { order: 4; }
+
+  /* Hero */
+  .hero-text { top: 92px !important; }
+  .hero-text h1 { font-size: clamp(30px, 9.4vw, 40px) !important; }
+  .scroll-hint { font-size: 12.5px; padding: 7px 14px; }
+
+  /* Projekte: Bilder nicht so riesig */
+  .bt, .bt--big { min-height: 0 !important; }
+  .bt__media { flex: none; aspect-ratio: 16 / 10; margin-top: 18px; }
+  .bt h3 { font-size: 30px; }
+  .work { padding-top: 84px; }
+
+  /* Magnettafel */
+  .mt { height: 980px; }
+  .mt-mag { width: 74px; }
+  .mt-dot { width: 18px; height: 18px; margin-left: -9px; top: -6px; }
+
+  /* Feierabend: Zeichnung größer */
+  .outro__scene { width: 200vw !important; }
+
+  /* Chat: fast volle Breite */
+  .chat__panel { width: calc(100vw - 28px); height: min(640px, calc(100dvh - 104px)); border-radius: 22px; }
+  .chat__chips button { font-size: 13.5px; padding: 9px 13px; }
+}
+
 </style>
 </head>
 
@@ -1058,6 +1103,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   <a href="#archiv">Archiv</a>
   <a href="#ueber-mich">Über mich</a>
   <a href="#kontakt">Kontakt</a>
+  <button class="nav__menu" type="button" aria-expanded="false" aria-label="Menü öffnen"><i></i><i></i></button>
   <a href="CV/CV_Lina-Melissa-Arndt.pdf" class="nav__cv" download>CV</a>
 </nav>
 
@@ -1299,7 +1345,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
         <p class="kicker">Nach Feierabend</p>
         <h2>Was mich sonst <span class="hl">ausmacht.</span></h2>
       </div>
-      <p class="tafel__hint">Meine Tafel – verschieb ruhig alles. <button type="button" class="tafel__reset">Aufräumen ↺</button></p>
+      <p class="tafel__hint"><span class="tafel__how">Meine Tafel – verschieb ruhig alles.</span> <button type="button" class="tafel__reset">Aufräumen ↺</button></p>
     </div>
     <div class="mt">
       <div class="mt-item mt-photo" style="--x:4%;--y:8%;--w:15%;--r:-5deg"><span class="mt-dot mt-dot--g"></span><span class="mt-ph"><img src="feierabend/reisen-1.jpg" alt="" loading="lazy" draggable="false"></span></div>
@@ -1398,6 +1444,14 @@ var WHITE = [255, 255, 255];
    ELEMENTE
    ===================================================== */
 var nav = document.querySelector('.nav');
+(function () {   // Handy-Menü
+  var btn = nav.querySelector('.nav__menu');
+  function set(open) { nav.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', String(open)); btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen'); }
+  btn.addEventListener('click', function () { set(!nav.classList.contains('is-open')); });
+  nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  document.addEventListener('click', function (e) { if (!nav.contains(e.target)) set(false); });
+  window.addEventListener('scroll', function () { if (nav.classList.contains('is-open')) set(false); }, { passive: true });
+})();
 var zoom = document.querySelector('.zoom');
 var stage = zoom.querySelector('.stage');
 var heroText = zoom.querySelector('.hero-text');
@@ -1548,8 +1602,9 @@ function update() {
   var textBottom = heroText.offsetTop + heroText.offsetHeight + 12;
   // Start: Zeichnung so breit wie der Bildschirm, direkt unter der Begrüßung (unten darf sie angeschnitten sein)
   // Zeichnung als Hintergrund: so groß wie möglich, nie abgeschnitten, unten bündig – Name & Navigation liegen darüber
-  var s0 = phone ? Math.min(1, (vh - textBottom - 16) / H) : Math.min(1, vh / H);
-  var startC = phone ? { x: vw / 2, y: textBottom + (vh - textBottom) / 2 } : { x: vw / 2, y: vh - H * s0 / 2 };
+  // Handy: Zeichnung groß (Seiten angeschnitten, Monitor in der Mitte) – Desktop: komplett sichtbar
+  var s0 = phone ? Math.min(2.05, (vh - textBottom - 24) / H) : Math.min(1, vh / H);
+  var startC = phone ? { x: vw / 2, y: textBottom + 12 + (vh - textBottom - 12) / 2 } : { x: vw / 2, y: vh - H * s0 / 2 };
   var bx = (sx + sw / 2) * W, by = (sy + sh / 2) * H;
   var c0 = { x: startC.x + (bx - W / 2) * s0, y: startC.y + (by - H / 2) * s0 };
   var s1 = phone ? (vw * 1.5) / (sw * W) : Math.min((vw * 0.92) / (sw * W), ((vh - top - 30) * 0.9) / (sh * H));
@@ -1792,14 +1847,15 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   var board = document.querySelector('.mt');
   var items = Array.from(board.querySelectorAll('.mt-item'));
   var z = 10;
+  var touchDrag = null;   // am Handy: verhindert Scrollen, solange ein Teil gezogen wird
+  document.addEventListener('touchmove', function (e) { if (touchDrag) e.preventDefault(); }, { passive: false });
   items.forEach(function (it, i) {
     it.style.zIndex = i + 1;
     var im = it.querySelector('img'); if (im) im.addEventListener('error', function () { im.remove(); });
     var sx, sy, ox, oy, moved;
-    it.addEventListener('pointerdown', function (e) {
-      if (e.button > 0) return;
-      e.preventDefault();
-      it.setPointerCapture(e.pointerId);
+    var hold;
+    function start(e) {
+      try { it.setPointerCapture(e.pointerId); } catch (err) {}
       it.classList.remove('is-back');
       it.classList.add('is-drag');
       it.style.zIndex = ++z;
@@ -1807,6 +1863,19 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       ox = parseFloat(it.style.getPropertyValue('--dx')) || 0;
       oy = parseFloat(it.style.getPropertyValue('--dy')) || 0;
       moved = false;
+    }
+    it.addEventListener('pointerdown', function (e) {
+      if (e.button > 0) return;
+      if (e.pointerType === 'touch') {
+        // kurz halten (0,2 s), dann ziehen – wischen scrollt die Seite ganz normal
+        var px = e.clientX, py = e.clientY;
+        clearTimeout(hold);
+        hold = setTimeout(function () { touchDrag = it; start({ pointerId: e.pointerId, clientX: px, clientY: py }); if (navigator.vibrate) navigator.vibrate(8); }, 200);
+        it.addEventListener('pointermove', function cancel(m) { if (Math.abs(m.clientX - px) + Math.abs(m.clientY - py) > 8 && !it.classList.contains('is-drag')) { clearTimeout(hold); } it.removeEventListener('pointermove', cancel); });
+        return;
+      }
+      e.preventDefault();
+      start(e);
     });
     it.addEventListener('pointermove', function (e) {
       if (!it.classList.contains('is-drag')) return;
@@ -1821,7 +1890,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       it.style.setProperty('--dx', dx + 'px');
       it.style.setProperty('--dy', dy + 'px');
     });
-    function end() { it.classList.remove('is-drag'); }
+    function end() { clearTimeout(hold); it.classList.remove('is-drag'); if (touchDrag === it) touchDrag = null; }
     it.addEventListener('pointerup', end);
     it.addEventListener('pointercancel', end);
     // Doppelklick auf ein Foto: groß ansehen
@@ -1944,7 +2013,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
 
   function layout() {
     vw = stage.clientWidth; vh = window.innerHeight; handy = vw <= 760;
-    var GAP = handy ? .6 : .46;
+    var GAP = handy ? .28 : .46;
     var ln = 0, side = 0;
     items.forEach(function (it, i) {
       var w, x, speed;
