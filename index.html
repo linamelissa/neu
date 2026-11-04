@@ -278,50 +278,6 @@ button { font: inherit; cursor: pointer; }
 }
 .scene.is-night .night { opacity: 1; }
 
-/* Persönlichkeits-Bubbles */
-.bubble {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: 0;
-  height: 0;
-  pointer-events: none;
-  z-index: 3;
-}
-.bubble span {
-  position: absolute;
-  bottom: 14px;
-  left: 0;
-  transform-origin: 0 100%;
-  transform: scale(calc(var(--inv) * .85)) translateY(8px);
-  opacity: 0;
-  white-space: nowrap;
-  padding: 10px 15px;
-  border-radius: 18px 18px 18px 6px;
-  background: #fff;
-  color: var(--text);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  box-shadow: 0 0 0 1.5px var(--sketch), 0 10px 24px -10px rgba(0,0,0,.35);
-  transition: opacity .35s ease, transform .45s var(--ease);
-}
-.bubble--left span { left: auto; right: 0; transform-origin: 100% 100%; border-radius: 18px 18px 6px 18px; }
-.bubble.is-on span { opacity: 1; transform: scale(var(--inv)) translateY(0); }
-.bubble::after {   /* kleiner Punkt am Gegenstand */
-  content: "";
-  position: absolute;
-  left: -5px;
-  top: -5px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--green-2);
-  box-shadow: 0 0 0 4px rgba(46,158,99,.25);
-  transform: scale(0);
-  transition: transform .3s var(--ease);
-}
-.bubble.is-on::after { transform: scale(var(--inv)); }
 
 /* Monitor: nur Positionsmarke */
 .scene .screen { pointer-events: none; }
@@ -925,7 +881,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .nav__logo em { display: none; }
   .hero-text { top: 78px; }
   .hero-text h1 { font-size: clamp(26px, 8vw, 34px); }
-  .bubble span { font-size: 13px; padding: 8px 12px; }
   .station { width: 220px; }
   .station__card { width: 205px; padding: 14px 16px; }
   .timeline__title { width: 220px; margin-right: 24px; }
@@ -1040,7 +995,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .chat__chips button:hover { background: var(--soft-2); border-color: transparent; }
 
 @media (max-width: 640px) {
-  .scene .bubble { display: none; }   /* bis die Handy-Zeichnung da ist */
   .chat { right: 14px; bottom: 14px; }
   .chat__toggle { width: 58px; height: 58px; }
   .chat__panel { bottom: 72px; height: min(600px, calc(100vh - 100px)); }
@@ -1190,16 +1144,6 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
            alt="Gezeichnete Lina an ihrem Schreibtisch mit Monitor, Laptop, Sticky Notes, Staffelei, Kindle, Hantel und Kaffeetasse">
 
       <div class="night" aria-hidden="true"></div>
-
-      <!-- PERSÖNLICHKEITS-BUBBLES
-           --x / --y = Punkt am Gegenstand in % vom Bild
-           Texte einfach hier ändern. bubble--left = Blase zeigt nach links -->
-      <div class="bubble bubble--left" style="--x:69%; --y:35%"><span>Hi, das bin ich!</span></div>
-      <div class="bubble bubble--left" style="--x:25.5%; --y:16.5%"><span>Reise, so oft es geht</span></div>
-      <div class="bubble" style="--x:22.5%; --y:57%"><span>Male nach Feierabend</span></div>
-      <div class="bubble" style="--x:24.5%; --y:32%"><span>Lieber Kindle statt Bücherregal</span></div>
-      <div class="bubble" style="--x:34.5%; --y:44%"><span>Komme aus der Mediengestaltung</span></div>
-      <div class="bubble" style="--x:28%; --y:64%"><span>Studiere UX-Design</span></div>
 
       <!-- Lampe = Lichtschalter -->
       <button class="pos lamp" style="--x:7%; --y:43%; --w:6%; --h:11%" aria-label="Licht an- und ausschalten"></button>
@@ -1556,7 +1500,6 @@ var screen = scene.querySelector('.screen');
 var cases = zoom.querySelector('.cases');
 var screenBg = zoom.querySelector('.cases__screen');
 var work = document.querySelector('.work');   // Projekte: übernehmen nahtlos, sobald der Zoom fertig ist
-var bubbles = Array.from(scene.querySelectorAll('.bubble'));
 var outro = document.querySelector('.outro');
 var oScene = outro.querySelector('.outro__scene');
 var oGlow = outro.querySelector('.outro__glow');
@@ -1566,33 +1509,6 @@ var sx = parseFloat(screen.style.getPropertyValue('--x')) / 100;
 var sy = parseFloat(screen.style.getPropertyValue('--y')) / 100;
 var sw = parseFloat(screen.style.getPropertyValue('--w')) / 100;
 var sh = parseFloat(screen.style.getPropertyValue('--h')) / 100;
-
-
-/* =====================================================
-   PERSÖNLICHKEITS-BUBBLES
-   Oben auf der Seite leuchten sie automatisch nacheinander auf,
-   beim Scrollen bestimmt die Scroll-Position, welche gerade dran ist.
-   ===================================================== */
-var BUBBLE_TAKT = 2600;   // ms pro Bubble, solange niemand scrollt
-var autoIndex = 0;
-var scrollP = 0;
-
-function showBubble(i) {
-  bubbles.forEach(function (b, n) { b.classList.toggle('is-on', n === i); });
-}
-function bubbleVisible(b) {
-  var r = b.getBoundingClientRect();
-  return r.top > 110 && r.top < window.innerHeight - 30 && r.left > 0 && r.left < window.innerWidth;
-}
-setInterval(function () {
-  if (scrollP > 0.02 || document.hidden) return;
-  for (var tries = 0; tries < bubbles.length; tries++) {
-    autoIndex = (autoIndex + 1) % bubbles.length;
-    if (bubbleVisible(bubbles[autoIndex])) break;
-  }
-  showBubble(autoIndex);
-}, BUBBLE_TAKT);
-setTimeout(function () { if (scrollP <= 0.02) showBubble(0); }, weniger ? 0 : 2300);
 
 
 var ZOOM_LEN = 2.3;     // Bildschirmhöhen fürs Reinzoomen
@@ -1690,7 +1606,6 @@ function update() {
   // Zoom in den Monitor
   var scrolled = clamp(smoothY - zoom.offsetTop, 0, zoom.offsetHeight - vh);
   var p = clamp(scrolled / (vh * ZOOM_LEN), 0, 1);
-  scrollP = p;
   var t = range(0.08, 0.88, p);
 
   var textBottom = heroText.offsetTop + heroText.offsetHeight + 12;
@@ -1716,12 +1631,6 @@ function update() {
   scrollHint.style.top = (Math.min(startC.y + H * s0 / 2, vh) - 52) + 'px';
   scrollHint.style.opacity = 1 - range(0.01, 0.08, p);
   nav.classList.toggle('is-hero', p < 0.1);
-
-  // Bubbles: beim Scrollen nacheinander, ab der Hälfte keine mehr
-  if (p > 0.02) {
-    var idx = p < 0.38 ? Math.floor(clamp((p - 0.02) / 0.36, 0, 0.999) * bubbles.length) : -1;
-    showBubble(idx);
-  }
 
   // Schreibtisch blendet aus, die Seite wird weiß
   var out = range(0.62, 0.88, p);
@@ -2287,8 +2196,13 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       var to = ph.dataset.to.split(',').map(Number);
       var stackRot = [0, -6, 5, -3, 7, -8, 4, -2, 6, -5, 3, -7][i % 12];
       var x = mix(0, (to[0] - 50) / 100 * w, spread);
-      if (phoneQ.matches) { var lim = w / 2 - ph.offsetWidth * 0.55 - 8; x = clamp(x, -lim, lim); }
       var y = mix(i * -3, (to[1] - 50) / 100 * h, spread);
+      if (phoneQ.matches) {
+        // am Handy: Fotos bleiben mit Luft komplett im Bild (oben Platz für die Navigation, unten Abstand)
+        var lim = w / 2 - ph.offsetWidth * 0.55 - 10; x = clamp(x, -lim, lim);
+        var halfH = ph.offsetHeight * 0.55;
+        y = clamp(y, -h / 2 + 84 + halfH, h / 2 - 28 - halfH);
+      }
       var rot = mix(stackRot, to[2], spread);
       var sc = mix(i === 0 ? 1.15 : 1.05, i === 0 ? 0.8 : 0.85, spread);
       ph.style.transform = 'translate(-50%, -50%) translate(' + x + 'px,' + y + 'px) rotate(' + rot + 'deg) scale(' + sc + ')';
