@@ -404,7 +404,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .float__title {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 0;   /* Titel liegt im Hintergrund, die Arbeiten davor */
   display: grid;
   place-content: center;
   text-align: center;
@@ -415,7 +415,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .float__sub { font-size: 15px; color: var(--muted); }
 .float__field { position: absolute; inset: 0; }
 .fi { position: absolute; left: 0; top: 0; width: var(--w); will-change: transform; }
-.fi { z-index: 1; cursor: zoom-in; }
+.fi { z-index: 2; cursor: zoom-in; }
 .fi:hover { z-index: 5; }
 .fi .kul { width: 100%; margin: 0; border-radius: 6px; animation: none; background: var(--soft-2); box-shadow: 0 24px 50px -28px rgba(0,0,0,.45); }
 .fi .kul:hover { transform: scale(1.03); }
@@ -1085,8 +1085,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .sn--web { grid-column: 1 / -1; }
 
   /* Abseits vom Interface: Titel liegt im Hintergrund, Arbeiten davor */
-  .float__title { z-index: 0; }
-  .fi { z-index: 2; }
 
   /* Über mich: Text liegt über den Fotos */
   .me__text { z-index: 30; }
