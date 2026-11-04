@@ -365,6 +365,8 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 
 @media (max-width: 900px) {
   .bento { grid-template-columns: 1fr !important; grid-template-rows: none !important; height: auto; }
+  .bt, .bt--big { min-height: 0 !important; }
+  .bt__media { flex: none; aspect-ratio: 16 / 10; margin-top: 18px; }
   .bt .wk-stats { max-height: 200px; opacity: 1; margin-top: 18px; }
   .bt { min-height: 420px; }
   .bt--big { grid-row: auto; min-height: 520px; }
@@ -642,6 +644,12 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   top: 56%;
   z-index: 20;
   width: min(640px, 84vw);
+  padding: 26px 30px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px -30px rgba(0,0,0,.25);
   transform: translate(-50%, -50%);
   text-align: center;
   opacity: 0;
@@ -683,8 +691,16 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   right: 0;
   top: 50%;
   height: 2px;
-  background: linear-gradient(90deg, #D9D9DE, #2E9E63);
+  background: #E5E5EA;
+  border-radius: 2px;
 }
+/* grüne Linie, die sich beim Scrollen füllt */
+.tl-fill { position: absolute; left: 0; top: 50%; z-index: 1; width: 0; height: 2px; margin-top: -1px; border-radius: 2px; background: linear-gradient(90deg, #9FD4B5, #2E9E63); pointer-events: none; }
+.tl-fill::after { content: ""; position: absolute; right: -7px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: #2E9E63; box-shadow: 0 0 0 6px rgba(46,158,99,.2); }
+.station::before { z-index: 2; transition: box-shadow .3s ease, background .3s ease; }
+.station:not(.is-on)::before { box-shadow: 0 0 0 3px #D2D2D7 !important; background: #fff !important; }
+.station__card { transition: opacity .5s ease, transform .6s var(--ease); }
+.station:not(.is-on) .station__card { opacity: .3; }
 .station { position: relative; flex: 0 0 auto; width: 270px; }
 .station::before {   /* Punkt auf der Linie */
   content: "";
@@ -808,8 +824,8 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   position: absolute;
   left: 50%;
   top: 54%;
-  width: min(100vw, calc((100vh - 70px) * 2.02));
-  transform-origin: 50.12% 42.07%;   /* Mitte des Monitors */
+  width: min(100vw, calc((100vh - 70px) * var(--illu-ratio, 2.02)));
+  transform-origin: 50.12% 42.07%;   /* Mitte des Monitors (setzt das Script je nach Version) */
   will-change: transform;
 }
 .outro__img { display: block; width: 100%; height: auto; }
@@ -833,7 +849,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   transform-origin: center;
 }
 @media (max-width: 640px) {
-  .outro__scene { width: 100vw; top: 50%; left: 50%; }
+  .outro__scene { top: 50%; left: 50%; }
 }
 
 /* =====================================================
@@ -1035,7 +1051,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .mt-dot { width: 18px; height: 18px; margin-left: -9px; top: -6px; }
 
   /* Feierabend: Zeichnung größer */
-  .outro__scene { width: 200vw !important; }
+  .illu-crop .outro__scene { width: 200vw !important; }
 
   /* Chat: fast volle Breite */
   .chat__panel { width: calc(100vw - 28px); height: min(640px, calc(100dvh - 104px)); border-radius: 22px; }
@@ -1082,13 +1098,14 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .me-cv .timeline__title { width: auto; margin: 0 auto 30px; text-align: center; }
   .me-cv .timeline ol { position: relative; display: block; height: auto; padding: 0; }
   .me-cv .timeline ol::before { left: 50%; right: auto; top: 0; bottom: 0; width: 3px; height: auto; margin-left: -1.5px; border-radius: 3px; background: #E5E5EA; }
-  .tl-fill { position: absolute; left: 50%; top: 0; width: 3px; margin-left: -1.5px; height: 0; border-radius: 3px; background: linear-gradient(180deg, #9FD4B5, #2E9E63); z-index: 1; }
-  .tl-fill::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #2E9E63; box-shadow: 0 0 0 6px rgba(46,158,99,.2); }
+  .tl-fill { position: absolute; left: 50%; top: 0; width: 3px !important; margin-top: 0; margin-left: -1.5px; height: 0; border-radius: 3px; background: linear-gradient(180deg, #9FD4B5, #2E9E63); z-index: 1; }
+  .tl-fill::after { content: ""; position: absolute; right: auto; top: auto; margin-top: 0; left: 50%; bottom: -7px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #2E9E63; box-shadow: 0 0 0 6px rgba(46,158,99,.2); }
   .me-cv .station { position: relative; width: 50%; margin: 0 0 18px; padding-right: 22px; }
   .me-cv .station:nth-child(even) { margin-left: 50%; padding: 0 0 0 22px; }
   .me-cv .station::before { left: auto; right: -7px; top: 20px; margin-top: 0; z-index: 2; background: #fff; box-shadow: 0 0 0 3px #D2D2D7; transition: box-shadow .3s ease, background .3s ease; }
   .me-cv .station:nth-child(even)::before { right: auto; left: -7px; }
   .me-cv .station.is-on::before { background: #fff; box-shadow: 0 0 0 3px #2E9E63; }
+  .me-cv .station:not(.is-on) .station__card { opacity: .25; }
   .me-cv .station--now.is-on::before { background: #2E9E63; }
   .me-cv .station__card { position: relative; left: auto; top: auto !important; bottom: auto !important; width: auto; padding: 14px 14px; opacity: .25; transform: translateY(14px); transition: opacity .5s ease, transform .6s var(--ease); }
   .me-cv .station.is-on .station__card { opacity: 1; transform: none; }
@@ -1443,7 +1460,7 @@ function mix(a, b, t) { return a + (b - a) * t; }
 function mixColor(a, b, t) { return 'rgb(' + a.map(function (c, i) { return Math.round(mix(c, b[i], t)); }).join(',') + ')'; }
 var weniger = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-var IMG_RATIO = 1274 / 2576;
+var IMG_RATIO = 1274 / 2576;   // wird von applyIllu() je nach Version gesetzt
 var PAPER = [248, 248, 248];
 var SCREEN = [252, 252, 252];   // Farbe des Monitors in der Zeichnung
 var WHITE = [255, 255, 255];
@@ -1505,10 +1522,50 @@ var oScene = outro.querySelector('.outro__scene');
 var oGlow = outro.querySelector('.outro__glow');
 var bar = document.querySelector('.progress span');
 
-var sx = parseFloat(screen.style.getPropertyValue('--x')) / 100;
-var sy = parseFloat(screen.style.getPropertyValue('--y')) / 100;
-var sw = parseFloat(screen.style.getPropertyValue('--w')) / 100;
-var sh = parseFloat(screen.style.getPropertyValue('--h')) / 100;
+/* =====================================================
+   ZEICHNUNG IN MEHREREN FORMATEN
+   Je nach Bildschirmform wird automatisch die passende Version geladen.
+   screen = Monitorfläche in % (x, y, Breite, Höhe), lamp = Stehlampe in %.
+   Eine Version ohne "screen" ist noch nicht da und wird übersprungen –
+   dann nimmt die Seite die Desktop-Version und schneidet sie passend zu.
+   ===================================================== */
+var ILLU = [
+  { name: 'handy',       bisFormat: 0.62, src: 'illustration/handy.jpg',       w: 1080, h: 2340, screen: null, lamp: null },
+  { name: 'tablet-hoch', bisFormat: 0.95, src: 'illustration/tablet-hoch.jpg', w: 1800, h: 2400, screen: null, lamp: null },
+  { name: 'tablet-quer', bisFormat: 1.55, src: 'illustration/tablet-quer.jpg', w: 2400, h: 1800, screen: null, lamp: null },
+  { name: 'desktop',     bisFormat: 99,   src: 'schreibtisch.jpg',             w: 2576, h: 1274, screen: [43.36, 34.3, 13.51, 15.54], lamp: [7, 43, 6, 11] }
+];
+var ILLU_DESKTOP = ILLU[ILLU.length - 1];
+var illu = null, sx, sy, sw, sh, MONITOR_W;
+var lampBtn = scene.querySelector('.lamp');
+var outroImg = document.querySelector('.outro__img');
+var outroScreen = document.querySelector('.outro__screen');
+function pickIllu() {
+  var a = window.innerWidth / stableVH();
+  for (var i = 0; i < ILLU.length; i++) if (ILLU[i].screen && a <= ILLU[i].bisFormat) return ILLU[i];
+  return ILLU_DESKTOP;
+}
+function applyIllu() {
+  var v = pickIllu();
+  if (v === illu) return false;
+  illu = v;
+  IMG_RATIO = v.h / v.w;
+  var r = v.screen;
+  sx = r[0] / 100; sy = r[1] / 100; sw = r[2] / 100; sh = r[3] / 100; MONITOR_W = sw;
+  [['--x', r[0]], ['--y', r[1]], ['--w', r[2]], ['--h', r[3]]].forEach(function (p) { screen.style.setProperty(p[0], p[1] + '%'); });
+  if (v.lamp) { lampBtn.hidden = false; [['--x', v.lamp[0]], ['--y', v.lamp[1]], ['--w', v.lamp[2]], ['--h', v.lamp[3]]].forEach(function (p) { lampBtn.style.setProperty(p[0], p[1] + '%'); }); }
+  else lampBtn.hidden = true;
+  if (img.getAttribute('src') !== v.src) { img.src = v.src; img.width = v.w; img.height = v.h; }
+  if (outroImg.getAttribute('src') !== v.src) { outroImg.src = v.src; outroImg.width = v.w; outroImg.height = v.h; }
+  outroScreen.style.left = r[0] + '%'; outroScreen.style.top = r[1] + '%';
+  outroScreen.style.width = r[2] + '%'; outroScreen.style.height = r[3] + '%';
+  oScene.style.transformOrigin = (r[0] + r[2] / 2) + '% ' + (r[1] + r[3] / 2) + '%';
+  document.documentElement.style.setProperty('--illu-ratio', (v.w / v.h).toFixed(3));
+  return true;
+}
+// Fehlt eine Datei doch, auf die Desktop-Version zurückfallen
+img.addEventListener('error', function () { if (illu !== ILLU_DESKTOP) { illu.screen = null; illu = null; applyIllu(); requestUpdate(); } });
+applyIllu();
 
 
 var ZOOM_LEN = 2.3;     // Bildschirmhöhen fürs Reinzoomen
@@ -1612,8 +1669,11 @@ function update() {
   // Start: Zeichnung so breit wie der Bildschirm, direkt unter der Begrüßung (unten darf sie angeschnitten sein)
   // Zeichnung als Hintergrund: so groß wie möglich, nie abgeschnitten, unten bündig – Name & Navigation liegen darüber
   // Handy: Zeichnung groß (Seiten angeschnitten, Monitor in der Mitte) – Desktop: komplett sichtbar
-  var s0 = phone ? Math.min(2.05, (vh - textBottom - 24) / H) : Math.min(1, vh / H);
-  var startC = phone ? { x: vw / 2, y: textBottom + 12 + (vh - textBottom - 12) / 2 } : { x: vw / 2, y: vh - H * s0 / 2 };
+  // Passt die geladene Version zur Bildschirmform, wird sie komplett gezeigt. Sonst (nur Desktop-Version da): hochkant zuschneiden.
+  var tall = illu === ILLU_DESKTOP && (phone || (vw <= 1024 && vh > vw * 1.1));
+  document.documentElement.classList.toggle('illu-crop', tall);
+  var s0 = tall ? Math.min(2.05, (vh - textBottom - 24) / H) : Math.min(1, vh / H);
+  var startC = tall ? { x: vw / 2, y: textBottom + 12 + (vh - textBottom - 12) / 2 } : { x: vw / 2, y: vh - H * s0 / 2 };
   var bx = (sx + sw / 2) * W, by = (sy + sh / 2) * H;
   var c0 = { x: startC.x + (bx - W / 2) * s0, y: startC.y + (by - H / 2) * s0 };
   var s1 = phone ? (vw * 1.5) / (sw * W) : Math.min((vw * 0.92) / (sw * W), ((vh - top - 30) * 0.9) / (sh * H));
@@ -1661,7 +1721,7 @@ function update() {
 
   // FEIERABEND: 1. rauszoomen  2. "Bis morgen"  3. Bildschirm aus  4. Licht aus  5. Sprechblase
   var q = clamp((smoothY - outro.offsetTop) / (outro.offsetHeight - vh), 0, 1);
-  var monitorW = oScene.offsetWidth * 0.1351;
+  var monitorW = oScene.offsetWidth * MONITOR_W;
   var startScale = Math.max(1, vw / monitorW * 1.02);          // Monitor füllt anfangs den ganzen Bildschirm
   var back = range(0, 0.5, q);
   var sc = startScale * Math.pow(1 / startScale, back);
@@ -1683,7 +1743,7 @@ function requestUpdate() {
   if (!ticking) { ticking = true; requestAnimationFrame(update); }
 }
 window.addEventListener('scroll', requestUpdate, { passive: true });
-window.addEventListener('resize', function () { zoomHeight(); requestUpdate(); });
+window.addEventListener('resize', function () { applyIllu(); zoomHeight(); requestUpdate(); });
 img.addEventListener('load', requestUpdate);
 zoomHeight();
 smoothY = window.scrollY;
@@ -2023,7 +2083,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
 
   function layout() {
     vw = stage.clientWidth; vh = stableVH(); handy = vw <= 760;
-    var GAP = handy ? .28 : .46;
+    var GAP = handy ? .28 : .4;
     var ln = 0, side = 0;
     items.forEach(function (it, i) {
       var w, x, speed;
@@ -2167,11 +2227,16 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   var fill = document.createElement('i'); fill.className = 'tl-fill'; ol.appendChild(fill);
   var stations = Array.from(ol.querySelectorAll('.station'));
   function cvRender() {
-    if (!phoneQ.matches) return;
-    var r = ol.getBoundingClientRect(), line = window.innerHeight * 0.62 - r.top;
-    var h = clamp(line, 0, r.height);
-    fill.style.height = h + 'px';
-    stations.forEach(function (st) { st.classList.toggle('is-on', st.offsetTop + 20 <= h); });
+    var r = ol.getBoundingClientRect();
+    if (phoneQ.matches) {            // Handy: von oben nach unten
+      var h = clamp(window.innerHeight * 0.62 - r.top, 0, r.height);
+      fill.style.height = h + 'px'; fill.style.width = '';
+      stations.forEach(function (st) { st.classList.toggle('is-on', st.offsetTop + 20 <= h); });
+    } else {                         // Tablet & Desktop: von links nach rechts
+      var w = clamp(window.innerWidth * 0.62 - r.left, 0, r.width);
+      fill.style.width = w + 'px'; fill.style.height = '';
+      stations.forEach(function (st) { st.classList.toggle('is-on', st.offsetLeft + 31 <= w); });
+    }
   }
   window.addEventListener('scroll', function () { requestAnimationFrame(cvRender); }, { passive: true });
   cvRender();
@@ -2197,8 +2262,8 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       var stackRot = [0, -6, 5, -3, 7, -8, 4, -2, 6, -5, 3, -7][i % 12];
       var x = mix(0, (to[0] - 50) / 100 * w, spread);
       var y = mix(i * -3, (to[1] - 50) / 100 * h, spread);
-      if (phoneQ.matches) {
-        // am Handy: Fotos bleiben mit Luft komplett im Bild (oben Platz für die Navigation, unten Abstand)
+      {
+        // Fotos bleiben mit Luft komplett im Bild (oben Platz für die Navigation, unten Abstand)
         var lim = w / 2 - ph.offsetWidth * 0.55 - 10; x = clamp(x, -lim, lim);
         var halfH = ph.offsetHeight * 0.55;
         y = clamp(y, -h / 2 + 84 + halfH, h / 2 - 28 - halfH);
@@ -2211,6 +2276,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
     text.style.opacity = range(0.55, 0.9, a);
     text.style.transform = 'translate(-50%, calc(-50% + ' + (1 - range(0.55, 0.9, a)) * 24 + 'px))';
     track.style.transform = 'translateX(' + (-side) + 'px)';
+    if (typeof cvRender === 'function') cvRender();
   }
 
   var busy = false;
