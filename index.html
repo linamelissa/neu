@@ -831,10 +831,9 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .tafel__how { display: block; margin-bottom: 8px; }
   .tafel__how::after { content: " Kurz halten, dann ziehen."; }
   .tafel__reset { margin-left: 0; }
-  .mt { height: 760px; }
-  .mt-photo { width: 34% !important; left: min(var(--x), 62%); }
-  .mt-card { width: 46% !important; font-size: 17px; left: min(var(--x), 50%); }
-  .mt-mag { left: min(var(--x), 74%); }
+  .mt { height: 1080px; }
+  .mt-item { left: var(--mx) !important; top: var(--my) !important; width: var(--mw, 74px) !important; --r: var(--mr) !important; }
+  .mt-card { font-size: 17px; }
 }
 
 /* =====================================================
@@ -1077,7 +1076,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .work { padding-top: 84px; }
 
   /* Magnettafel */
-  .mt { height: 980px; }
+  .mt { height: 1080px; }
   .mt-mag { width: 74px; }
   .mt-dot { width: 18px; height: 18px; margin-left: -9px; top: -6px; }
 
@@ -1123,15 +1122,25 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .me__text { z-index: 30; }
   .photo { width: 26vw !important; }
 
-  /* Lebenslauf von oben nach unten */
-  .me-cv { padding: 40px 20px 30px; }
+  /* Lebenslauf von oben nach unten: Linie mittig, Stationen abwechselnd links/rechts */
+  .me-cv { padding: 30px 16px 40px; }
   .me-cv .timeline { display: block; height: auto; padding: 0; }
-  .me-cv .timeline__title { width: auto; margin: 0 0 26px; }
-  .me-cv .timeline ol { display: block; height: auto; padding-left: 28px; }
-  .me-cv .timeline ol::before { left: 6px; right: auto; top: 6px; bottom: 6px; width: 2px; height: auto; background: linear-gradient(180deg, #D9D9DE, #2E9E63); }
-  .me-cv .station { width: auto; margin-bottom: 14px; }
-  .me-cv .station::before { left: -28px; top: 22px; margin-top: 0; }
-  .me-cv .station__card { position: relative; left: auto; top: auto !important; bottom: auto !important; width: auto; padding: 16px 18px; }
+  .me-cv .timeline__title { width: auto; margin: 0 auto 30px; text-align: center; }
+  .me-cv .timeline ol { position: relative; display: block; height: auto; padding: 0; }
+  .me-cv .timeline ol::before { left: 50%; right: auto; top: 0; bottom: 0; width: 3px; height: auto; margin-left: -1.5px; border-radius: 3px; background: #E5E5EA; }
+  .tl-fill { position: absolute; left: 50%; top: 0; width: 3px; margin-left: -1.5px; height: 0; border-radius: 3px; background: linear-gradient(180deg, #9FD4B5, #2E9E63); z-index: 1; }
+  .tl-fill::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #2E9E63; box-shadow: 0 0 0 6px rgba(46,158,99,.2); }
+  .me-cv .station { position: relative; width: 50%; margin: 0 0 18px; padding-right: 22px; }
+  .me-cv .station:nth-child(even) { margin-left: 50%; padding: 0 0 0 22px; }
+  .me-cv .station::before { left: auto; right: -7px; top: 20px; margin-top: 0; z-index: 2; background: #fff; box-shadow: 0 0 0 3px #D2D2D7; transition: box-shadow .3s ease, background .3s ease; }
+  .me-cv .station:nth-child(even)::before { right: auto; left: -7px; }
+  .me-cv .station.is-on::before { background: #fff; box-shadow: 0 0 0 3px #2E9E63; }
+  .me-cv .station--now.is-on::before { background: #2E9E63; }
+  .me-cv .station__card { position: relative; left: auto; top: auto !important; bottom: auto !important; width: auto; padding: 14px 14px; opacity: .25; transform: translateY(14px); transition: opacity .5s ease, transform .6s var(--ease); }
+  .me-cv .station.is-on .station__card { opacity: 1; transform: none; }
+  .me-cv .station__card h4 { font-size: 15px; }
+  .me-cv .station__card p { font-size: 13px; }
+  .me-cv .station__card time { font-size: 12px; }
 
   /* Magnettafel: nur anschauen, nichts verschieben */
   .tafel__hint { display: none; }
@@ -1404,20 +1413,20 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
       <p class="tafel__hint"><span class="tafel__how">Meine Tafel – verschieb ruhig alles.</span> <button type="button" class="tafel__reset">Aufräumen ↺</button></p>
     </div>
     <div class="mt">
-      <div class="mt-item mt-photo" style="--x:4%;--y:8%;--w:15%;--r:-5deg"><span class="mt-dot mt-dot--g"></span><span class="mt-ph"><img src="feierabend/reisen-1.jpg" alt="" loading="lazy" draggable="false"></span></div>
-      <div class="mt-item mt-photo" style="--x:22%;--y:30%;--w:14%;--r:4deg"><span class="mt-dot mt-dot--k"></span><span class="mt-ph"><img src="feierabend/zeichnen-1.jpg" alt="" loading="lazy" draggable="false"></span></div>
-      <div class="mt-item mt-photo" style="--x:62%;--y:6%;--w:16%;--r:3deg"><span class="mt-dot mt-dot--w"></span><span class="mt-ph"><img src="feierabend/reisen-2.jpg" alt="" loading="lazy" draggable="false"></span></div>
-      <div class="mt-item mt-photo" style="--x:80%;--y:40%;--w:13%;--r:-4deg"><span class="mt-dot mt-dot--g"></span><span class="mt-ph"><img src="feierabend/kindle-1.jpg" alt="" loading="lazy" draggable="false"></span></div>
-      <div class="mt-item mt-photo" style="--x:40%;--y:52%;--w:13%;--r:-3deg"><span class="mt-dot mt-dot--w"></span><span class="mt-ph"><img src="feierabend/zeichnen-2.jpg" alt="" loading="lazy" draggable="false"></span></div>
-      <div class="mt-item mt-photo" style="--x:6%;--y:56%;--w:15%;--r:6deg"><span class="mt-dot mt-dot--k"></span><span class="mt-ph"><img src="feierabend/reisen-3.jpg" alt="" loading="lazy" draggable="false"></span></div>
-      <div class="mt-item mt-card" style="--x:40%;--y:8%;--w:19%;--r:-2deg"><span class="mt-dot mt-dot--g"></span><b>Gerade auf Repeat ♫</b><ul><li>[Song] – [Artist]</li><li>[Song] – [Artist]</li><li>[Song] – [Artist]</li></ul></div>
-      <div class="mt-item mt-card mt-card--green" style="--x:62%;--y:58%;--w:15%;--r:3deg"><span class="mt-dot mt-dot--k"></span><b>Lieblings-Artists</b><ul><li>[Artist]</li><li>[Artist]</li><li>[Artist]</li></ul></div>
-      <div class="mt-item mt-card mt-card--note" style="--x:24%;--y:74%;--w:13%;--r:-4deg"><span class="mt-dot mt-dot--w"></span><b>Lese gerade</b><p>[Buchtitel]</p></div>
-      <div class="mt-item mt-card mt-card--note" style="--x:82%;--y:8%;--w:14%;--r:4deg"><span class="mt-dot mt-dot--g"></span><p>Nach Feierabend:<br>zeichnen, Gym, Pläne für die nächste Reise.</p></div>
-      <div class="mt-item mt-mag mt-mag--w" style="--x:28%;--y:10%;--r:-8deg" title="London"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M17 34V14h6v20M15 14h10M16 14l4-8 4 8M18 18h4M18 23h4M18 28h4"/><circle cx="20" cy="18.5" r="0"/></svg><span>London</span></div>
-      <div class="mt-item mt-mag mt-mag--g" style="--x:55%;--y:40%;--r:6deg" title="Australien"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 30c4-8 8-12 12-12 0-6 4-10 8-10-2 4-2 8 0 12 4 0 8 4 12 10z"/><path d="M4 30h32"/></svg><span>Australien</span></div>
-      <div class="mt-item mt-mag mt-mag--k" style="--x:80%;--y:78%;--r:-5deg" title="Venedig"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 26c6 4 28 4 34-4M8 26l2-6h20l2 3"/><path d="M30 20l3-10"/><path d="M5 31c3 1 6 1 9 0s6-1 9 0 6 1 9 0"/></svg><span>Venedig</span></div>
-      <div class="mt-item mt-mag mt-mag--w" style="--x:90%;--y:64%;--r:9deg" title="Rom"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 32V16a14 8 0 0 1 28 0v16"/><path d="M6 32h28M11 32v-8a3 3 0 0 1 6 0v8M23 32v-8a3 3 0 0 1 6 0v8M11 18v-2M17 17v-2M23 17v-2M29 18v-2"/></svg><span>Rom</span></div>
+      <div class="mt-item mt-photo" style="--x:4%;--y:8%;--w:15%;--r:-5deg;--mx:4%;--my:24px;--mr:-5deg;--mw:42%"><span class="mt-dot mt-dot--g"></span><span class="mt-ph"><img src="feierabend/reisen-1.jpg" alt="" loading="lazy" draggable="false"></span></div>
+      <div class="mt-item mt-photo" style="--x:22%;--y:30%;--w:14%;--r:4deg;--mx:52%;--my:214px;--mr:4deg;--mw:42%"><span class="mt-dot mt-dot--k"></span><span class="mt-ph"><img src="feierabend/zeichnen-1.jpg" alt="" loading="lazy" draggable="false"></span></div>
+      <div class="mt-item mt-photo" style="--x:62%;--y:6%;--w:16%;--r:3deg;--mx:5%;--my:376px;--mr:3deg;--mw:43%"><span class="mt-dot mt-dot--w"></span><span class="mt-ph"><img src="feierabend/reisen-2.jpg" alt="" loading="lazy" draggable="false"></span></div>
+      <div class="mt-item mt-photo" style="--x:80%;--y:40%;--w:13%;--r:-4deg;--mx:52%;--my:428px;--mr:-4deg;--mw:42%"><span class="mt-dot mt-dot--g"></span><span class="mt-ph"><img src="feierabend/kindle-1.jpg" alt="" loading="lazy" draggable="false"></span></div>
+      <div class="mt-item mt-photo" style="--x:40%;--y:52%;--w:13%;--r:-3deg;--mx:51%;--my:640px;--mr:5deg;--mw:42%"><span class="mt-dot mt-dot--w"></span><span class="mt-ph"><img src="feierabend/zeichnen-2.jpg" alt="" loading="lazy" draggable="false"></span></div>
+      <div class="mt-item mt-photo" style="--x:6%;--y:56%;--w:15%;--r:6deg;--mx:6%;--my:866px;--mr:-3deg;--mw:42%"><span class="mt-dot mt-dot--k"></span><span class="mt-ph"><img src="feierabend/reisen-3.jpg" alt="" loading="lazy" draggable="false"></span></div>
+      <div class="mt-item mt-card" style="--x:40%;--y:8%;--w:19%;--r:-2deg;--mx:48%;--my:34px;--mr:3deg;--mw:48%"><span class="mt-dot mt-dot--g"></span><b>Gerade auf Repeat ♫</b><ul><li>[Song] – [Artist]</li><li>[Song] – [Artist]</li><li>[Song] – [Artist]</li></ul></div>
+      <div class="mt-item mt-card mt-card--green" style="--x:62%;--y:58%;--w:15%;--r:3deg;--mx:5%;--my:590px;--mr:2deg;--mw:46%"><span class="mt-dot mt-dot--k"></span><b>Lieblings-Artists</b><ul><li>[Artist]</li><li>[Artist]</li><li>[Artist]</li></ul></div>
+      <div class="mt-item mt-card mt-card--note" style="--x:24%;--y:74%;--w:13%;--r:-4deg;--mx:8%;--my:770px;--mr:-4deg;--mw:42%"><span class="mt-dot mt-dot--w"></span><b>Lese gerade</b><p>[Buchtitel]</p></div>
+      <div class="mt-item mt-card mt-card--note" style="--x:82%;--y:8%;--w:14%;--r:4deg;--mx:5%;--my:228px;--mr:-3deg;--mw:45%"><span class="mt-dot mt-dot--g"></span><p>Nach Feierabend:<br>zeichnen, Gym, Pläne für die nächste Reise.</p></div>
+      <div class="mt-item mt-mag mt-mag--w" style="--x:28%;--y:10%;--r:-8deg;--mx:37%;--my:170px;--mr:-8deg" title="London"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M17 34V14h6v20M15 14h10M16 14l4-8 4 8M18 18h4M18 23h4M18 28h4"/><circle cx="20" cy="18.5" r="0"/></svg><span>London</span></div>
+      <div class="mt-item mt-mag mt-mag--g" style="--x:55%;--y:40%;--r:6deg;--mx:38%;--my:560px;--mr:6deg" title="Australien"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 30c4-8 8-12 12-12 0-6 4-10 8-10-2 4-2 8 0 12 4 0 8 4 12 10z"/><path d="M4 30h32"/></svg><span>Australien</span></div>
+      <div class="mt-item mt-mag mt-mag--k" style="--x:80%;--y:78%;--r:-5deg;--mx:60%;--my:880px;--mr:-5deg" title="Venedig"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 26c6 4 28 4 34-4M8 26l2-6h20l2 3"/><path d="M30 20l3-10"/><path d="M5 31c3 1 6 1 9 0s6-1 9 0 6 1 9 0"/></svg><span>Venedig</span></div>
+      <div class="mt-item mt-mag mt-mag--w" style="--x:90%;--y:64%;--r:9deg;--mx:54%;--my:980px;--mr:9deg" title="Rom"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 32V16a14 8 0 0 1 28 0v16"/><path d="M6 32h28M11 32v-8a3 3 0 0 1 6 0v8M23 32v-8a3 3 0 0 1 6 0v8M11 18v-2M17 17v-2M23 17v-2M29 18v-2"/></svg><span>Rom</span></div>
     </div>
   </div>
 </section>
@@ -1500,6 +1509,15 @@ var WHITE = [255, 255, 255];
    ELEMENTE
    ===================================================== */
 var nav = document.querySelector('.nav');
+/* Am Handy ändert sich die Fensterhöhe, wenn die Adressleiste ein-/ausblendet.
+   Für Abschnittshöhen nehmen wir deshalb eine feste Höhe, die sich nur bei Breitenänderung neu setzt. */
+var stableVH = (function () {
+  var w = window.innerWidth, h = window.innerHeight;
+  return function () {
+    if (window.innerWidth !== w || window.innerWidth > 640) { w = window.innerWidth; h = window.innerHeight; }
+    return h;
+  };
+})();
 /* Am Handy: Seite hinter Chat / Großansicht festhalten */
 var scrollLock = (function () {
   var y = 0, on = false;
@@ -1638,12 +1656,12 @@ var HOLD_LEN = window.innerWidth <= 640 ? 0.3 : 0.7;     // danach bleiben die P
 var ticking = false;
 
 function zoomHeight() {
-  zoom.style.height = (window.innerHeight * (1 + ZOOM_LEN + HOLD_LEN)) + 'px';
+  zoom.style.height = (stableVH() * (1 + ZOOM_LEN + HOLD_LEN)) + 'px';
 }
 
 // Scroll-Position, an der Projekt i in der Mitte steht
 function projectScrollTop(i) {
-  return zoom.offsetTop + window.innerHeight * (ZOOM_LEN + 0.02);   // Projekte stehen fertig im Bild
+  return zoom.offsetTop + stableVH() * (ZOOM_LEN + 0.02);   // Projekte stehen fertig im Bild
 }
 
 // Weiches Nachziehen: alle Animationen folgen dem Scrollen mit kurzer Verzögerung statt ruckartig
@@ -1660,7 +1678,7 @@ function update() {
   var diff = target - smoothY;
   smoothY = (weniger || window.innerWidth <= 640 || Math.abs(diff) < 0.5) ? target : smoothY + diff * k;
   var vw = window.innerWidth;
-  var vh = window.innerHeight;
+  var vh = stableVH();
   var top = nav.offsetTop + nav.offsetHeight;
   var W = vw, H = W * IMG_RATIO;
   var phone = vw <= 640;
@@ -2095,7 +2113,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   var vw, vh, handy;
 
   function layout() {
-    vw = stage.clientWidth; vh = window.innerHeight; handy = vw <= 760;
+    vw = stage.clientWidth; vh = stableVH(); handy = vw <= 760;
     var GAP = handy ? .28 : .46;
     var ln = 0, side = 0;
     items.forEach(function (it, i) {
@@ -2235,14 +2253,28 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   place();
   phoneQ.addEventListener('change', function () { place(); measure(); render(); });
 
+  // Handy-Lebenslauf: Linie füllt sich beim Scrollen, Stationen leuchten auf
+  var ol = timeline.querySelector('ol');
+  var fill = document.createElement('i'); fill.className = 'tl-fill'; ol.appendChild(fill);
+  var stations = Array.from(ol.querySelectorAll('.station'));
+  function cvRender() {
+    if (!phoneQ.matches) return;
+    var r = ol.getBoundingClientRect(), line = window.innerHeight * 0.62 - r.top;
+    var h = clamp(line, 0, r.height);
+    fill.style.height = h + 'px';
+    stations.forEach(function (st) { st.classList.toggle('is-on', st.offsetTop + 20 <= h); });
+  }
+  window.addEventListener('scroll', function () { requestAnimationFrame(cvRender); }, { passive: true });
+  cvRender();
+
   // Höhe des Abschnitts = Auffächern + seitliche Strecke
   function measure() {
     sideways = Math.max(0, track.scrollWidth - window.innerWidth);
-    me.style.height = (window.innerHeight * (1 + STACK_LEN) + sideways) + 'px';
+    me.style.height = (stableVH() * (1 + STACK_LEN) + sideways) + 'px';
   }
 
   function render() {
-    var vh = window.innerHeight;
+    var vh = stableVH();
     var r = me.getBoundingClientRect();
     var scrolled = clamp(-r.top, 0, me.offsetHeight - vh);
     var stackPx = vh * STACK_LEN;
@@ -2255,6 +2287,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       var to = ph.dataset.to.split(',').map(Number);
       var stackRot = [0, -6, 5, -3, 7, -8, 4, -2, 6, -5, 3, -7][i % 12];
       var x = mix(0, (to[0] - 50) / 100 * w, spread);
+      if (phoneQ.matches) { var lim = w / 2 - ph.offsetWidth * 0.55 - 8; x = clamp(x, -lim, lim); }
       var y = mix(i * -3, (to[1] - 50) / 100 * h, spread);
       var rot = mix(stackRot, to[2], spread);
       var sc = mix(i === 0 ? 1.15 : 1.05, i === 0 ? 0.8 : 0.85, spread);
