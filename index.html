@@ -789,6 +789,11 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .mt-dot--k { background: #111; box-shadow: 0 3px 4px rgba(0,0,0,.45), inset 0 3px 3px rgba(255,255,255,.18); }
 .mt-dot--w { background: #F2F2F2; }
 
+/* Selbst gezeichnete Magnete (PNG mit transparentem Hintergrund) */
+.mt-art { aspect-ratio: 1; filter: drop-shadow(0 0 1.2px rgba(255,255,255,.75)) drop-shadow(0 0 6px rgba(255,255,255,.12)) drop-shadow(0 16px 14px rgba(0,0,0,.55)); }   /* heller Rand, damit Dunkles auf der Tafel sichtbar bleibt */
+.mt-art img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.mt-art.is-drag { filter: drop-shadow(0 8px 6px rgba(0,0,0,.5)) drop-shadow(0 30px 24px rgba(0,0,0,.5)); }
+
 /* Reise-Magneten */
 .mt-mag { width: clamp(78px, 7.4vw, 104px); aspect-ratio: 1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 6px rgba(0,0,0,.45), 0 16px 20px -12px rgba(0,0,0,.7), inset 0 -4px 6px rgba(0,0,0,.2), inset 0 3px 4px rgba(255,255,255,.3); }
 .mt-mag svg { width: 46%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
@@ -1382,6 +1387,7 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
       <div class="mt-item mt-card mt-card--green" style="--x:62%;--y:58%;--w:15%;--r:3deg;--mx:5%;--my:590px;--mr:2deg;--mw:46%"><span class="mt-dot mt-dot--k"></span><b>Lieblings-Artists</b><ul><li>[Artist]</li><li>[Artist]</li><li>[Artist]</li></ul></div>
       <div class="mt-item mt-card mt-card--note" style="--x:24%;--y:74%;--w:13%;--r:-4deg;--mx:8%;--my:770px;--mr:-4deg;--mw:42%"><span class="mt-dot mt-dot--w"></span><b>Lese gerade</b><p>[Buchtitel]</p></div>
       <div class="mt-item mt-card mt-card--note" style="--x:82%;--y:8%;--w:14%;--r:4deg;--mx:5%;--my:228px;--mr:-3deg;--mw:45%"><span class="mt-dot mt-dot--g"></span><p>Nach Feierabend:<br>zeichnen, Gym, Pläne für die nächste Reise.</p></div>
+      <div class="mt-item mt-art" style="--x:73%;--y:44%;--w:12%;--r:-6deg;--mx:56%;--my:612px;--mw:34%;--mr:-6deg" title="Sierra Kidd"><img src="feierabend/magnet-sierra-kidd.png" alt="Selbst gezeichneter Magnet: Sierra Kidd" loading="lazy" draggable="false"></div>
       <div class="mt-item mt-mag mt-mag--w" style="--x:28%;--y:10%;--r:-8deg;--mx:37%;--my:170px;--mr:-8deg" title="London"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M17 34V14h6v20M15 14h10M16 14l4-8 4 8M18 18h4M18 23h4M18 28h4"/><circle cx="20" cy="18.5" r="0"/></svg><span>London</span></div>
       <div class="mt-item mt-mag mt-mag--g" style="--x:55%;--y:40%;--r:6deg;--mx:38%;--my:560px;--mr:6deg" title="Australien"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 30c4-8 8-12 12-12 0-6 4-10 8-10-2 4-2 8 0 12 4 0 8 4 12 10z"/><path d="M4 30h32"/></svg><span>Australien</span></div>
       <div class="mt-item mt-mag mt-mag--k" style="--x:80%;--y:78%;--r:-5deg;--mx:60%;--my:880px;--mr:-5deg" title="Venedig"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 26c6 4 28 4 34-4M8 26l2-6h20l2 3"/><path d="M30 20l3-10"/><path d="M5 31c3 1 6 1 9 0s6-1 9 0 6 1 9 0"/></svg><span>Venedig</span></div>
