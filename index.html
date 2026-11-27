@@ -25,9 +25,9 @@
   --green-2: #2E9E63;
   --green-dark: #14562F;
   --grad: linear-gradient(135deg, #248453 0%, #14562F 100%);
-  --paper: #F8F8F8;           /* Hintergrund der Zeichnung */
+  --paper: #C4D6C8;           /* Salbeigrün passend zur Illustration / Video */
   --sketch: #1D1D1F;          /* Linienfarbe der Zeichnung */
-  --screen: #6E6E6E;          /* Bildschirm-Grau der Zeichnung */
+  --screen: #FFFFFF;          /* Bildschirmfläche in der Illustration / im Video */
   /* Sticky-Note-Farben aus der Zeichnung */
   --note-green: #CFE3D6;
   --note-red: #BDBDC2;
@@ -96,7 +96,6 @@ button { font: inherit; cursor: pointer; }
 .nav a:hover { background: var(--soft-2); }
 .nav__logo { font-weight: 600 !important; padding-left: 8px !important; }
 .nav__logo em { display: inline-block; max-width: 200px; overflow: hidden; white-space: nowrap; vertical-align: middle; transition: max-width .45s var(--ease), opacity .3s ease; }
-.nav.is-hero .nav__logo em { max-width: 0; opacity: 0; }
 .nav__logo span {
   display: grid;
   place-items: center;
@@ -202,47 +201,6 @@ button { font: inherit; cursor: pointer; }
 .zoom { height: 600vh; }   /* genaue Höhe setzt das JS */
 .stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--paper); }
 
-.hero-text {
-  position: absolute;
-  top: clamp(96px, 13vh, 130px);
-  left: 16px;
-  right: 16px;
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-.hero-text::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: -1;
-  width: min(900px, 110%);
-  height: 220%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(closest-side, var(--paper) 55%, rgba(248,248,248,.85) 72%, rgba(248,248,248,0));
-  pointer-events: none;
-}
-.hero-text .role { font-size: clamp(15px, 1.4vw, 18px); font-weight: 500; color: var(--muted); margin-top: 8px; text-shadow: 0 0 12px var(--paper), 0 0 24px var(--paper); }
-.hero-text h1 {
-  text-shadow: 0 0 18px var(--paper), 0 0 36px var(--paper);
-  font-size: clamp(28px, 4vw, 58px);
-  font-weight: 700;
-  line-height: 1.03;
-  letter-spacing: -0.048em;
-}
-.shimmer {
-  background: linear-gradient(100deg, #2E9E63 0%, #2E9E63 42%, #B9F2D3 50%, #2E9E63 58%, #2E9E63 100%);
-  background-size: 250% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 4.5s ease-in-out infinite;
-}
-.hero-text h1 .shimmer { text-shadow: none; filter: drop-shadow(0 0 14px var(--paper)); }
-@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .scroll-hint { position: absolute; left: 50%; top: 0; z-index: 4; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 6px 20px -10px rgba(0,0,0,.3); font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; pointer-events: none; }
 .scroll-hint::after { content: "↓"; animation: hint 1.8s ease-in-out infinite; }
 @keyframes hint { 50% { transform: translateY(5px); } }
@@ -257,7 +215,7 @@ button { font: inherit; cursor: pointer; }
           mask-image: linear-gradient(90deg, #000 0 40%, transparent 60%);
   -webkit-mask-size: 250% 100%; mask-size: 250% 100%;
   -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-  animation: aufbau 2.2s cubic-bezier(.55,.1,.35,1) forwards;
+  animation: aufbau 1.8s cubic-bezier(.55,.1,.35,1) forwards;
 }
 @keyframes aufbau {
   from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
@@ -375,15 +333,13 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 /* =====================================================
    02b · UI SNIPPETS – Handys und Web-Ansichten in schwarzen Rahmen, gleich hoch pro Reihe
    ===================================================== */
-/* gleiche Breite wie das Bento-Raster der Projekte */
 .snips-wrap { max-width: calc(1320px + 2 * clamp(16px, 4vw, 64px)); margin: 0 auto; padding: 0 clamp(16px, 4vw, 64px); }
 .snips-head { margin-bottom: clamp(28px, 4vw, 44px); }
 .snips-head h2 { font-size: clamp(30px, 4.4vw, 60px); font-weight: 700; letter-spacing: -0.05em; line-height: 1.02; margin: 4px 0 10px; }
 .sgrid { display: grid; gap: clamp(14px, 1.8vw, 24px); }
 .srow { display: flex; gap: clamp(14px, 1.8vw, 24px); align-items: stretch; }
-/* Breite im Verhältnis zum Seitenformat → alle Rahmen einer Reihe sind gleich hoch */
 .sn { --r: 9 / 19; flex: calc(9 / 19) 1 0; min-width: 0; aspect-ratio: var(--r); padding: 6px; border: 0; border-radius: 30px; background: #1D1D1F; box-shadow: 0 24px 40px -26px rgba(0,0,0,.55); cursor: zoom-in; transition: transform .4s var(--ease), box-shadow .4s ease; }
-.sn--web { flex: calc(16 / 10) 1 0; aspect-ratio: auto; border-radius: 18px; }   /* Höhe = Höhe der Handys in der Reihe */
+.sn--web { flex: calc(16 / 10) 1 0; aspect-ratio: auto; border-radius: 18px; }
 .sn:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -26px rgba(0,0,0,.6); }
 .sn:focus-visible { outline: 3px solid var(--green-2); outline-offset: 3px; }
 .sn__screen { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 24px; background: var(--soft-2); }
@@ -399,12 +355,12 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 /* =====================================================
    04 · ABSEITS VOM INTERFACE (schwebende Arbeiten)
    ===================================================== */
-.float { position: relative; background: var(--bg); margin-top: clamp(60px, 8vw, 110px); }   /* Höhe setzt das JS */
+.float { position: relative; background: var(--bg); margin-top: clamp(60px, 8vw, 110px); }
 .float__stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 .float__title {
   position: absolute;
   inset: 0;
-  z-index: 0;   /* Titel liegt im Hintergrund, die Arbeiten davor */
+  z-index: 0;
   display: grid;
   place-content: center;
   text-align: center;
@@ -558,7 +514,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 /* =====================================================
    04b · KARTEN (Papier, Drehen, Aufklappen, Licht)
    ===================================================== */
-/* Karte */
 .pc {
   --tilt-x: 0deg; --tilt-y: 0deg;
   position: relative;
@@ -579,7 +534,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 }
 .pc__face--back { transform: rotateY(180deg); }
 .pc__face img, .pc__base img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Papierstruktur + Licht */
 .pc__face::before, .pc__base::before {
   content: "";
   position: absolute;
@@ -602,13 +556,11 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 }
 .pc__dark::before { mix-blend-mode: screen; opacity: .06; }
 
-/* PNG-Klappkarte (z. B. Arch & Barre mit freigestellter 3D-Form) */
 .pc--png { width: 100%; }
 .pc--png img { display: block; width: 100%; height: auto; filter: drop-shadow(0 28px 34px rgba(0,0,0,.32)); }
 .pc--png .pc__closed { position: absolute; left: 50%; top: 0; height: 100%; width: auto; max-width: none; transform: translateX(-50%); transition: opacity .35s ease; }
 .pc--png .pc__open { transform: scaleX(var(--open, .52)); opacity: var(--open-op, 0); transform-origin: center; transition: transform .35s var(--ease), opacity .25s ease; }
 
-/* Platzhalter-Designs (ersetzen durch eigene Bilder) */
 .pd { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 8%; color: #0A0A0A; font-family: 'Inter', sans-serif; }
 .pd--center { align-items: center; justify-content: center; text-align: center; gap: 6%; }
 .pd b { font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
@@ -622,7 +574,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 /* =====================================================
    05 · ÜBER MICH: Fotostapel → Text → Zeitstrahl
    ===================================================== */
-.me { position: relative; margin-top: clamp(80px, 11vw, 140px); }   /* Höhe setzt das JS */
+.me { position: relative; margin-top: clamp(80px, 11vw, 140px); }
 .me__stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 .me__track { display: flex; height: 100%; will-change: transform; }
 
@@ -690,7 +642,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .timeline__title p { color: var(--muted); margin-top: 10px; font-size: 15px; }
 
 .timeline ol { position: relative; display: flex; height: 70%; }
-.timeline ol::before {   /* die Linie */
+.timeline ol::before {
   content: "";
   position: absolute;
   left: 0;
@@ -700,7 +652,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   background: #E5E5EA;
   border-radius: 2px;
 }
-/* grüne Linie, die sich beim Scrollen füllt */
 .tl-fill { position: absolute; left: 0; top: 50%; z-index: 1; width: 0; height: 2px; margin-top: -1px; border-radius: 2px; background: linear-gradient(90deg, #9FD4B5, #2E9E63); pointer-events: none; }
 .tl-fill::after { content: ""; position: absolute; right: -7px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: #2E9E63; box-shadow: 0 0 0 6px rgba(46,158,99,.2); }
 .station::before { z-index: 2; transition: box-shadow .3s ease, background .3s ease; }
@@ -708,7 +659,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .station__card { transition: opacity .5s ease, transform .6s var(--ease); }
 .station:not(.is-on) .station__card { opacity: .3; }
 .station { position: relative; flex: 0 0 auto; width: 270px; }
-.station::before {   /* Punkt auf der Linie */
+.station::before {
   content: "";
   position: absolute;
   left: 24px;
@@ -734,7 +685,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .station__card h4 { font-size: 17px; letter-spacing: -0.02em; line-height: 1.25; }
 .station__card p { font-size: 14px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
 .station__card small { display: block; font-size: 12.5px; color: var(--muted-2); margin-top: 4px; }
-.station--life .station__card { background: var(--paper); }
+.station--life .station__card { background: #F8F8F8; }
 .station--now .station__card { background: #0A0A0A; color: #fff; }
 .station--now .station__card time { color: #7FE0A8; }
 .station--now .station__card p, .station--now .station__card small { color: rgba(255,255,255,.65); }
@@ -755,7 +706,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .tafel__reset { margin-left: 8px; padding: 7px 13px; border: 0; border-radius: 999px; background: var(--soft-2); font-size: 13px; font-weight: 600; color: var(--text); }
 .tafel__reset:hover { background: #E3E3E6; }
 
-/* die Tafel: mattes Schwarz mit Alu-Rahmen */
 .mt {
   position: relative;
   height: clamp(560px, 72vh, 760px);
@@ -774,13 +724,11 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .mt-item.is-drag { cursor: grabbing; transition: none; touch-action: none; filter: drop-shadow(0 26px 22px rgba(0,0,0,.45)); }
 .mt-item.is-back { transition: transform .8s var(--ease); }
 
-/* Fotos */
 .mt-photo { padding: clamp(6px, .7vw, 11px) clamp(6px, .7vw, 11px) clamp(22px, 2.4vw, 38px); background: #fff; box-shadow: 0 2px 3px rgba(0,0,0,.35), 0 18px 26px -16px rgba(0,0,0,.7); }
 .mt-ph { position: relative; display: block; aspect-ratio: 1; overflow: hidden; background: linear-gradient(160deg, #E5E5EA, #C7C7CB); pointer-events: none; }
 .mt-ph::after { content: "Foto folgt"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 11px; font-weight: 600; color: #8E8E93; }
 .mt-ph img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
 
-/* Zettel */
 .mt-card { padding: 14px 16px 16px; background: #FAFAF6; box-shadow: 0 2px 3px rgba(0,0,0,.35), 0 18px 26px -16px rgba(0,0,0,.7); font-family: 'Caveat', cursive; font-size: clamp(17px, 1.45vw, 23px); line-height: 1.15; color: #1D1D1F; }
 .mt-card b { display: block; margin-bottom: 4px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green); }
 .mt-card ul { list-style: none; }
@@ -789,18 +737,15 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 .mt-card--green b { color: var(--green-dark); }
 .mt-card--note { background: #fff; }
 
-/* Magnete auf Fotos und Zetteln */
 .mt-dot { position: absolute; left: 50%; top: -8px; z-index: 2; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; box-shadow: 0 3px 4px rgba(0,0,0,.45), inset 0 -3px 4px rgba(0,0,0,.25), inset 0 3px 3px rgba(255,255,255,.35); }
 .mt-dot--g { background: #2E9E63; }
 .mt-dot--k { background: #111; box-shadow: 0 3px 4px rgba(0,0,0,.45), inset 0 3px 3px rgba(255,255,255,.18); }
 .mt-dot--w { background: #F2F2F2; }
 
-/* Selbst gezeichnete Magnete (PNG mit transparentem Hintergrund) */
-.mt-art { width: clamp(78px, 7.4vw, 104px); aspect-ratio: 1; filter: drop-shadow(0 0 1.2px rgba(255,255,255,.75)) drop-shadow(0 0 6px rgba(255,255,255,.12)) drop-shadow(0 16px 14px rgba(0,0,0,.55)); }   /* heller Rand, damit Dunkles auf der Tafel sichtbar bleibt */
+.mt-art { width: clamp(78px, 7.4vw, 104px); aspect-ratio: 1; filter: drop-shadow(0 0 1.2px rgba(255,255,255,.75)) drop-shadow(0 0 6px rgba(255,255,255,.12)) drop-shadow(0 16px 14px rgba(0,0,0,.55)); }
 .mt-art img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .mt-art.is-drag { filter: drop-shadow(0 8px 6px rgba(0,0,0,.5)) drop-shadow(0 30px 24px rgba(0,0,0,.5)); }
 
-/* Reise-Magneten */
 .mt-mag { width: clamp(78px, 7.4vw, 104px); aspect-ratio: 1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 6px rgba(0,0,0,.45), 0 16px 20px -12px rgba(0,0,0,.7), inset 0 -4px 6px rgba(0,0,0,.2), inset 0 3px 4px rgba(255,255,255,.3); }
 .mt-mag svg { width: 46%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 .mt-mag span { font-size: clamp(10px, .85vw, 12.5px); font-weight: 700; letter-spacing: .02em; pointer-events: none; }
@@ -830,24 +775,23 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   overflow: hidden;
   background: var(--paper);
 }
-/* Zeichnung: Größe so, dass sie komplett sichtbar ist, mittig */
 .outro__scene {
   position: absolute;
   left: 50%;
-  top: 54%;
-  width: min(100vw, calc((100vh - 70px) * var(--illu-ratio, 2.02)));
-  transform-origin: 50.12% 42.07%;   /* Mitte des Monitors (setzt das Script je nach Version) */
+  top: 50%;
+  width: 100vw;
+  min-height: 100vh;
+  transform-origin: 54.5% 41%;
   will-change: transform;
 }
-.outro__img { display: block; width: 100%; height: auto; }
+.outro__img { display: block; width: 100%; height: 100vh; object-fit: cover; }
 
-/* Monitor: erst die weiße Website, dann geht er aus wie ein alter Röhrenmonitor */
 .outro__screen {
   position: absolute;
-  left: 43.36%;
-  top: 34.3%;
-  width: 13.51%;
-  height: 15.54%;
+  left: 43.2%;
+  top: 29.8%;
+  width: 22.7%;
+  height: 22.6%;
   background: #0E0E0F;
   overflow: hidden;
   display: grid;
@@ -858,9 +802,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   inset: 0;
   background: #fff;
   transform-origin: center;
-}
-@media (max-width: 640px) {
-  .outro__scene { top: 50%; left: 50%; }
 }
 
 /* =====================================================
@@ -905,9 +846,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 }
 @media (max-width: 640px) {
   .nav a:not(.nav__logo):not(.nav__cv) { padding: 0 10px; font-size: 13.5px; }
-  .nav__logo em { display: none; }
-  .hero-text { top: 78px; }
-  .hero-text h1 { font-size: clamp(26px, 8vw, 34px); }
   .station { width: 220px; }
   .station__card { width: 205px; padding: 14px 16px; }
   .timeline__title { width: 220px; margin-right: 24px; }
@@ -919,12 +857,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .kul { margin-bottom: 10px; border-radius: 18px; }
   .kul__tag { top: 8px; left: 8px; font-size: 11.5px; padding: 4px 9px; }
   .kul__count { top: 8px; right: 8px; min-width: 30px; height: 30px; font-size: 11px; }
-  .screen__body { padding-top: 3cqw; }
-  .screen__url { display: none; }
-  .suggest__pitch { display: none; }
-  .suggest { width: 44cqw; }
-  .suggest a { font-size: 2.2cqw; }
-  .search.is-open .cursor { transform: translate(-5cqw, 7cqw); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -945,7 +877,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--paper);
+  background: #F8F8F8;
   box-shadow: 0 0 0 3px #fff, 0 12px 30px -10px rgba(0,0,0,.45);
   transition: transform .3s var(--ease);
 }
@@ -991,7 +923,7 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
 }
 .chat.is-open .chat__panel { opacity: 1; transform: none; pointer-events: auto; }
 .chat__head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
-.chat__head img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: var(--paper); }
+.chat__head img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #F8F8F8; }
 .chat__head b { display: block; font-size: 15px; }
 .chat__head span { display: block; font-size: 11.5px; color: var(--muted); }
 .chat__close { margin-left: auto; width: 34px; height: 34px; border: 0; border-radius: 50%; background: var(--soft-2); font-size: 18px; }
@@ -1032,7 +964,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
    ===================================================== */
 .nav__menu { display: none; }
 @media (max-width: 640px) {
-  /* Navigation: Logo links, Menü + CV rechts, Links klappen darunter auf */
   .nav { width: calc(100vw - 24px); flex-wrap: wrap; overflow: visible; border-radius: 26px; transition: border-radius .3s ease; }
   .nav__logo { margin-right: auto; }
   .nav__sep { display: none; }
@@ -1045,26 +976,17 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .nav.is-open .nav__menu i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
   .nav__cv { order: 4; }
 
-  /* Hero */
-  .hero-text { top: 92px !important; }
-  .hero-text h1 { font-size: clamp(30px, 9.4vw, 40px) !important; }
   .scroll-hint { font-size: 12.5px; padding: 7px 14px; }
 
-  /* Projekte: Bilder nicht so riesig */
   .bt, .bt--big { min-height: 0 !important; }
   .bt__media { flex: none; aspect-ratio: 16 / 10; margin-top: 18px; }
   .bt h3 { font-size: 30px; }
   .work { padding-top: 84px; }
 
-  /* Magnettafel */
   .mt { height: 1080px; }
   .mt-mag { width: 74px; }
   .mt-dot { width: 18px; height: 18px; margin-left: -9px; top: -6px; }
 
-  /* Feierabend: Zeichnung größer */
-  .illu-crop .outro__scene { width: 200vw !important; }
-
-  /* Chat: fast volle Breite */
   .chat__panel { width: calc(100vw - 28px); height: min(640px, calc(100dvh - 104px)); border-radius: 22px; }
   .chat__chips button { font-size: 13.5px; padding: 9px 13px; }
 }
@@ -1073,7 +995,6 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
    HANDY-FEINSCHLIFF 2 (gilt nur bis 640 px Breite)
    ===================================================== */
 @media (max-width: 640px) {
-  /* keine Hover-Effekte am Handy */
   .btn:hover, a.bt:hover, a.bt:hover .bt__media, .sn:hover, .fi .kul:hover, .fi--card:hover .pc, .kul:hover, .hb:hover, .chat__toggle:hover, .head:hover .head__icon { transform: none !important; }
   .sn:hover { box-shadow: 0 24px 40px -26px rgba(0,0,0,.55); }
   .kul:hover { box-shadow: 0 1px 2px rgba(0,0,0,.04); }
@@ -1089,19 +1010,14 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .chat__toggle:hover + .chat__hint, .chat__toggle:hover ~ .chat__hint { opacity: 0; }
   .chat.is-hinting:not(.is-open) .chat__hint { opacity: 1; }
 
-  /* UI Snippets: Handys immer paarweise, Web-Ansichten über die volle Breite – nichts steht allein */
   .sgrid { grid-template-columns: 1fr 1fr; grid-auto-flow: row dense; gap: 14px; }
   .srow { display: contents; }
   .sn { flex: none !important; width: auto !important; }
   .sn--web { grid-column: 1 / -1; }
 
-  /* Abseits vom Interface: Titel liegt im Hintergrund, Arbeiten davor */
-
-  /* Über mich: Text liegt über den Fotos */
   .me__text { z-index: 30; }
   .photo { width: 26vw !important; }
 
-  /* Lebenslauf von oben nach unten: Linie mittig, Stationen abwechselnd links/rechts */
   .me-cv { padding: 30px 16px 40px; }
   .me-cv .timeline { display: block; height: auto; padding: 0; }
   .me-cv .timeline__title { width: auto; margin: 0 auto 30px; text-align: center; }
@@ -1122,18 +1038,14 @@ a.bt:hover .bt__media { transform: translateY(-6px); }
   .me-cv .station__card p { font-size: 13px; }
   .me-cv .station__card time { font-size: 12px; }
 
-  /* Magnettafel: nur anschauen, nichts verschieben */
   .tafel__hint { display: none; }
   .mt-item { cursor: default; touch-action: auto; }
 
-  /* Kontakt: Mail + LinkedIn nebeneinander, CV darunter */
   .hallo__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 360px; }
   .hallo__btns .hb { justify-content: center; padding: 15px 12px; }
   .hallo__btns .hb:nth-child(2) { grid-column: 1 / -1; order: 3; }
 }
-/* Hintergrund nicht scrollbar, solange Chat oder Großansicht offen ist */
 html.is-locked body { overflow: hidden; overscroll-behavior: none; }
-
 </style>
 </head>
 
@@ -1154,37 +1066,28 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 
 
 <!-- =====================================================
-     00 · HERO: Schreibtisch, Bubbles, Zoom in den Monitor
+     00 · HERO: Schreibtisch-Video + Zoom in den Monitor
      ===================================================== -->
 <section class="zoom" id="top">
   <div class="stage">
 
-    <div class="hero-text">
-      <h1><span class="shimmer">Lina Melissa</span> Arndt</h1>
-      <p class="role">UX/UI Designerin &amp; Mediengestalterin</p>
-    </div>
     <span class="scroll-hint">Scroll dich in meinen Bildschirm</span>
 
     <div class="scene intro">
-      <video class="scene__img" src="schreibtisch.mp4" poster="schreibtisch.jpg" width="2576" height="1274"
+      <video class="scene__img" src="video_1.mp4" poster="schreibtisch.jpg" width="1280" height="720"
              autoplay loop muted playsinline preload="auto"
-             aria-label="Animierte Lina an ihrem Schreibtisch mit Monitor, Laptop, Sticky Notes, Staffelei, Kindle, Hantel und Kaffeetasse"></video>
+             aria-label="Lina an ihrem Schreibtisch mit Monitor, Laptop, Pflanzen, Tasse und Tasche"></video>
 
       <div class="night" aria-hidden="true"></div>
 
       <!-- Lampe = Lichtschalter -->
-      <button class="pos lamp" style="--x:7%; --y:43%; --w:6%; --h:11%" aria-label="Licht an- und ausschalten"></button>
+      <button class="pos lamp" style="--x:18%; --y:38%; --w:7%; --h:24%" aria-label="Licht an- und ausschalten"></button>
 
-      <!-- Monitor: nur die Position. Beim Reinzoomen wächst daraus die Projektansicht. -->
-      <div class="pos screen" style="--x:43.36%; --y:34.3%; --w:13.51%; --h:15.54%" aria-hidden="true"></div>
+      <!-- Monitor: Position im Video. Beim Reinzoomen wächst daraus die Projektansicht. -->
+      <div class="pos screen" style="--x:43.2%; --y:29.8%; --w:22.7%; --h:22.6%" aria-hidden="true"></div>
     </div>
 
-    <!-- =====================================================
-         02 · AUSGEWÄHLTE PROJEKTE – liegt "im Monitor".
-         Nach dem Reinzoomen bleibt die Seite stehen und die Projekte laufen beim Scrollen durch.
-         ===================================================== -->
     <div class="cases__screen" aria-hidden="true"></div>
-    <!-- wird per Script mit einer Kopie von "Ausgewählte Projekte" gefüllt, damit man die Projekte schon beim Reinzoomen sieht -->
     <div class="cases"></div>
 
   </div>
@@ -1193,14 +1096,12 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 
 <!-- =====================================================
      02 · AUSGEWÄHLTE PROJEKTE – Bento-Raster
-     Beim Hovern wird eine Kachel zur größten und zeigt ihre Kennzahlen (<dl class="wk-stats">).
      ===================================================== -->
 <section class="work" id="projekte">
   <div class="work__head">
     <p class="kicker">Ausgewählte Projekte</p>
     <h2>Echte Probleme, <span class="hl">echte Lösungen.</span></h2>
   </div>
-  <!-- BENTO: beim Hovern wird die Kachel zur größten und zeigt ihre Kennzahlen -->
   <div class="bento">
     <a class="bt bt--big is-active" href="samespot.html">
       <div class="bt__text">
@@ -1232,7 +1133,6 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
       <div class="bt__media"><span class="wk-soon">Bald hier</span></div>
     </div>
   </div>
-
 </section>
 
 
@@ -1240,9 +1140,6 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 
 <!-- =====================================================
      02b · UI SNIPPETS
-     Reihe 1: Handy, Handy, Web, Handy · Reihe 2: Web, Handy, Handy, Handy
-     Bild tauschen = src ändern. Neue Reihe = einen <div class="srow"> kopieren.
-     Handy = <button class="sn">, Web = <button class="sn sn--web">. Fehlt ein Bild, bleibt die Fläche leer.
      ===================================================== -->
 <section class="section" id="snippets">
   <div class="snips-wrap">
@@ -1270,9 +1167,7 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 
 
 <!-- =====================================================
-     04 · ABSEITS VOM INTERFACE – Arbeiten schweben beim Scrollen am Titel vorbei.
-     Karten (drehen sich / klappen auf) stehen im Script unter "ABSEITS VOM INTERFACE".
-     Neue Arbeit = einen <button class="kul"> kopieren; Reihenfolge = Reihenfolge hier.
+     04 · ABSEITS VOM INTERFACE
      ===================================================== -->
 <section class="float" id="archiv">
   <div class="float__stage">
@@ -1310,15 +1205,13 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 
 
 <!-- =====================================================
-     05 · ÜBER MICH  – Fotostapel fliegt auseinander, dann seitlich zum Zeitstrahl
+     05 · ÜBER MICH
      ===================================================== -->
 <section class="me" id="ueber-mich">
   <div class="me__stage">
     <div class="me__track">
 
       <div class="me__intro">
-        <!-- FOTOS: data-to = Ziel nach dem Auffächern (x %, y %, Drehung in Grad)
-             Das erste Foto liegt oben auf dem Stapel. -->
         <figure class="photo photo--main" data-to="50,19,0"><img src="ich/bild1.jpg" alt="Lina" loading="lazy"></figure>
         <figure class="photo" data-to="13,24,-8"><img src="zwischendurch/zd-venedig.jpg" alt="Reise nach Venedig" loading="lazy"></figure>
         <figure class="photo" data-to="87,22,7"><img src="ich/bild2.jpg" alt="Lina" loading="lazy"></figure>
@@ -1344,7 +1237,6 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
         </div>
       </div>
 
-      <!-- ZEITSTRAHL -->
       <div class="timeline">
         <div class="timeline__title">
           <p class="kicker">Lebenslauf</p>
@@ -1370,9 +1262,7 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 
 
 <!-- =====================================================
-     05b · NACH FEIERABEND – Magnettafel: alles lässt sich mit der Maus (oder dem Finger) verschieben.
-     Fotos: Ordner "feierabend/". Startposition: --x/--y in % der Tafel, --w = Breite, --r = Drehung.
-     Reise-Magneten = Orte, an denen ich schon war (neuer Ort: eine .mt-mag kopieren). [Platzhalter] ersetzen.
+     05b · NACH FEIERABEND – Magnettafel
      ===================================================== -->
 <section class="tafel" id="abseits">
   <div class="tafel__wrap">
@@ -1410,7 +1300,7 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 <section class="outro" aria-label="Feierabend">
   <div class="outro__stage">
     <div class="outro__scene">
-      <video class="outro__img loop" src="schreibtisch.mp4" poster="schreibtisch.jpg" width="2576" height="1274"
+      <video class="outro__img loop" src="video_1.mp4" poster="schreibtisch.jpg" width="1280" height="720"
              autoplay loop muted playsinline preload="metadata"
              aria-label="Lina an ihrem Schreibtisch – Feierabend"></video>
       <div class="outro__screen" aria-hidden="true"><div class="outro__glow"></div></div>
@@ -1443,7 +1333,7 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 </footer>
 
 <!-- =====================================================
-     CHAT MIT LINA (unten rechts). Fragen & Antworten stehen im Script ("CHAT MIT LINA").
+     CHAT MIT LINA
      ===================================================== -->
 <div class="chat">
   <div class="chat__panel" role="dialog" aria-label="Chat mit Lina">
@@ -1463,9 +1353,6 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 </div>
 
 <script>
-/* =====================================================
-   HILFSFUNKTIONEN
-   ===================================================== */
 function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
 function smooth(t) { return t * t * (3 - 2 * t); }
 function range(a, b, t) { return smooth(clamp((t - a) / (b - a), 0, 1)); }
@@ -1473,18 +1360,12 @@ function mix(a, b, t) { return a + (b - a) * t; }
 function mixColor(a, b, t) { return 'rgb(' + a.map(function (c, i) { return Math.round(mix(c, b[i], t)); }).join(',') + ')'; }
 var weniger = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-var IMG_RATIO = 1274 / 2576;   // wird von applyIllu() je nach Version gesetzt
-var PAPER = [248, 248, 248];
-var SCREEN = [252, 252, 252];   // Farbe des Monitors in der Zeichnung
+var IMG_RATIO = 9 / 16;
+var PAPER = [196, 214, 200];
+var SCREEN = [255, 255, 255];
 var WHITE = [255, 255, 255];
 
-
-/* =====================================================
-   ELEMENTE
-   ===================================================== */
 var nav = document.querySelector('.nav');
-/* Am Handy ändert sich die Fensterhöhe, wenn die Adressleiste ein-/ausblendet.
-   Für Abschnittshöhen nehmen wir deshalb eine feste Höhe, die sich nur bei Breitenänderung neu setzt. */
 var stableVH = (function () {
   var w = window.innerWidth, h = window.innerHeight;
   return function () {
@@ -1492,7 +1373,6 @@ var stableVH = (function () {
     return h;
   };
 })();
-/* Am Handy: Seite hinter Chat / Großansicht festhalten */
 var scrollLock = (function () {
   var y = 0, on = false;
   function phone() { return window.innerWidth <= 640; }
@@ -1512,7 +1392,7 @@ var scrollLock = (function () {
     }
   };
 })();
-(function () {   // Handy-Menü
+(function () {
   var btn = nav.querySelector('.nav__menu');
   function set(open) { nav.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', String(open)); btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen'); }
   btn.addEventListener('click', function () { set(!nav.classList.contains('is-open')); });
@@ -1520,73 +1400,53 @@ var scrollLock = (function () {
   document.addEventListener('click', function (e) { if (!nav.contains(e.target)) set(false); });
   window.addEventListener('scroll', function () { if (nav.classList.contains('is-open')) set(false); }, { passive: true });
 })();
+
 var zoom = document.querySelector('.zoom');
 var stage = zoom.querySelector('.stage');
-var heroText = zoom.querySelector('.hero-text');
 var scrollHint = zoom.querySelector('.scroll-hint');
 var scene = zoom.querySelector('.scene');
 var img = scene.querySelector('.scene__img');
 var screen = scene.querySelector('.screen');
 var cases = zoom.querySelector('.cases');
 var screenBg = zoom.querySelector('.cases__screen');
-var work = document.querySelector('.work');   // Projekte: übernehmen nahtlos, sobald der Zoom fertig ist
+var work = document.querySelector('.work');
 var outro = document.querySelector('.outro');
 var oScene = outro.querySelector('.outro__scene');
 var oGlow = outro.querySelector('.outro__glow');
 var bar = document.querySelector('.progress span');
 
-/* =====================================================
-   ZEICHNUNG / VIDEO IN MEHREREN FORMATEN
-   Je nach Bildschirmform wird automatisch die passende Version geladen.
-   screen = Monitorfläche in % (x, y, Breite, Höhe), lamp = Stehlampe in %.
-   Eine Version ohne "screen" ist noch nicht da und wird übersprungen –
-   dann nimmt die Seite die Desktop-Version und schneidet sie passend zu.
-   ===================================================== */
 var ILLU = [
-  { name: 'handy',       bisFormat: 0.62, src: 'illustration/handy.mp4',       poster: 'illustration/handy.jpg',       w: 1080, h: 2340, screen: null, lamp: null },
-  { name: 'tablet-hoch', bisFormat: 0.95, src: 'illustration/tablet-hoch.mp4', poster: 'illustration/tablet-hoch.jpg', w: 1800, h: 2400, screen: null, lamp: null },
-  { name: 'tablet-quer', bisFormat: 1.55, src: 'illustration/tablet-quer.mp4', poster: 'illustration/tablet-quer.jpg', w: 2400, h: 1800, screen: null, lamp: null },
-  { name: 'desktop',     bisFormat: 99,   src: 'schreibtisch.mp4',             poster: 'schreibtisch.jpg',             w: 2576, h: 1274, screen: [43.36, 34.3, 13.51, 15.54], lamp: [7, 43, 6, 11] }
+  { name: 'desktop', bisFormat: 99, src: 'video_1.mp4', poster: 'schreibtisch.jpg', w: 1280, h: 720, screen: [43.2, 29.8, 22.7, 22.6], lamp: [18, 38, 7, 24] }
 ];
-var ILLU_DESKTOP = ILLU[ILLU.length - 1];
+var ILLU_DESKTOP = ILLU[0];
 var illu = null, sx, sy, sw, sh, MONITOR_W;
 var lampBtn = scene.querySelector('.lamp');
 var outroImg = document.querySelector('.outro__img');
 var outroScreen = document.querySelector('.outro__screen');
-function pickIllu() {
-  var a = window.innerWidth / stableVH();
-  for (var i = 0; i < ILLU.length; i++) if (ILLU[i].screen && a <= ILLU[i].bisFormat) return ILLU[i];
-  return ILLU_DESKTOP;
-}
+
 function applyIllu() {
-  var v = pickIllu();
+  var v = ILLU_DESKTOP;
   if (v === illu) return false;
   illu = v;
   IMG_RATIO = v.h / v.w;
   var r = v.screen;
   sx = r[0] / 100; sy = r[1] / 100; sw = r[2] / 100; sh = r[3] / 100; MONITOR_W = sw;
   [['--x', r[0]], ['--y', r[1]], ['--w', r[2]], ['--h', r[3]]].forEach(function (p) { screen.style.setProperty(p[0], p[1] + '%'); });
-  if (v.lamp) { lampBtn.hidden = false; [['--x', v.lamp[0]], ['--y', v.lamp[1]], ['--w', v.lamp[2]], ['--h', v.lamp[3]]].forEach(function (p) { lampBtn.style.setProperty(p[0], p[1] + '%'); }); }
-  else lampBtn.hidden = true;
-  if (img.getAttribute('src') !== v.src) {
-    img.src = v.src;
-    if (v.poster) img.poster = v.poster;
-    img.width = v.w; img.height = v.h;
-    if (!weniger) { var p1 = img.play(); if (p1 && p1.catch) p1.catch(function () {}); }
-  }
-  if (outroImg.getAttribute('src') !== v.src) {
-    outroImg.src = v.src;
-    if (v.poster) outroImg.poster = v.poster;
-    outroImg.width = v.w; outroImg.height = v.h;
-  }
+  if (v.lamp) {
+    lampBtn.hidden = false;
+    [['--x', v.lamp[0]], ['--y', v.lamp[1]], ['--w', v.lamp[2]], ['--h', v.lamp[3]]].forEach(function (p) { lampBtn.style.setProperty(p[0], p[1] + '%'); });
+  } else lampBtn.hidden = true;
+  if (img.getAttribute('src') !== v.src) img.src = v.src;
+  if (v.poster) img.poster = v.poster;
+  if (outroImg.getAttribute('src') !== v.src) outroImg.src = v.src;
+  if (v.poster) outroImg.poster = v.poster;
   outroScreen.style.left = r[0] + '%'; outroScreen.style.top = r[1] + '%';
   outroScreen.style.width = r[2] + '%'; outroScreen.style.height = r[3] + '%';
   oScene.style.transformOrigin = (r[0] + r[2] / 2) + '% ' + (r[1] + r[3] / 2) + '%';
   document.documentElement.style.setProperty('--illu-ratio', (v.w / v.h).toFixed(3));
   return true;
 }
-// Fehlt eine Videodatei doch, auf die Desktop-Version zurückfallen
-img.addEventListener('error', function () { if (illu !== ILLU_DESKTOP) { illu.screen = null; illu = null; applyIllu(); requestUpdate(); } });
+
 img.addEventListener('loadedmetadata', function () {
   if (img.videoWidth && img.videoHeight) {
     IMG_RATIO = img.videoHeight / img.videoWidth;
@@ -1596,22 +1456,15 @@ img.addEventListener('loadedmetadata', function () {
 });
 applyIllu();
 
+var ZOOM_LEN = 2.3;
+var HOLD_LEN = window.innerWidth <= 640 ? 0.3 : 0.7;
 
-var ZOOM_LEN = 2.3;     // Bildschirmhöhen fürs Reinzoomen
-var HOLD_LEN = window.innerWidth <= 640 ? 0.3 : 0.7;     // danach bleiben die Projekte kurz stehen
-
-/* =====================================================
-   AUSGEWÄHLTE PROJEKTE
-   1. Kopie in den Monitor, damit die Projekte schon beim Reinzoomen zu sehen sind
-   2. Bento: gehoverte Kachel wird weich zur größten
-   ===================================================== */
 (function () {
   var work = document.querySelector('.work');
   var copy = document.querySelector('.cases');
   copy.innerHTML = work.innerHTML;
   copy.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
 
-  // Spalten / Reihen pro aktiver Kachel (0 = sameSpot, 1 = pr.druck, 2 = Kino Grimm)
   var LAYOUT = [[1.6, 1, 1, 1], [0.75, 2, 2.4, 0.75], [0.75, 2, 0.75, 2.4]];
   var desktop = window.matchMedia('(min-width: 901px)');
 
@@ -1646,29 +1499,21 @@ var HOLD_LEN = window.innerWidth <= 640 ? 0.3 : 0.7;     // danach bleiben die P
     apply();
   }
   document.querySelectorAll('.bento').forEach(bento);
-
-  // fehlende Bilder: leere Fläche statt Fehlersymbol
   document.querySelectorAll('.work img, .cases img').forEach(function (im) { im.addEventListener('error', function () { im.remove(); }); });
 })();
 
-
-/* =====================================================
-   SCROLLEN: Zoom → Projekte durchlaufen → Outro
-   ===================================================== */
 var ticking = false;
 
 function zoomHeight() {
   zoom.style.height = (stableVH() * (1 + ZOOM_LEN + HOLD_LEN)) + 'px';
 }
 
-// Scroll-Position, an der Projekt i in der Mitte steht
-function projectScrollTop(i) {
-  return zoom.offsetTop + stableVH() * (ZOOM_LEN + 0.02);   // Projekte stehen fertig im Bild
+function projectScrollTop() {
+  return zoom.offsetTop + stableVH() * (ZOOM_LEN + 0.02);
 }
 
-// Weiches Nachziehen: alle Animationen folgen dem Scrollen mit kurzer Verzögerung statt ruckartig
 var smoothY = window.scrollY;
-var SMOOTH = 0.13;     // 0.05 = sehr weich/träge, 1 = keine Glättung
+var SMOOTH = 0.13;
 
 function update() {
   ticking = false;
@@ -1685,24 +1530,19 @@ function update() {
   var W = vw, H = W * IMG_RATIO;
   var phone = vw <= 640;
 
-  // Fortschrittsbalken
   var max = document.documentElement.scrollHeight - vh;
   bar.style.transform = 'scaleX(' + (max > 0 ? smoothY / max : 0) + ')';
 
-  // Zoom in den Monitor
   var scrolled = clamp(smoothY - zoom.offsetTop, 0, zoom.offsetHeight - vh);
   var p = clamp(scrolled / (vh * ZOOM_LEN), 0, 1);
   var t = range(0.08, 0.88, p);
 
-  var textBottom = heroText.offsetTop + heroText.offsetHeight + 12;
-  // Passt die geladene Version zur Bildschirmform, wird sie komplett gezeigt. Sonst (nur Desktop-Version da): hochkant zuschneiden.
-  var tall = illu === ILLU_DESKTOP && (phone || (vw <= 1024 && vh > vw * 1.1));
-  document.documentElement.classList.toggle('illu-crop', tall);
-  var s0 = tall ? Math.min(2.05, (vh - textBottom - 24) / H) : Math.min(1, vh / H);
-  var startC = tall ? { x: vw / 2, y: textBottom + 12 + (vh - textBottom - 12) / 2 } : { x: vw / 2, y: vh - H * s0 / 2 };
+  // Vollbild-Cover am Start (s0): füllt den Viewport komplett aus, ohne Ränder
+  var s0 = Math.max(1, vh / H);
+  var startC = { x: vw / 2, y: vh / 2 };
   var bx = (sx + sw / 2) * W, by = (sy + sh / 2) * H;
   var c0 = { x: startC.x + (bx - W / 2) * s0, y: startC.y + (by - H / 2) * s0 };
-  var s1 = phone ? (vw * 1.5) / (sw * W) : Math.min((vw * 0.92) / (sw * W), ((vh - top - 30) * 0.9) / (sh * H));
+  var s1 = phone ? (vw * 1.45) / (sw * W) : Math.min((vw * 0.92) / (sw * W), ((vh - top - 30) * 0.9) / (sh * H));
   var c1 = { x: vw / 2, y: top + (vh - top) / 2 };
 
   var s = s0 * Math.pow(s1 / s0, t);
@@ -1712,18 +1552,16 @@ function update() {
   scene.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + s + ')';
   scene.style.setProperty('--inv', (1 / s).toFixed(4));
 
-  heroText.style.opacity = 1 - range(0.02, 0.14, p);
-  // Scroll-Hinweis unten mittig auf der Zeichnung
-  scrollHint.style.top = (Math.min(startC.y + H * s0 / 2, vh) - 52) + 'px';
-  scrollHint.style.opacity = 1 - range(0.01, 0.08, p);
+  if (scrollHint) {
+    scrollHint.style.top = (vh - 52) + 'px';
+    scrollHint.style.opacity = 1 - range(0.01, 0.08, p);
+  }
   nav.classList.toggle('is-hero', p < 0.1);
 
-  // Schreibtisch blendet aus, die Seite wird weiß
   var out = range(0.62, 0.88, p);
   img.style.opacity = 1 - out;
   stage.style.backgroundColor = mixColor(PAPER, WHITE, out);
 
-  // Bildschirm: zuerst wird der gezeichnete Monitor hell, dann wächst er zur ganzen Seite
   var rect = screen.getBoundingClientRect();
   var bw = mix(rect.width, vw, out), bh = mix(rect.height, vh, out);
   var bxp = mix(rect.left, 0, out), byp = mix(rect.top, 0, out);
@@ -1734,34 +1572,28 @@ function update() {
   screenBg.style.opacity = range(0.26, 0.34, p);
   screenBg.style.backgroundColor = mixColor(SCREEN, WHITE, range(0.26, 0.4, p));
 
-  // Inhalt passt immer komplett in den Bildschirm (nichts wird abgeschnitten)
   var fit = Math.min(rect.width / document.documentElement.clientWidth, rect.height / vh);
-  var k = mix(fit, 1, out);
+  var kScale = mix(fit, 1, out);
   var cx = bxp + bw / 2, cy = byp + bh / 2;
   var cw = document.documentElement.clientWidth;
-  cases.style.transform = 'translate(' + (cx - cw * k / 2) + 'px,' + (cy - vh * k / 2) + 'px) scale(' + k + ')';
+  cases.style.transform = 'translate(' + (cx - cw * kScale / 2) + 'px,' + (cy - vh * kScale / 2) + 'px) scale(' + kScale + ')';
   cases.style.opacity = range(0.36, 0.46, p);
   cases.classList.toggle('is-live', out > 0.97);
   work.classList.toggle('is-on', scrolled >= vh * (ZOOM_LEN + HOLD_LEN) - 2);
 
-
-  // FEIERABEND: 1. rauszoomen  2. "Bis morgen"  3. Bildschirm aus  4. Licht aus  5. Sprechblase
   var q = clamp((smoothY - outro.offsetTop) / (outro.offsetHeight - vh), 0, 1);
   var monitorW = oScene.offsetWidth * MONITOR_W;
-  var startScale = Math.max(1, vw / monitorW * 1.02);          // Monitor füllt anfangs den ganzen Bildschirm
+  var startScale = Math.max(1, vw / Math.max(1, monitorW) * 1.02);
   var back = range(0, 0.5, q);
   var sc = startScale * Math.pow(1 / startScale, back);
   oScene.style.transform = 'translate(-50%, -50%) scale(' + sc + ')';
 
-  // Röhrenmonitor: erst zu einem Strich, dann zu einem Punkt, dann aus
   var lineY = 1 - range(0.55, 0.65, q) * 0.985;
   var lineX = 1 - range(0.65, 0.72, q) * 0.97;
   oGlow.style.transform = 'scale(' + lineX + ',' + lineY + ')';
   oGlow.style.opacity = 1 - range(0.72, 0.76, q);
   oGlow.style.boxShadow = q > 0.55 && q < 0.76 ? '0 0 18px 6px rgba(255,255,255,.8)' : 'none';
 
-
-  // solange noch nachgezogen wird, nächsten Frame anfordern
   if (smoothY !== target) requestUpdate();
 }
 
@@ -1775,7 +1607,6 @@ zoomHeight();
 smoothY = window.scrollY;
 update();
 
-// Links auf "#projekte" springen genau zum ersten Projekt
 document.querySelectorAll('a[href="#projekte"]').forEach(function (a) {
   a.addEventListener('click', function (e) {
     e.preventDefault();
@@ -1783,18 +1614,10 @@ document.querySelectorAll('a[href="#projekte"]').forEach(function (a) {
   });
 });
 
-
-/* =====================================================
-   LAMPE: Licht in der Zeichnung an / aus
-   ===================================================== */
 scene.querySelector('.lamp').addEventListener('click', function () {
   scene.classList.toggle('is-night');
 });
 
-
-/* =====================================================
-   EINBLENDEN BEIM SCROLLEN + VIDEOS NUR ABSPIELEN, WENN SICHTBAR
-   ===================================================== */
 if ('IntersectionObserver' in window) {
   var revealIO = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -1815,26 +1638,19 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
 }
 
-// Hero-Video startet sofort (sofern keine reduzierte Bewegung gewünscht)
 img.muted = true;
 if (!weniger) { var heroPlay = img.play(); if (heroPlay && heroPlay.catch) heroPlay.catch(function () {}); }
 else img.pause();
 
-// Fehlende Bilder (noch nicht hochgeladen) einfach ausblenden statt Fehler-Symbol
 document.querySelectorAll('main img:not(.kul img):not(.pc img), .photo img').forEach(function (im) {
   im.addEventListener('error', function () { im.style.visibility = 'hidden'; });
 });
-
 
 (function () {
   var v = document.querySelector('.viewer');
   new MutationObserver(function () { if (v.open) scrollLock.lock(); else scrollLock.unlock(); }).observe(v, { attributes: true, attributeFilter: ['open'] });
 })();
 
-
-/* =====================================================
-   UI SNIPPETS: Klick öffnet den Screen groß (nutzt die Großansicht vom Archiv)
-   ===================================================== */
 (function () {
   var viewer = document.querySelector('.viewer');
   var media = viewer.querySelector('.viewer__media');
@@ -1855,10 +1671,6 @@ document.querySelectorAll('main img:not(.kul img):not(.pc img), .photo img').for
   });
 })();
 
-
-/* =====================================================
-   ABSEITS VOM INTERFACE: Sets wechseln automatisch, Großansicht
-   ===================================================== */
 (function () {
   var tiles = Array.from(document.querySelectorAll('.kul'));
   var viewer = document.querySelector('.viewer');
@@ -1868,14 +1680,12 @@ document.querySelectorAll('main img:not(.kul img):not(.pc img), .photo img').for
   var vCount = vNav.querySelector('i');
   var current = null, idx = 0;
 
-  // fehlende Bilder: Kachel bekommt eine leere Fläche statt Fehlersymbol
   tiles.forEach(function (t) {
     t.querySelectorAll('img').forEach(function (im) {
       im.addEventListener('error', function () { im.remove(); if (!t.querySelector('img, video')) t.querySelector('.kul__media').classList.add('is-empty'); });
     });
   });
 
-  // Sets (mehrere Bilder) wechseln alle 3 Sekunden
   if (!weniger) setInterval(function () {
     tiles.forEach(function (t) {
       var imgs = t.querySelectorAll('.kul__media img');
@@ -1930,30 +1740,22 @@ document.querySelectorAll('main img:not(.kul img):not(.pc img), .photo img').for
   viewer.addEventListener('close', function () { vMedia.innerHTML = ''; });
 })();
 
-
-/* =====================================================
-   KONTAKT: "Frag meinen Chat" öffnet den Chat
-   ===================================================== */
 document.querySelector('.hallo__chat').addEventListener('click', function () {
   var t = document.querySelector('.chat__toggle');
   if (!document.querySelector('.chat').classList.contains('is-open')) t.click();
 });
 
-
-/* =====================================================
-   NACH FEIERABEND: Magnettafel – alles verschiebbar (Maus & Finger), "Aufräumen" setzt zurück
-   ===================================================== */
 (function () {
   var board = document.querySelector('.mt');
   var items = Array.from(board.querySelectorAll('.mt-item'));
   var z = 10;
   var phoneBoard = window.matchMedia('(max-width: 640px)').matches;
-  var touchDrag = null;   // am Handy: verhindert Scrollen, solange ein Teil gezogen wird
+  var touchDrag = null;
   document.addEventListener('touchmove', function (e) { if (touchDrag) e.preventDefault(); }, { passive: false });
   items.forEach(function (it, i) {
     it.style.zIndex = i + 1;
     var im = it.querySelector('img'); if (im) im.addEventListener('error', function () { im.remove(); });
-    var sx, sy, ox, oy, moved;
+    var sx, sy, ox, oy;
     var hold;
     function start(e) {
       try { it.setPointerCapture(e.pointerId); } catch (err) {}
@@ -1963,12 +1765,10 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       sx = e.clientX; sy = e.clientY;
       ox = parseFloat(it.style.getPropertyValue('--dx')) || 0;
       oy = parseFloat(it.style.getPropertyValue('--dy')) || 0;
-      moved = false;
     }
     it.addEventListener('pointerdown', function (e) {
       if (e.button > 0 || phoneBoard) return;
       if (e.pointerType === 'touch') {
-        // kurz halten (0,2 s), dann ziehen – wischen scrollt die Seite ganz normal
         var px = e.clientX, py = e.clientY;
         clearTimeout(hold);
         hold = setTimeout(function () { touchDrag = it; start({ pointerId: e.pointerId, clientX: px, clientY: py }); if (navigator.vibrate) navigator.vibrate(8); }, 200);
@@ -1982,19 +1782,16 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       if (!it.classList.contains('is-drag')) return;
       var b = board.getBoundingClientRect(), r = it.getBoundingClientRect();
       var dx = ox + e.clientX - sx, dy = oy + e.clientY - sy;
-      // innerhalb der Tafel bleiben
       var baseL = r.left - (parseFloat(it.style.getPropertyValue('--dx')) || 0);
       var baseT = r.top - (parseFloat(it.style.getPropertyValue('--dy')) || 0);
       dx = clamp(dx, b.left - baseL - r.width * .4, b.right - baseL - r.width * .6);
       dy = clamp(dy, b.top - baseT - 10, b.bottom - baseT - r.height * .5);
-      if (Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) > 3) moved = true;
       it.style.setProperty('--dx', dx + 'px');
       it.style.setProperty('--dy', dy + 'px');
     });
     function end() { clearTimeout(hold); it.classList.remove('is-drag'); if (touchDrag === it) touchDrag = null; }
     it.addEventListener('pointerup', end);
     it.addEventListener('pointercancel', end);
-    // Doppelklick auf ein Foto: groß ansehen
     it.addEventListener('dblclick', function () {
       var im = it.querySelector('img'); if (!im) return;
       var viewer = document.querySelector('.viewer');
@@ -2013,16 +1810,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   });
 })();
 
-
-/* =====================================================
-   ABSEITS VOM INTERFACE: Arbeiten schweben vorbei, Karten drehen sich / klappen auf
-   Pro Karte:
-     typ     "flat" (Visitenkarte, dreht sich um), "fold" (Klappkarte) oder "png-fold" (freigestellte PNG-Klappkarte)
-     ratio   Breite/Höhe der geschlossenen Karte (85×55 mm = 1.545)
-     vorne, hinten (flat) bzw. vorne, innenL, innenR (fold) bzw. zu, offen (png-fold):
-             Bildpfad (z. B. "karten/archandbarre_1.png") ODER HTML für einen Platzhalter
-     specs   die kleinen Infos neben der Karte
-   ===================================================== */
 (function () {
   var QR = '<svg viewBox="0 0 25 25" shape-rendering="crispEdges"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM9 0h1v1h-1zM13 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM21 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM13 1h1v1h-1zM16 1h1v1h-1zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM8 2h1v1h-1zM9 2h1v1h-1zM14 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM13 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM12 5h1v1h-1zM16 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM21 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM8 7h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM0 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM11 8h1v1h-1zM13 8h1v1h-1zM17 8h1v1h-1zM18 8h1v1h-1zM21 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM23 9h1v1h-1zM0 10h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM9 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM14 10h1v1h-1zM15 10h1v1h-1zM21 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM0 11h1v1h-1zM4 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM11 11h1v1h-1zM16 11h1v1h-1zM17 11h1v1h-1zM18 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM24 11h1v1h-1zM1 12h1v1h-1zM2 12h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM16 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM24 12h1v1h-1zM0 13h1v1h-1zM2 13h1v1h-1zM7 13h1v1h-1zM10 13h1v1h-1zM12 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM19 13h1v1h-1zM23 13h1v1h-1zM0 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM19 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM23 14h1v1h-1zM24 14h1v1h-1zM0 15h1v1h-1zM2 15h1v1h-1zM3 15h1v1h-1zM7 15h1v1h-1zM12 15h1v1h-1zM14 15h1v1h-1zM19 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM24 15h1v1h-1zM0 16h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM12 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM22 16h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM0 18h1v1h-1zM1 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM24 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h1v1h-1zM11 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM20 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM0 21h1v1h-1zM2 21h1v1h-1zM3 21h1v1h-1zM4 21h1v1h-1zM6 21h1v1h-1zM12 21h1v1h-1zM13 21h1v1h-1zM14 21h1v1h-1zM15 21h1v1h-1zM16 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM23 21h1v1h-1zM24 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM16 22h1v1h-1zM21 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM16 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM0 24h1v1h-1zM1 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM11 24h1v1h-1zM12 24h1v1h-1zM13 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM21 24h1v1h-1zM24 24h1v1h-1z" fill="#0A0A0A"/></svg>';
   var DEMOQR = '<div class="pd__qr pd__qr--demo">QR</div>';
@@ -2032,8 +1819,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       specs: [['Format', '85 × 55 mm'], ['Papier', '400 g, schwarz durchgefärbt'], ['Veredelung', 'Heißfolie Grün'], ['QR', 'echt – scann mich']],
       vorne: '<div class="pd pd--center" style="background:#111;color:#fff"><b style="font-size:calc(var(--w)*.2);color:#2E9E63">LA</b><small>LINA MELISSA ARNDT</small></div>',
       hinten: '<div class="pd" style="background:#F2F2F0"><div><b style="font-size:calc(var(--w)*.06)">Lina Melissa Arndt</b><br><small>UX/UI Designerin &amp; Mediengestalterin</small></div><div style="display:flex;justify-content:space-between;align-items:flex-end"><small>lina-melissa@web.de<br>linamelissa.de<br>Hamburg / Remote</small><div class="pd__qr">' + QR + '</div></div></div>',
-      dark: true, zoom: { x: 50, y: 50, s: 1.9 },
-      notes: [{ x: 80, y: 66, side: 'l', text: 'Echter QR-Code → linamelissa.de' }, { x: 22, y: 22, side: 'r', text: 'Naturkarton, ungestrichen' }] },
+      dark: true },
     { name: 'Arch & Barre', info: 'Klappkarte · Branding', typ: 'png-fold',
       desc: 'Isometrische Klappkarte für ein Barre- und Pilates-Studio: geschlossen ein Raum-Cube, aufgeklappt öffnet sich die Spiegelwand mit Gutschein und QR-Code zum Kursplan.',
       specs: [['Studio', 'Arch & Barre Hamburg'], ['Format', 'Isometrische Stanzform'], ['Papier', '350 g Naturkarton'], ['QR', 'Kursplan-Buchung']],
@@ -2044,37 +1830,29 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       specs: [['Format', '55 × 80 mm, gefalzt'], ['Papier', '300 g Naturpapier'], ['Veredelung', 'Rillung, Stanzkante'], ['QR', 'Spielplan']],
       vorne: '<div class="pd pd--center" style="background:#14562F;color:#B9F2D3"><svg class="ic" viewBox="0 0 80 60"><path class="ln" d="M6 12h68v10a8 8 0 0 0 0 16v10H6V38a8 8 0 0 0 0-16z"/><path class="ln" d="M54 14v32" stroke-dasharray="3 4"/></svg><b style="font-size:calc(var(--w)*.13)">KINO<br>GRIMM</b><small>Programmkino Schwarzenbek</small></div>',
       innenL: '<div class="pd pd--center" style="background:#F2F2F0"><b style="font-size:calc(var(--w)*.11)">Film ab.</b><small>Programm, Kinocard &amp; Geschichte</small></div>',
-      innenR: '<div class="pd pd--center" style="background:#F2F2F0">' + DEMOQR + '<small>Spielplan scannen</small></div>',
-      zoom: { x: 50, y: 50, s: 1.6 },
-      notes: [{ x: 0, y: 30, side: 'r', text: 'Rillung für sauberen Falz', on: 'b' }, { x: 50, y: 40, side: 'r', text: 'QR zum Spielplan', on: 'b' }] },
+      innenR: '<div class="pd pd--center" style="background:#F2F2F0">' + DEMOQR + '<small>Spielplan scannen</small></div>' },
     { name: 'Café-Karte', info: 'Klappkarte · Konzept', typ: 'fold', ratio: .7,
       desc: 'Bonuskarte für ein kleines Café. Das Logo ist nur blind geprägt – man sieht es erst im Licht.',
       specs: [['Format', '55 × 80 mm, gefalzt'], ['Papier', '350 g Recyclingkarton'], ['Veredelung', 'Blindprägung'], ['QR', 'Speisekarte']],
       vorne: '<div class="pd pd--center" style="background:#E6E6E9;color:#1D1D1F"><svg class="ic" viewBox="0 0 60 60"><path class="ln" d="M14 18h30l-4 34H18z"/><path class="ln" d="M44 24h4a6 6 0 0 1 0 12h-6"/><path class="ln" d="M24 10q3-4 0-8M32 10q3-4 0-8"/></svg><b style="font-size:calc(var(--w)*.11)">KAFFEE</b><small>Der zehnte geht aufs Haus</small></div>',
       innenL: '<div class="pd pd--center" style="background:#fff"><b style="font-size:calc(var(--w)*.09);color:#2E9E63">○ ○ ○ ○ ○<br>○ ○ ○ ○ ○</b><small>Stempelfelder</small></div>',
-      innenR: '<div class="pd pd--center" style="background:#fff">' + DEMOQR + '<small>Speisekarte</small></div>',
-      zoom: { x: 42, y: 46, s: 2 },
-      notes: [{ x: 50, y: 34, side: 'r', text: 'Blindprägung – nur im Licht sichtbar', on: 'a' }] },
+      innenR: '<div class="pd pd--center" style="background:#fff">' + DEMOQR + '<small>Speisekarte</small></div>' },
     { name: 'Keramikstudio', info: 'Visitenkarte · Konzept', typ: 'flat', ratio: 1.545,
       desc: 'Ruhige Visitenkarte für ein Mal-Atelier: viel Weißraum, eine Linienzeichnung, hinten der Weg zur Buchung.',
       specs: [['Format', '85 × 55 mm'], ['Papier', '450 g Baumwollpapier'], ['Veredelung', 'Letterpress'], ['QR', 'Termin buchen']],
       vorne: '<div class="pd pd--center" style="background:#F7F7F5;color:#1D1D1F"><svg class="ic" style="width:16%" viewBox="0 0 60 70"><path class="ln" d="M22 6h16v6c0 4 10 8 10 24 0 18-9 30-18 30S12 54 12 36c0-16 10-20 10-24z"/><path class="ln" d="M14 40q16 6 32 0"/></svg><b style="font-size:calc(var(--w)*.07)">Atelier für Keramik</b></div>',
-      hinten: '<div class="pd" style="background:#F7F7F5;flex-direction:row;align-items:center"><small>Mal dir deine<br>eigene Tasse.<br><br>Termine online</small>' + DEMOQR + '</div>',
-      zoom: { x: 50, y: 46, s: 2.2 },
-      notes: [{ x: 50, y: 40, side: 'r', text: 'Letterpress: Farbe ins Papier gedrückt', on: 'a' }] },
+      hinten: '<div class="pd" style="background:#F7F7F5;flex-direction:row;align-items:center"><small>Mal dir deine<br>eigene Tasse.<br><br>Termine online</small>' + DEMOQR + '</div>' },
     { name: 'sameSpot', info: 'Teaser-Karte · zur App', typ: 'flat', ratio: 1.545,
       desc: 'Eine Karte, die man an Orten liegen lässt: Wer sie findet, entdeckt die App – passend zur Idee von sameSpot.',
       specs: [['Format', '85 × 55 mm, abgerundet'], ['Papier', '350 g, beidseitig matt'], ['Veredelung', 'partieller UV-Lack'], ['QR', 'App-Prototyp']],
       vorne: '<div class="pd pd--center" style="background:#2E9E63;color:#fff"><svg class="ic" style="width:12%" viewBox="0 0 40 52"><path class="ln" d="M20 50S4 32 4 20a16 16 0 0 1 32 0c0 12-16 30-16 30z"/><circle class="ln" cx="20" cy="20" r="6"/></svg><b style="font-size:calc(var(--w)*.09)">Same spot?</b><small>Hier war heute schon jemand wie du.</small></div>',
       hinten: '<div class="pd" style="background:#0A0A0A;color:#fff;flex-direction:row;align-items:center"><small>sameSpot<br>Leute treffen,<br>ohne „Freunde finden“.</small>' + DEMOQR + '</div>',
-      dark: true, zoom: { x: 50, y: 50, s: 1.8 },
-      notes: [{ x: 50, y: 42, side: 'r', text: 'Partieller UV-Lack auf dem Pin' }] }
+      dark: true }
   ];
   var sec = document.querySelector('.float');
   var stage = sec.querySelector('.float__stage');
   var field = sec.querySelector('.float__field');
 
-  // Papierstruktur einmal per Canvas erzeugen (feine Fasern + Körnung)
   (function () {
     var c = document.createElement('canvas'); c.width = c.height = 260;
     var x = c.getContext('2d'), d = x.createImageData(260, 260);
@@ -2087,12 +1865,10 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
 
   function face(content) { return /^</.test(content) ? content : '<img src="' + content + '" alt="">'; }
 
-  // Kacheln einpacken
   var tiles = Array.from(field.querySelectorAll('.kul')).map(function (t) {
     var w = document.createElement('div'); w.className = 'fi'; t.parentNode.insertBefore(w, t); w.appendChild(t);
     return { el: w, card: false };
   });
-  // Karten bauen
   var cards = KARTEN.map(function (k) {
     var w = document.createElement('div');
     var isPng = k.typ === 'png-fold';
@@ -2113,7 +1889,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
     return { el: w, card: true, k: k, cover: w.querySelector('.pc__cover'), specs: w.querySelector('.fi__specs') };
   });
 
-  // Reihenfolge: Karten gleichmäßig zwischen die Kacheln mischen (deine Karte zuerst)
   var items = tiles.slice();
   cards.forEach(function (c, n) { items.splice(n === 0 ? 1 : Math.round(n * (tiles.length + cards.length) / cards.length), 0, c); });
 
@@ -2163,7 +1938,7 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       if (!on) return;
       it.el.style.transform = 'translate3d(' + it.x + 'px,' + y + 'px,0)';
       if (it.card) {
-        var c = 1 - (y + it.h / 2) / vh;           // 0 = unten, 1 = oben
+        var c = 1 - (y + it.h / 2) / vh;
         var flip = weniger ? (c > .45 ? 1 : 0) : range(.28, .55, c);
         if (it.k.typ === 'png-fold') {
           var pc = it.el.querySelector('.pc');
@@ -2177,7 +1952,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
     });
   }
 
-  // Klick auf eine Karte: groß ansehen, umdrehen / aufklappen
   var viewer = document.querySelector('.viewer');
   var vMedia = viewer.querySelector('.viewer__media');
   var vTitle = viewer.querySelector('.viewer__meta b');
@@ -2238,7 +2012,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
     c.el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
   });
 
-  // Licht + leichte Neigung der Karten folgen der Maus
   stage.addEventListener('pointermove', function (e) {
     if (e.pointerType !== 'mouse' || weniger) return;
     var px = e.clientX / vw, py = e.clientY / vh;
@@ -2260,17 +2033,13 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   again();
 })();
 
-
-/* =====================================================
-   ÜBER MICH: Fotostapel auffächern, dann seitlich zum Zeitstrahl
-   ===================================================== */
 (function () {
   var me = document.querySelector('.me');
   var track = me.querySelector('.me__track');
   var intro = me.querySelector('.me__intro');
   var text = me.querySelector('.me__text');
   var photos = Array.from(me.querySelectorAll('.photo'));
-  var STACK_LEN = 1.3;   // wie viele Bildschirmhöhen das Auffächern dauert
+  var STACK_LEN = 1.3;
   var sideways = 0;
   var timeline = me.querySelector('.timeline');
   var cv = document.createElement('section');
@@ -2283,17 +2052,16 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   place();
   phoneQ.addEventListener('change', function () { place(); measure(); render(); });
 
-  // Handy-Lebenslauf: Linie füllt sich beim Scrollen, Stationen leuchten auf
   var ol = timeline.querySelector('ol');
   var fill = document.createElement('i'); fill.className = 'tl-fill'; ol.appendChild(fill);
   var stations = Array.from(ol.querySelectorAll('.station'));
   function cvRender() {
     var r = ol.getBoundingClientRect();
-    if (phoneQ.matches) {            // Handy: von oben nach unten
+    if (phoneQ.matches) {
       var h = clamp(window.innerHeight * 0.62 - r.top, 0, r.height);
       fill.style.height = h + 'px'; fill.style.width = '';
       stations.forEach(function (st) { st.classList.toggle('is-on', st.offsetTop + 20 <= h); });
-    } else {                         // Tablet & Desktop: von links nach rechts
+    } else {
       var w = clamp(window.innerWidth * 0.62 - r.left, 0, r.width);
       fill.style.width = w + 'px'; fill.style.height = '';
       stations.forEach(function (st) { st.classList.toggle('is-on', st.offsetLeft + 31 <= w); });
@@ -2302,7 +2070,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   window.addEventListener('scroll', function () { requestAnimationFrame(cvRender); }, { passive: true });
   cvRender();
 
-  // Höhe des Abschnitts = Auffächern + seitliche Strecke
   function measure() {
     sideways = Math.max(0, track.scrollWidth - window.innerWidth);
     me.style.height = (stableVH() * (1 + STACK_LEN) + sideways) + 'px';
@@ -2313,8 +2080,8 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
     var r = me.getBoundingClientRect();
     var scrolled = clamp(-r.top, 0, me.offsetHeight - vh);
     var stackPx = vh * STACK_LEN;
-    var a = clamp(scrolled / stackPx, 0, 1);                 // 0 → 1 Auffächern
-    var side = clamp(scrolled - stackPx, 0, sideways);        // px seitlich
+    var a = clamp(scrolled / stackPx, 0, 1);
+    var side = clamp(scrolled - stackPx, 0, sideways);
 
     var w = intro.clientWidth, h = intro.clientHeight;
     var spread = range(0.1, 0.75, a);
@@ -2323,12 +2090,9 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
       var stackRot = [0, -6, 5, -3, 7, -8, 4, -2, 6, -5, 3, -7][i % 12];
       var x = mix(0, (to[0] - 50) / 100 * w, spread);
       var y = mix(i * -3, (to[1] - 50) / 100 * h, spread);
-      {
-        // Fotos bleiben mit Luft komplett im Bild (oben Platz für die Navigation, unten Abstand)
-        var lim = w / 2 - ph.offsetWidth * 0.55 - 10; x = clamp(x, -lim, lim);
-        var halfH = ph.offsetHeight * 0.55;
-        y = clamp(y, -h / 2 + 84 + halfH, h / 2 - 28 - halfH);
-      }
+      var lim = w / 2 - ph.offsetWidth * 0.55 - 10; x = clamp(x, -lim, lim);
+      var halfH = ph.offsetHeight * 0.55;
+      y = clamp(y, -h / 2 + 84 + halfH, h / 2 - 28 - halfH);
       var rot = mix(stackRot, to[2], spread);
       var sc = mix(i === 0 ? 1.15 : 1.05, i === 0 ? 0.8 : 0.85, spread);
       ph.style.transform = 'translate(-50%, -50%) translate(' + x + 'px,' + y + 'px) rotate(' + rot + 'deg) scale(' + sc + ')';
@@ -2348,7 +2112,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   measure();
   render();
 
-  // Navigation "Über mich" landet direkt beim Text (nicht beim Stapel)
   document.querySelectorAll('a[href="#ueber-mich"]').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
@@ -2357,12 +2120,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   });
 })();
 
-
-/* =====================================================
-   CHAT MIT LINA
-   Fragen und Antworten hier ändern. Es antwortet keine echte KI –
-   die Antworten sind vorgeschrieben, in deinen eigenen Worten.
-   ===================================================== */
 (function () {
   var FRAGEN = [
     { f: 'Wer bist du?', a: ['Hi! Ich bin Lina, UX/UI Designerin aus dem Raum Hamburg.', 'Ich komme aus der Mediengestaltung Digital & Print und studiere nebenbei UX-Design (B.A.).'] },
@@ -2384,7 +2141,6 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
 
   var root = document.querySelector('.chat');
   var toggle = root.querySelector('.chat__toggle');
-  var panel = root.querySelector('.chat__panel');
   var log = root.querySelector('.chat__log');
   var chips = root.querySelector('.chat__chips');
   var closeBtn = root.querySelector('.chat__close');
@@ -2456,11 +2212,9 @@ document.querySelector('.hallo__chat').addEventListener('click', function () {
   closeBtn.addEventListener('click', close);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && root.classList.contains('is-open')) close(); });
 
-  // kleine Sprechblase nach ein paar Sekunden, damit man den Chat bemerkt
   setTimeout(function () { if (!started) root.classList.add('is-hinting'); }, 9000);
   setTimeout(function () { root.classList.remove('is-hinting'); }, 17000);
 })();
-
 </script>
 </body>
 </html>
