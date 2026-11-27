@@ -1166,8 +1166,9 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
     <span class="scroll-hint">Scroll dich in meinen Bildschirm</span>
 
     <div class="scene intro">
-      <img class="scene__img" src="schreibtisch.jpg" width="2576" height="1274"
-           alt="Gezeichnete Lina an ihrem Schreibtisch mit Monitor, Laptop, Sticky Notes, Staffelei, Kindle, Hantel und Kaffeetasse">
+      <video class="scene__img" src="schreibtisch.mp4" poster="schreibtisch.jpg" width="2576" height="1274"
+             autoplay loop muted playsinline preload="auto"
+             aria-label="Animierte Lina an ihrem Schreibtisch mit Monitor, Laptop, Sticky Notes, Staffelei, Kindle, Hantel und Kaffeetasse"></video>
 
       <div class="night" aria-hidden="true"></div>
 
@@ -1409,7 +1410,9 @@ html.is-locked body { overflow: hidden; overscroll-behavior: none; }
 <section class="outro" aria-label="Feierabend">
   <div class="outro__stage">
     <div class="outro__scene">
-      <img class="outro__img" src="schreibtisch.jpg" width="2576" height="1274" alt="Lina an ihrem Schreibtisch – Feierabend">
+      <video class="outro__img loop" src="schreibtisch.mp4" poster="schreibtisch.jpg" width="2576" height="1274"
+             autoplay loop muted playsinline preload="metadata"
+             aria-label="Lina an ihrem Schreibtisch – Feierabend"></video>
       <div class="outro__screen" aria-hidden="true"><div class="outro__glow"></div></div>
     </div>
   </div>
@@ -1533,17 +1536,17 @@ var oGlow = outro.querySelector('.outro__glow');
 var bar = document.querySelector('.progress span');
 
 /* =====================================================
-   ZEICHNUNG IN MEHREREN FORMATEN
+   ZEICHNUNG / VIDEO IN MEHREREN FORMATEN
    Je nach Bildschirmform wird automatisch die passende Version geladen.
    screen = Monitorfläche in % (x, y, Breite, Höhe), lamp = Stehlampe in %.
    Eine Version ohne "screen" ist noch nicht da und wird übersprungen –
    dann nimmt die Seite die Desktop-Version und schneidet sie passend zu.
    ===================================================== */
 var ILLU = [
-  { name: 'handy',       bisFormat: 0.62, src: 'illustration/handy.jpg',       w: 1080, h: 2340, screen: null, lamp: null },
-  { name: 'tablet-hoch', bisFormat: 0.95, src: 'illustration/tablet-hoch.jpg', w: 1800, h: 2400, screen: null, lamp: null },
-  { name: 'tablet-quer', bisFormat: 1.55, src: 'illustration/tablet-quer.jpg', w: 2400, h: 1800, screen: null, lamp: null },
-  { name: 'desktop',     bisFormat: 99,   src: 'schreibtisch.jpg',             w: 2576, h: 1274, screen: [43.36, 34.3, 13.51, 15.54], lamp: [7, 43, 6, 11] }
+  { name: 'handy',       bisFormat: 0.62, src: 'illustration/handy.mp4',       poster: 'illustration/handy.jpg',       w: 1080, h: 2340, screen: null, lamp: null },
+  { name: 'tablet-hoch', bisFormat: 0.95, src: 'illustration/tablet-hoch.mp4', poster: 'illustration/tablet-hoch.jpg', w: 1800, h: 2400, screen: null, lamp: null },
+  { name: 'tablet-quer', bisFormat: 1.55, src: 'illustration/tablet-quer.mp4', poster: 'illustration/tablet-quer.jpg', w: 2400, h: 1800, screen: null, lamp: null },
+  { name: 'desktop',     bisFormat: 99,   src: 'schreibtisch.mp4',             poster: 'schreibtisch.jpg',             w: 2576, h: 1274, screen: [43.36, 34.3, 13.51, 15.54], lamp: [7, 43, 6, 11] }
 ];
 var ILLU_DESKTOP = ILLU[ILLU.length - 1];
 var illu = null, sx, sy, sw, sh, MONITOR_W;
@@ -1565,16 +1568,32 @@ function applyIllu() {
   [['--x', r[0]], ['--y', r[1]], ['--w', r[2]], ['--h', r[3]]].forEach(function (p) { screen.style.setProperty(p[0], p[1] + '%'); });
   if (v.lamp) { lampBtn.hidden = false; [['--x', v.lamp[0]], ['--y', v.lamp[1]], ['--w', v.lamp[2]], ['--h', v.lamp[3]]].forEach(function (p) { lampBtn.style.setProperty(p[0], p[1] + '%'); }); }
   else lampBtn.hidden = true;
-  if (img.getAttribute('src') !== v.src) { img.src = v.src; img.width = v.w; img.height = v.h; }
-  if (outroImg.getAttribute('src') !== v.src) { outroImg.src = v.src; outroImg.width = v.w; outroImg.height = v.h; }
+  if (img.getAttribute('src') !== v.src) {
+    img.src = v.src;
+    if (v.poster) img.poster = v.poster;
+    img.width = v.w; img.height = v.h;
+    if (!weniger) { var p1 = img.play(); if (p1 && p1.catch) p1.catch(function () {}); }
+  }
+  if (outroImg.getAttribute('src') !== v.src) {
+    outroImg.src = v.src;
+    if (v.poster) outroImg.poster = v.poster;
+    outroImg.width = v.w; outroImg.height = v.h;
+  }
   outroScreen.style.left = r[0] + '%'; outroScreen.style.top = r[1] + '%';
   outroScreen.style.width = r[2] + '%'; outroScreen.style.height = r[3] + '%';
   oScene.style.transformOrigin = (r[0] + r[2] / 2) + '% ' + (r[1] + r[3] / 2) + '%';
   document.documentElement.style.setProperty('--illu-ratio', (v.w / v.h).toFixed(3));
   return true;
 }
-// Fehlt eine Datei doch, auf die Desktop-Version zurückfallen
+// Fehlt eine Videodatei doch, auf die Desktop-Version zurückfallen
 img.addEventListener('error', function () { if (illu !== ILLU_DESKTOP) { illu.screen = null; illu = null; applyIllu(); requestUpdate(); } });
+img.addEventListener('loadedmetadata', function () {
+  if (img.videoWidth && img.videoHeight) {
+    IMG_RATIO = img.videoHeight / img.videoWidth;
+    document.documentElement.style.setProperty('--illu-ratio', (img.videoWidth / img.videoHeight).toFixed(3));
+    requestUpdate();
+  }
+});
 applyIllu();
 
 
@@ -1676,9 +1695,6 @@ function update() {
   var t = range(0.08, 0.88, p);
 
   var textBottom = heroText.offsetTop + heroText.offsetHeight + 12;
-  // Start: Zeichnung so breit wie der Bildschirm, direkt unter der Begrüßung (unten darf sie angeschnitten sein)
-  // Zeichnung als Hintergrund: so groß wie möglich, nie abgeschnitten, unten bündig – Name & Navigation liegen darüber
-  // Handy: Zeichnung groß (Seiten angeschnitten, Monitor in der Mitte) – Desktop: komplett sichtbar
   // Passt die geladene Version zur Bildschirmform, wird sie komplett gezeigt. Sonst (nur Desktop-Version da): hochkant zuschneiden.
   var tall = illu === ILLU_DESKTOP && (phone || (vw <= 1024 && vh > vw * 1.1));
   document.documentElement.classList.toggle('illu-crop', tall);
@@ -1754,7 +1770,7 @@ function requestUpdate() {
 }
 window.addEventListener('scroll', requestUpdate, { passive: true });
 window.addEventListener('resize', function () { applyIllu(); zoomHeight(); requestUpdate(); });
-img.addEventListener('load', requestUpdate);
+img.addEventListener('loadeddata', requestUpdate);
 zoomHeight();
 smoothY = window.scrollY;
 update();
@@ -1798,6 +1814,11 @@ if ('IntersectionObserver' in window) {
 } else {
   document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
 }
+
+// Hero-Video startet sofort (sofern keine reduzierte Bewegung gewünscht)
+img.muted = true;
+if (!weniger) { var heroPlay = img.play(); if (heroPlay && heroPlay.catch) heroPlay.catch(function () {}); }
+else img.pause();
 
 // Fehlende Bilder (noch nicht hochgeladen) einfach ausblenden statt Fehler-Symbol
 document.querySelectorAll('main img:not(.kul img):not(.pc img), .photo img').forEach(function (im) {
